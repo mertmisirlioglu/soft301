@@ -75,8 +75,12 @@ WSGI_APPLICATION = 'ticketsystem.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'thptfuwd',
+        'USER': 'thptfuwd',
+        'PASSWORD':'OWEe45u-nZW-F-IOoNK7l-Zog_TRPImI',
+        'HOST':'salt.db.elephantsql.com',
+        'PORT' : '5432'
     }
 }
 
