@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth import authenticate, login
 
 
 class Ticket(models.Model):
@@ -19,7 +20,7 @@ class User(models.Model):
     phone_number = models.CharField(max_length=11)
     password = models.CharField(max_length=20)
     type = models.CharField(max_length=10)
-    img = models.URLField()
+    img = models.URLField(null=True)
     ticket = models.ForeignKey(Ticket, on_delete=models.CASCADE, null=True)
 
 
@@ -61,3 +62,11 @@ class Theatre(Event):
 
 class Sport(Event):
     pass
+
+
+def my_view(request):
+    email = request.POST['email']
+    password = request.POST['password']
+    user = authenticate(request, email=email, password=password)
+    if user is not None:
+        login(request, user)
