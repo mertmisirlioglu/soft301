@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth.forms import UserCreationForm
+from .forms import UserReg 
+from .models import User
 
 
 def home(request):
@@ -7,7 +9,9 @@ def home(request):
 
 
 def signup(request):
-    form = UserCreationForm()
-    return render(request, 'registration/signup.html', {
-        'form': form
-    })
+    form = UserReg(request.POST or None)
+    if form.is_valid():
+        form.save()
+        return HttpResponseRedirect('/home.html')
+    return render(request, 'registration/signup.html',
+                  {'form': UserReg})
