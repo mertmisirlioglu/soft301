@@ -1,5 +1,6 @@
 body{
     margin: auto;
+    background-color: gray;
 }
 
 #mainDiv{
@@ -98,7 +99,6 @@ body{
     width: 95%;
     height: 70%;
     margin: auto;
-    background-color: red;
 }
 
 .categories{
