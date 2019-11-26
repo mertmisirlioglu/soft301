@@ -67,7 +67,7 @@ body{
 }
 
 .accountTextDiv a{
-  margin-top: 3%;
+  margin-top: 1%;
     font-size: x-large;
 }
 
@@ -94,15 +94,12 @@ body{
     text-align: center;
 }
 
-.mainRow{
+#mainRow{
     float: none;
-    width: 50%;
+    width: 95%;
     height: 70%;
     margin: auto;
-    margin-top: 2%;
-    margin-left: 40%;
 }
-
 
 .categories{
   float: left;
@@ -135,9 +132,123 @@ body{
     width: 85%;
     height: 100%;
     margin: auto;
-    margin-top: 10%;
-    margin-left: 15%;
-    background-color: red;
+    margin-left: 10%;
+
+
+}
+
+#signupPart{
+  float: left;
+  width: 30%;
+  height: 100%;
+  margin: auto;
+  margin-left: 12%;
+  text-align: center;
+
+}
+
+.signupHeader{
+  float: none;
+  width: 95%;
+  height: 10%;
+  margin: auto;
+}
+
+.signupHeader h2{
+  color: orange;
+  font-size: x-large;
+}
+
+#signupText{
+    float: none;
+    width: 95%;
+    height: 20%;
+    margin: auto;
+}
+
+.signupButton{
+  float: none;
+  width: 95%;
+  height: 25%;
+  margin: auto;
+    margin-top: 2%;
+}
+
+
+#loginPart{
+  float: left;
+  width: 30%;
+  height: 100%;
+  margin: auto;
+  margin-left: 10%;
+}
+
+#loginText{
+  float: none;
+  width: 95%;
+  height: 10%;
+  margin: auto;
+    text-align: center;
+}
+
+.email-part{
+  float: none;
+  width: 40%;
+  height: 10%;
+  margin: auto;
+    margin-left: 10%;
+
+}
+
+.email-part h4{
+    float: left;
+    margin:auto;
+}
+
+.email-part input{
+    float: left;
+    margin: auto;
+}
+
+.password-part{
+  float: none;
+  width: 40%;
+  height: 10%;
+  margin: auto;
+    margin-left: 10%;
+}
+
+.password-part h4{
+    float: left;
+    margin: auto;
+}
+
+.password-part input{
+    float: left;
+    margin: auto;
+}
+
+.forgotPasswordPart{
+  float: none;
+  width: 90%;
+  height: 5%;
+  margin: auto;
+    margin-left: 10%;
+
+}
+
+.forgotPasswordPart h4{
+    float: none;
+    margin: auto;
+    font-size: x-small;
+}
+
+#loginButton{
+  float: none;
+  width: 50%;
+  height: 20%;
+  margin: auto;
+    margin-left: 37%;
 }
 
 

@@ -1,5 +1,6 @@
+from django.contrib.auth.base_user import AbstractBaseUser
+from django.contrib.auth.models import AbstractUser
 from django.db import models
-from django.contrib.auth import authenticate, login
 
 
 class Ticket(models.Model):
@@ -7,7 +8,7 @@ class Ticket(models.Model):
     seat_number = models.CharField(max_length=10)
 
 
-class User(models.Model):
+class User(AbstractUser):
     GENDER = (
         ('M', 'Male'),
         ('F', 'Female'),
@@ -15,13 +16,16 @@ class User(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     gender = models.CharField(max_length=1, choices=GENDER)
-    email = models.EmailField()
+    email = models.EmailField(primary_key=True)
     birthday = models.DateField()
     phone_number = models.CharField(max_length=11)
     password = models.CharField(max_length=20)
-    type = models.CharField(max_length=10)
+    state = models.CharField(max_length=10)
     img = models.URLField(null=True)
     ticket = models.ForeignKey(Ticket, on_delete=models.CASCADE, null=True)
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = []
 
 
 class Admin(User):
@@ -62,11 +66,3 @@ class Theatre(Event):
 
 class Sport(Event):
     pass
-
-
-def my_view(request):
-    email = request.POST['email']
-    password = request.POST['password']
-    user = authenticate(request, email=email, password=password)
-    if user is not None:
-        login(request, user)
