@@ -6,7 +6,16 @@
   {% block head %}
         {% load static %}
         <link rel="stylesheet" type="text/css" href="{% static "css/registration/signup.css" %}">
+        
     {% endblock %}
+     <script>
+    $(function () {
+        $('.datetime-input').datetimepicker({
+            format:'YYYY-MM-DD HH:mm:ss'
+        });
+    });
+</script>
+
 </head>
 
 <body>
