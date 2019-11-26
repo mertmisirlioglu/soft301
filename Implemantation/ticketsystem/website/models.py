@@ -20,9 +20,9 @@ class User(AbstractUser):
     birthday = models.DateField()
     phone_number = models.CharField(max_length=11)
     password = models.CharField(max_length=20)
-    state = models.CharField(max_length=10)
-    img = models.URLField(null=True)
-    ticket = models.ForeignKey(Ticket, on_delete=models.CASCADE, null=True)
+    state = models.CharField(max_length=10,null=True,blank=True)
+    img = models.URLField(null=True,blank=True)
+    ticket = models.ForeignKey(Ticket, on_delete=models.CASCADE, null=True,blank=True)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
