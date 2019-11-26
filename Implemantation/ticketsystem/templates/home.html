@@ -1,14 +1,17 @@
 {%  extends 'base.html' %}
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="UTF-8">
-  <link rel="stylesheet" type="text/css" href="../static/home.css">
-  <title>{% block title %}{%  endblock %}</title>
+    {% block head %}
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static "css/home.css" %}">
+    {% endblock %}
 </head>
-
 <body>
+{% block content %}
   <div id="mainDiv">
     <div id="topRow">
       <h3 id="helpText">Help</h3>
@@ -32,15 +35,11 @@
         <button type="submit">Submit</button>
       </div>
       <div class="avatarDiv">
-        <img src="../media/user-avatar.png" alt="user-avatar">
+        <img src={% static "media/user-avatar.png" %} alt="user-avatar">
       </div>
       <div class="accountTextDiv">
-        <a href="">
-          <h1>Login</h1>
-        </a>
+          <a href="{% url 'home' %}">Login</a>
       </div>
-      <!--<a href="{%  url 'home' %}">Home</a> /
-    <a href="{% url 'signup' %}">SignUp</a> -->
     </div>
     <div id="searchFilterRow">
       <div class="categories">
@@ -69,7 +68,6 @@
       </div>
     </div>
     <div id="mainRow">
-      <!-- Bu kısım değiştirilecek-->
       <div class="mainpageDiv">
           <div id="signupPart">
             <div class="signupHeader">
@@ -79,7 +77,9 @@
               <h3>Don't you have an account? Create now!</h3>
             </div>
             <div class="signupButton">
-                <button type="submit">Create Account</button>
+                <button type="submit">
+                    <a href="{% url 'signup' %}">Create Account</a>
+                </button>
             </div>
           </div>
           <div id="loginPart">
@@ -104,6 +104,7 @@
       </div>
     </div>
   </div>
+{% endblock %}
 </body>
 
 </html>
