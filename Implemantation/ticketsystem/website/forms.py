@@ -2,7 +2,12 @@ from django import forms
 from .models import User
 
 
+
+
+    
+
 class UserReg(forms.ModelForm):
+
     GENDER = (('M', 'Male'), ('F', 'Female'))
     first_name = forms.CharField()
     last_name = forms.CharField()
@@ -15,6 +20,7 @@ class UserReg(forms.ModelForm):
     widgets = {'password': forms.PasswordInput()}
 
     class Meta:
+
         model = User
         fields = (
             'first_name',
@@ -24,4 +30,9 @@ class UserReg(forms.ModelForm):
             'birthday',
             'phone_number',
             'password',
-        )
+            )
+  
+
+        
+    
+    
