@@ -1,23 +1,15 @@
-{% extends 'base.html' %}
+{%  extends 'base.html' %}
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
-  {% block head %}
+    {% block head %}
         {% load static %}
-        <link rel="stylesheet" type="text/css" href="{% static "css/registration/signup.css" %}">
-        
+        <link rel="stylesheet" type="text/css" href="{% static "css/registration/login.css" %}">
     {% endblock %}
-     <script>
-    $(function () {
-        $('.datetime-input').datetimepicker({
-            format:'YYYY-MM-DD HH:mm:ss'
-        });
-    });
-</script>
-
 </head>
-
 <body>
 {% block content %}
   <div id="mainDiv">
@@ -75,14 +67,33 @@
         <button type="submit">Go</button>
       </div>
     </div>
-    <div class="mainRow">
-      <form method="post">
-         {% csrf_token %}
-         {{ form.as_p }}
-         <button type="submit">Sign Up</button>
-      </form>
+    <div id="mainRow">
+      <div class="mainPageDiv">
+          <div id="signupPart">
+            <div class="signupHeader">
+                <h2>Create Account</h2>
+            </div>
+            <div id="signupText">
+              <h3>Don't you have an account? Create now!</h3>
+            </div>
+            <div class="signupButton">
+                <button type="submit">
+                    <a href="{% url 'signup' %}">Create Account</a>
+                </button>
+            </div>
+          </div>
+          <div id="loginPart">
+            <h2>Login</h2>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Login</button>
+            </form>
+          </div>
+      </div>
     </div>
   </div>
 {% endblock %}
 </body>
+
 </html>
