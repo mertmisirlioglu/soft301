@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" href="wevents.css">
+  <title>{% block title %}{%  endblock %}</title>
+</head>
+
+<body>
+  <div id="mainDiv">
+    <div id="topRow">
+      <h3 id="helpText">Help</h3>
+    </div>
+    <div id="headerRow">
+      <div id="webSiteName">
+        <a href="{%  url 'home' %}">
+          <h1>Online Ticket System</h1>
+        </a></div>
+      <div class="topicsName"><a href="">
+          <h1>Music</h1>
+        </a></div>
+      <div class="topicsName"><a href="">
+          <h1>Stage</h1>
+        </a></div>
+      <div class="topicsName"><a href="">
+          <h1>Sports</h1>
+        </a></div>
+      <div class="search-container">
+        <input type="text" placeholder="Search.." name="search">
+        <button type="submit">Submit</button>
+      </div>
+      <div class="avatarDiv">
+        <img src="../media/user-avatar.png" alt="user-avatar">
+      </div>
+      <div class="accountTextDiv">
+        <a href="">
+          <h1>Login</h1>
+        </a>
+      </div>
+      <!--<a href="{%  url 'home' %}">Home</a> /
+    <a href="{% url 'signup' %}">SignUp</a> -->
+    </div>
+    <div id="searchFilterRow">
+      <div class="categories">
+        <select>
+          <option value="Sport">Sport</option>
+          <option value="Music">Music</option>
+          <option value="Stage">Stage</option>
+        </select>
+      </div>
+      <div class="categories">
+        <select>
+          <option value="Today">Today</option>
+          <option value="Tomorrow">Tomorrow</option>
+          <option value="In this week">This week</option>
+        </select>
+      </div>
+      <div class="categories">
+        <select>
+          <option value="Istanbul">Istanbul</option>
+          <option value="Ankara">Ankara</option>
+          <option value="Izmir">İzmir</option>
+        </select>
+      </div>
+      <div class="filterButton">
+        <button type="submit">Go</button>
+      </div>
+    </div>
+    <div id="mainRow">
+   
+      <div class="firstpart">
+      <h2>Waiting Events</h2>
+
+      </div>
+      <div class="secondpart">
+        <div class="inside">
+          <p class="ename">Event Name</p>
+          <img src="image.jpg" alt="event photo">
+
+          <form>
+          <textarea disabled rows="5" cols="30">Details</textarea>  
+           </form>
+           <i>Date()</i>
+           <i>Time()</i>
+           <i>Place()</i>
+
+          
+
+          <button id="abutton">Accept</button>
+          <button id="dbutton">Decline</button>
+
+        </div>
+        <br>
+   
+      </div>
+
+
+    </div>
+  </div>
+</body> 
+
+</html>
