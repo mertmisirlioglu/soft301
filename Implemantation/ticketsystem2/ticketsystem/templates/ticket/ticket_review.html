@@ -11,6 +11,7 @@
   {% endblock %}
 </head>
 <body>
+{%  load static %}
 {% block content %}
   <div id="mainDiv">
     <div id="topRow">
@@ -77,7 +78,7 @@
       <h4 id="head">Event name =  {{ event.name }}</h4>
       <div id="firstblock">
         <div class="photoo">
-        <img  src="picture.jpg" class="fimage">
+        <img  src={% static 'media/picture.jpg' %}  class="fimage">
       </div>
         <div id="details">
           <p >Event date =  {{ event.date }}</p >
@@ -104,7 +105,7 @@
 <i>Chair no:(Chair number)</i>
 <p><a href={{ event.get_buy_ticket_url }}>Buy Ticket</a></p>
 <div id="karekod">       
- <img  src="karekod.jpg" class="karekod">
+ <img  src={% static 'media/karekod.jpg' %} class="karekod">
 <p>Qr Code:</p>
    </div>     
      

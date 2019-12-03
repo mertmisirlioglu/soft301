@@ -75,10 +75,12 @@
       </div>
     </div>
     <div id="mainRow">
+       <form method="post">
+         {% csrf_token %}
+         {{ form.as_p }}
 
-		  {% csrf_token %}
-                        {{ form.as_p }}
-
+         <button type="submit">Buy</button>
+      </form>
 
     </div>
   </div>

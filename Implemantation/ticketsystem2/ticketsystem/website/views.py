@@ -1,12 +1,13 @@
 from django.contrib import messages
 # Create your views here.
 from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import redirect, get_object_or_404
 from django.shortcuts import render
 
-from website.models import Event
-from .forms import UserReg, ExtendedUserCreationForm
+from website.models import Event, Ticket, UserProfile
+from .forms import UserReg, ExtendedUserCreationForm, BuyTicketForm
 
 
 def home(request):
@@ -59,8 +60,35 @@ def signup(request):
 def event_preview(request, pk):
     event = get_object_or_404(Event, pk=pk)
     context = {"event": event}
-    return render(request, 'preview_ticket.html', context)
+    return render(request, 'ticket/ticket_review.html', context)
 
 
-def ticket_buy(request):
-    return None
+@login_required
+def ticket_buy_view(request, pk):
+    event = get_object_or_404(Event, pk=pk)
+    if request.method == 'POST':
+        user = request.user
+        form = BuyTicketForm(request.POST)
+        if form.is_valid():
+            print('mert')
+
+            quantity = form.cleaned_data.get('quantity')
+
+            for i in range(0, quantity):
+                ticket = Ticket(event=event, user=user)
+                ticket.save()
+
+            return redirect('home')
+    else:
+        form = BuyTicketForm()
+
+    context = {'event': event, 'form': form}
+    return render(request, 'buy_ticket.html', context)
+
+
+@login_required
+def my_tickets_view(request):
+    user = request.user
+    ticket_list = Ticket.objects.all().filter(user=user)
+    context = {"ticket_list": ticket_list}
+    return render(request, 'profile/my_tickets.html', context)

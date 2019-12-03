@@ -43,7 +43,8 @@ class UserReg(forms.ModelForm):
         )
 
 
-class BuyTicket(forms.ModelForm):
+class BuyTicketForm(forms.Form):
     quantity = forms.IntegerField()
+
 
 
