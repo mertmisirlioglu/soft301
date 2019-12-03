@@ -1,18 +1,18 @@
 {%  extends 'base.html' %}
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="UTF-8">
-  <title>Online Ticket System</title>
-  {% block head %}
+    {% block head %}
         {% load static %}
-		 <link rel="stylesheet" type="text/css" href="{% static "css/ticket/ticket_review.css" %}">
-  {% endblock %}
+        <link rel="stylesheet" type="text/css" href="{% static "css/home.css" %}">
+    {% endblock %}
 </head>
 <body>
-{%  load static %}
 {% block content %}
+
   <div id="mainDiv">
     <div id="topRow">
       <h3 id="helpText">Help</h3>
@@ -38,15 +38,16 @@
       <div class="avatarDiv">
         <img src={% static "media/user-avatar.png" %} alt="user-avatar">
       </div>
-      <div class="accountTextDiv">
-				{% if user.is_authenticated %}
+       <div class="accountTextDiv">
+                {% if user.is_authenticated %}
                     <p>Welcome, {{ user.get_username }}. Thanks for logging in.<a href="{% url 'logout' %}">Logout</a>
                     </p>
                 {% else %}
                     <p><a href="{% url 'login' %}">Login</a></p>
                 {% endif %}
 
-		</div>
+            </div>
+    </div>
     <div id="searchFilterRow">
       <div class="categories">
         <select>
@@ -74,45 +75,16 @@
       </div>
     </div>
     <div id="mainRow">
-       
-      <h4 id="head">Event name =  {{ event.name }}</h4>
-      <div id="firstblock">
-        <div class="photoo">
-        <img  src={% static 'media/picture.jpg' %}  class="fimage">
-      </div>
-        <div id="details">
-          <p >Event date =  {{ event.date }}</p >
-         
-          <p>(informations)</p>
-        </div>
-        <div id="Stage">
-          <p >Event stage =  {{ event.stage }}</p >
-         
-          <p>(informations)</p>
-        </div>
-        <div id="eventdetails">
-          <p >Event Rules:</p >
-         
-          <p>(informations)</p>
-        </div>
-      </div>
-      <br>
-      <h4 id="ticket">Event price =  {{ event.price }}</h4>
-   <div id="secondblock">
-     
-<p>Owner:(Owners name)</p>
-<i>Ticket no:(Ticket number)</i>
-<i>Chair no:(Chair number)</i>
-<p><a href={{ event.get_buy_ticket_url }}>Buy Ticket</a></p>
-<div id="karekod">       
- <img  src={% static 'media/karekod.jpg' %} class="karekod">
-<p>Qr Code:</p>
-   </div>     
-     
-   </div>
+       <form method="post">
+         {% csrf_token %}
+         {{ form.as_p }}
+
+         <button type="submit">Buy</button>
+      </form>
+
     </div>
   </div>
-  {% endblock %}
-</body> 
+{% endblock %}
+</body>
 
 </html>
