@@ -2,18 +2,16 @@ from django.contrib import messages
 # Create your views here.
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import AuthenticationForm
-from django.shortcuts import redirect
+from django.shortcuts import redirect, get_object_or_404
 from django.shortcuts import render
 
+from website.models import Event
 from .forms import UserReg, ExtendedUserCreationForm
 
 
 def home(request):
-    if request.user.is_authenticated:
-        username = request.user.username
-    else:
-        username = 'not logged in'
-    context = {'username': username}
+    event_list = Event.objects.all()
+    context = {"event_list": event_list}
     return render(request, 'home.html', context)
 
 
@@ -56,3 +54,13 @@ def signup(request):
         return redirect('home')
     return render(request, 'registration/signup.html',
                   {'form': ExtendedUserCreationForm, 'profile_form': UserReg})
+
+
+def event_preview(request, pk):
+    event = get_object_or_404(Event, pk=pk)
+    context = {"event": event}
+    return render(request, 'preview_ticket.html', context)
+
+
+def ticket_buy(request):
+    return None

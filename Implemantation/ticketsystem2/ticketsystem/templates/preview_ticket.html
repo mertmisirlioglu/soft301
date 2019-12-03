@@ -75,9 +75,13 @@
       </div>
     </div>
     <div id="mainRow">
-        {% for event in event_list %}
-		  <p>Event {{ event.name }} <a href={{ event.get_preview_ticket_url }}>click to buy</a></p>
-	{% endfor %}
+
+		  <p>Event name =  {{ event.name }}</p>
+             <p>Event price =  {{ event.price }}</p>
+             <p>Event stage =  {{ event.stage }}</p>
+             <p>Event date =  {{ event.date }}</p>
+               <p><a href={{ event.get_buy_ticket_url }}>Buy Ticket</a></p>
+
 
     </div>
   </div>
