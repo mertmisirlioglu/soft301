@@ -133,13 +133,6 @@ body{
     background-color: red;
 }
 
-#miniMainDiv{
-  position: relative;
-    width: 85%;
-    height: 100%;
-    background-color: green;
-}
-
 #searchResultRow{
   position: relative;
   width: 85%;
