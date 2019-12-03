@@ -1,6 +1,5 @@
-from django.contrib.auth.models import User
 from django.db import models
-
+from django.contrib.auth.models import User
 
 class Ticket(models.Model):
     price = models.IntegerField()
@@ -13,7 +12,10 @@ class UserProfile(models.Model):
         ('M', 'Male'),
         ('F', 'Female'),
     )
+    first_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50)
     gender = models.CharField(max_length=1, choices=GENDER)
+    email = models.EmailField(primary_key=True)
     birthday = models.DateField()
     phone_number = models.CharField(max_length=11)
     password = models.CharField(max_length=20)
