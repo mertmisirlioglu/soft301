@@ -60,7 +60,7 @@ def signup(request):
 def event_preview(request, pk):
     event = get_object_or_404(Event, pk=pk)
     context = {"event": event}
-    return render(request, 'ticket/ticket_review.html', context)
+    return render(request, 'event/event_review.html', context)
 
 
 @login_required

@@ -96,7 +96,7 @@ body{
 #mainRow{
     float: none;
     width: 95%;
-    height: 90%;
+    height: 95%;
     margin: auto;
     background-color: red;
 }
@@ -158,105 +158,74 @@ body{
   top: 21px;
   left: 22px;
 }
-#firstblock{
-  position: absolute;
-background-color: pink;
-height:40%;
-width:70%;
-left:60px;
 
-}
-.fimage{
-  position: relative;
-  width:250px;
-  float: left;
-  left: 20px;
-  top: 20px;
-}
-#details{
-  position: relative;
-  
-  left: 305px;
-  top: 60px;
- 
-  width: 200px;
-  right:200px;
-
-}
-#time p{
-   
-   float: left;
+#event-review{
+    float: left;
+    width: 80%;
+    height: 35%;
+    margin: auto;
+    background-color: blue;
 }
 
-#firstblock p{
-
- font-size: 17px;
- font-weight: bold;
-
-}
-#Stage{
-  position: relative;
-  float:right;
-  right: 360px;
-  top: -68px;
-  width:200px;
-
-  top: -32px;
+.event-name{
+    float: none;
+    width: 95%;
+    height: 5%;
+    margin: auto;
+    background-color: blue;
 }
 
-#eventdetails{
-  position: relative;
- 
-  width: 200px;
-  float: right;
-left: 90px;
-  top: -30px;
-}
-.photoo{
-position:absolute;
-}
-#ticket{
-  position:relative;
-  border: 3px solid black;
-  padding:6px;
-  width: 200px;
-  top:270px;
-  left: 26px;
-}
-.karekod{
-
-  position: relative;
-  width :150px;
-  float: right;
- right: 270px;
-  top: 70px;
-
-}
-#secondblock{
-  top: 250px;
-  position: relative;
-  
-  
-background-color: pink;
-height:40%;
-width:74%;
-left:25px;
+.event-name h3{
+    text-align: left;
 }
 
-#secondblock p{
-position:absolute;
-top: 90px;
 
+#event-info{
+    float: none;
+    width: 95%;
+    height: 20%;
+    margin: auto;
+    background-color: red;
 }
 
-#secondblock i{
+#event-img{
+ float: left;
+    width: 15%;
+    height: 85%;
+    margin: auto;
+     background-color: purple;
+}
 
-  position: relative;
-  top: 40px;
-  }
-  #karekod p{
-position: relative;
-float: right;
-top: 100px;
-right: 300px;
-  }
+#event-date{
+ float: left;
+    width: 15%;
+    height: 85%;
+    margin: auto;
+     background-color: yellow;
+}
+
+#event-place{
+ float: left;
+    width: 15%;
+    height: 85%;
+    margin: auto;
+     background-color: gray;
+}
+
+#event-price{
+    float: left;
+    width: 15%;
+    height: 85%;
+    margin: auto;
+     background-color: blue;
+}
+
+#event-buy-ticket{
+    float: left;
+    width: 50%;
+    height: 5%;
+    margin: auto;
+}
+
+
+
