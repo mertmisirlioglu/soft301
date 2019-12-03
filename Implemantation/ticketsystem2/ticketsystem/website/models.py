@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
 class Ticket(models.Model):
     price = models.IntegerField()
     seat_number = models.CharField(max_length=10)
@@ -19,13 +20,12 @@ class UserProfile(models.Model):
     birthday = models.DateField()
     phone_number = models.CharField(max_length=11)
     password = models.CharField(max_length=20)
-    state = models.CharField(max_length=10,null=True,blank=True)
-    img = models.URLField(null=True,blank=True)
-    ticket = models.ForeignKey(Ticket, on_delete=models.CASCADE, null=True,blank=True)
+    state = models.CharField(max_length=10, null=True, blank=True)
+    img = models.URLField(null=True, blank=True)
+    ticket = models.ForeignKey(Ticket, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
-    	return self.user.username
-
+        return self.user.username
 
 
 class Operator(UserProfile):
@@ -41,15 +41,28 @@ class Stage(models.Model):
     address = models.CharField(max_length=200)
     quota = models.IntegerField()
 
+    def __str__(self):
+        return '' + self.place
+
 
 class Event(models.Model):
     name = models.CharField(max_length=50)
     stage = models.ForeignKey(Stage, on_delete=models.CASCADE)
     date = models.DateField()
     quota = models.IntegerField()
+    price = models.IntegerField()
     isAvailable = models.BooleanField(default=False)
     isAccepted = models.BooleanField(default=False)
     rules = models.CharField(max_length=500)
+
+    def get_preview_ticket_url(self):
+        return f"/event/{self.pk}/preview"
+
+    def get_buy_ticket_url(self):
+        return f"/event/{self.pk}/buy"
+
+    def __str__(self):
+        return '' + self.name
 
 
 class Concert(Event):

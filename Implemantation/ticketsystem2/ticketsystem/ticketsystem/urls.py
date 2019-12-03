@@ -18,10 +18,16 @@ from django.urls import path, include
 
 from website import views
 
+
+
+
+
 urlpatterns = [
     path('', views.home, name='home'),
     path('login/', views.login_view, name='login'),
     path('logout/', views.logout_view, name='logout'),
     path('signup/', views.signup, name='signup'),
     path('admin/', admin.site.urls),
+    path('event/<int:pk>/preview', views.event_preview),
+    path('event/<int:pk>/buy', views.ticket_buy),
 ]
