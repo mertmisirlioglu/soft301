@@ -1,0 +1,105 @@
+{%  extends 'base.html' %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+    {% block head %}
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static "css/event/event_review.css" %}">
+    {% endblock %}
+</head>
+<body>
+{% block content %}
+
+  <div id="mainDiv">
+    <div id="topRow">
+      <h3 id="helpText">Help</h3>
+    </div>
+    <div id="headerRow">
+      <div id="webSiteName">
+        <a href="{%  url 'home' %}">
+          <h1>Online Ticket System</h1>
+        </a></div>
+      <div class="topicsName"><a href="">
+          <h1>Music</h1>
+        </a></div>
+      <div class="topicsName"><a href="">
+          <h1>Stage</h1>
+        </a></div>
+      <div class="topicsName"><a href="">
+          <h1>Sports</h1>
+        </a></div>
+      <div class="search-container">
+        <input type="text" placeholder="Search.." name="search">
+        <button type="submit">Submit</button>
+      </div>
+      <div class="avatarDiv">
+        <img src={% static "media/user-avatar.png" %} alt="user-avatar">
+      </div>
+       <div class="accountTextDiv">
+                {% if user.is_authenticated %}
+                    <p>Welcome, {{ user.get_username }}. Thanks for logging in.<a href="{% url 'logout' %}">Logout</a>
+                    </p>
+                {% else %}
+                    <p><a href="{% url 'login' %}">Login</a></p>
+                {% endif %}
+
+            </div>
+    </div>
+    <div id="searchFilterRow">
+      <div class="categories">
+        <select>
+          <option value="Sport">Sport</option>
+          <option value="Music">Music</option>
+          <option value="Stage">Stage</option>
+        </select>
+      </div>
+      <div class="categories">
+        <select>
+          <option value="Today">Today</option>
+          <option value="Tomorrow">Tomorrow</option>
+          <option value="In this week">This week</option>
+        </select>
+      </div>
+      <div class="categories">
+        <select>
+          <option value="Istanbul">Istanbul</option>
+          <option value="Ankara">Ankara</option>
+          <option value="Izmir">İzmir</option>
+        </select>
+      </div>
+      <div class="filterButton">
+        <button type="submit">Go</button>
+      </div>
+    </div>
+    <div id="mainRow">
+        <div id="event-review">
+            <div class="event-name">
+                <h3>Event name =  {{ event.name }}</h3>
+            </div>
+            <div id="event-info">
+                <div id="event-img">
+                     <p>event-img</p>
+                </div>
+                <div id="event-date">
+                    <p>Event date =  {{ event.date }}</p>
+                </div>
+                 <div id="event-place">
+                     <p>Event stage =  {{ event.stage }}</p>
+                 </div>
+                <div id="event-price">
+                    <p>Event price =  {{ event.price }}</p>
+                </div>
+                <div id="event-buy-ticket">
+                     <p><a href={{ event.get_buy_ticket_url }}>Buy Ticket</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+{% endblock %}
+</body>
+
+</html>
