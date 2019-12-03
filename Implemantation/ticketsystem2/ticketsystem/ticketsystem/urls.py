@@ -26,5 +26,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('event/<int:pk>/preview', views.event_preview, name='event_preview'),
     path('event/<int:pk>/buy', views.ticket_buy_view, name='buy_ticket'),
-    path('profile/', views.my_tickets_view, name='my_tickets'),
+    path('account/tickets/', views.my_tickets_view, name='my_tickets'),
 ]
