@@ -91,7 +91,11 @@
                                                 <option value="TicketType">Standing -00.0TL</option>
                                             </select>
                                             <select id="selectQuantity" >
-                                                <option value="Quantity">0</option>
+                                                  <form method="post">
+                                                    {% csrf_token %}
+                                                     {{ form.as_p }}
+                                                     <button type="submit">Buy</button>
+                                                  </form>
                                             </select>
                                             </div>
                                             </div>

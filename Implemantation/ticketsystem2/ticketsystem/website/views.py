@@ -83,7 +83,7 @@ def ticket_buy_view(request, pk):
         form = BuyTicketForm()
 
     context = {'event': event, 'form': form}
-    return render(request, 'buy_ticket.html', context)
+    return render(request, 'ticket/buyTicketPage.html', context)
 
 
 @login_required
