@@ -1,77 +1,58 @@
-body{
-    margin: auto;
-    background-color: gray;
-}
-
-#mainDiv{
-  float: none;
-  width: 100%;
-  height: 768px;
-  margin: auto;
-}
-
-#helpText{
-  text-align: right;
-}
-
-#topRow{
-    float: none;
+body {
+    background-color: white;
     width: 100%;
-    height: 5%;
+}
+
+#helpText {
+    text-align: right;
+}
+
+header {
+    width: 100%;
+}
+
+#webSiteName {
+    float: left;
+    width: 14%;
+    height: 95%;
     margin: auto;
 }
 
-#headerRow{
-    float: none;
-    width: 95%;
-    height: 15%;
+.topicsName {
+    float: left;
+    width: 14%;
+    height: 95%;
     margin: auto;
-    margin-left: 6%;
 }
 
-#webSiteName{
-  float: left;
-  width: 14%;
-  height: 95%;
-  margin: auto;
+.avatarDiv {
+    float: left;
+    width: 25%;
+    height: 95%;
+    margin: auto;
+    margin-left: 2%;
 }
 
-.topicsName{
-  float: left;
-  width: 14%;
-  height: 95%;
-  margin: auto;
+.avatarDiv img {
+    max-width: 100%;
+    max-height: 100%;
 }
 
-
-.avatarDiv{
-  float: left;
-  width: 7%;
-  height: 95%;
-  margin: auto;
-  margin-left: 2%;
+.accountTextDiv {
+    float: left;
+    width: 14%;
+    height: 95%;
+    margin: auto;
+    padding-top: 1%;
+    margin-left: 1%;
 }
 
-.avatarDiv img{
-  max-width:100%;
-  max-height:100%;
-}
-
-.accountTextDiv{
-  float: left;
-  width: 14%;
-  height: 95%;
-  margin: auto;
-  padding-top: 1%;
-  margin-left:1%;
-}
-
-.accountTextDiv a{
-  margin-top: 1%;
+.accountTextDiv a {
+    margin-top: 1%;
     font-size: x-large;
 }
 
-.search-container{
+.search-container {
     float: left;
     width: 16%;
     height: 80%;
@@ -79,64 +60,67 @@ body{
     padding-top: 2%;
 }
 
-.search-container input{
- float: left;
- width: 70%;
- height: 20%;
- margin: auto;
+.search-container input {
+    float: left;
+    margin: auto;
 }
 
-#searchFilterRow{
-    float: none;
-    width: 80%;
-    height: 10%;
+#searchFilterRow {
     margin: auto;
+    padding-left: 50px;
     text-align: center;
+    background-color: darkcyan;
 }
 
-#mainRow{
-    float: none;
-    width: 95%;
-    height: 70%;
+#mainRow {
     margin: auto;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 50px;
+    background-color: burlywood;
 }
 
-.categories{
-  float: left;
-  width: 25%;
-  height: 90%;
-  margin: auto;
-  padding-top: 1%;
+#content {
+    background-color: gray;
 }
 
-.categories select{
-  width: 50%;
-  height: 50%;
+.categories {
+    float: left;
+    width: 80%;
+    height: 40px;
+    margin: auto;
+    padding-top: 1%;
 }
 
-.filterButton{
-  float: left;
-  width: 15%;
-  height: 100%;
-  margin: auto;
-  padding-top: 1%;
+.categories select {
+    width: 70%;
+    height: 70%;
 }
 
-.filterButton button{
-  font-size:20px;
-  width: 25%;
-}
-
-.mainPageDiv{
-    float: none;
-    width: 85%;
+.filterButton {
+    float: left;
+    width: 40%;
     height: 100%;
     margin: auto;
-    margin-left: 10%;
-    background-color: red;
+    padding-top: 1%;
 }
 
+.filterButton button {
+    font-size: 20px;
+    width: 50px;
+}
 
+@media (max-width: 956px) {
+    #mainRow {
+        display: none !important;
+    }
+    #searchFilterRow {
+        padding-top: 70px;
+    }
+}
 
-
-
+@media (min-width: 956px) {
+    #top-navbar {
+        display: none !important;
+    }
+}
