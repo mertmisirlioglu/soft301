@@ -1,75 +1,14 @@
 {%  extends 'base.html' %}
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
     {% block head %}
+       <title>Buy Ticket</title>
         {% load static %}
         <link rel="stylesheet" type="text/css" href="{% static "css/ticket/buyTicketPage.css" %}">
     {% endblock %}
-</head>
 
-<body>
+
 {% block content %}
-    <div id="mainDiv">
-        <div id="topRow">
-            <h3 id="helpText">Help</h3>
-        </div>
-        <div id="headerRow">
-            <div id="webSiteName">
-                <a href="{%  url 'home' %}">
-                    <h1>Online Ticket System</h1>
-                </a></div>
-            <div class="topicsName"><a href="">
-                    <h1>Music</h1>
-                </a></div>
-            <div class="topicsName"><a href="">
-                    <h1>Stage</h1>
-                </a></div>
-            <div class="topicsName"><a href="">
-                    <h1>Sports</h1>
-                </a></div>
-            <div class="search-container">
-                <input type="text" placeholder="Search.." name="search">
-                <button type="submit">Submit</button>
-            </div>
-            <div class="avatarDiv">
-                <img src={% static "media/user-avatar.png" %} alt="user-avatar">
-            </div>
-            <div class="accountTextDiv">
-                <a href="">
-                    <h1>Login</h1>
-                </a>
-            </div>
-        </div>
-        <div id="searchFilterRow">
-            <div class="categories">
-                <select>
-                    <option value="Sport">Sport</option>
-                    <option value="Music">Music</option>
-                    <option value="Stage">Stage</option>
-                </select>
-            </div>
-            <div class="categories">
-                <select>
-                    <option value="Today">Today</option>
-                    <option value="Tomorrow">Tomorrow</option>
-                    <option value="In this week">This week</option>
-                </select>
-            </div>
-            <div class="categories">
-                <select>
-                    <option value="Istanbul">Istanbul</option>
-                    <option value="Ankara">Ankara</option>
-                    <option value="Izmir">İzmir</option>
-                </select>
-            </div>
-            <div class="filterButton">
-                <button type="submit">Go</button>
-            </div>
-        </div>
-            <div id="mainRow">
+
                  <!-- Bu kısım değiştirilecek-->
                   <div class="mainPageDiv">
                       <div id="miniPageDiv">
@@ -119,9 +58,5 @@
                         </div>
                      </div>
                  </div>
-         </div>
-     </div>
- {% endblock %}
-</body>
 
-</html>
+ {% endblock %}
