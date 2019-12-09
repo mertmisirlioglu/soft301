@@ -31,9 +31,13 @@
                 <div id="loginPart">
                     <h2>Login</h2>
                     <form method="post">
+                        {% for message in messages %}
+                            {{ message }}
+                        {% endfor %}
                         {% csrf_token %}
                         {{ form.as_p }}
                         <button type="submit">Login</button>
+                        <a href="" >Forgot Password</a>
                     </form>
                 </div>
             </div>

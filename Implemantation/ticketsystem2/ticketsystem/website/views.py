@@ -1,5 +1,4 @@
 from django.contrib import messages
-# Create your views here.
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
@@ -26,11 +25,11 @@ def login_view(request):
             login(request, user)
             return redirect('home')
         else:
-            messages.error(request, 'username or password not correct')
+            messages.error(request, 'Username or Password is not correct!')
             return redirect('login')
     else:
         form = AuthenticationForm()
-        return render(request, 'registration/login.html',
+    return render(request, 'registration/login.html',
                       {'form': form})
 
 
