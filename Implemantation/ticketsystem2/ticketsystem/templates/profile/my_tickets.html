@@ -1,15 +1,9 @@
-{% extends 'base.html' %}
+{% extends 'profile/profile.html' %}
 
 
-{% block head %}
-    <title>My Tickets</title>
-{% endblock %}
-
-{% block content %}
-
+{% block info %}
     {% for ticket in ticket_list %}
         <p>Ticket pk : {{ ticket.pk }} // Which Event : {{ ticket.event }} // Which Stage : {{ ticket.event.stage }}</p>
     {% endfor %}
-
-
 {% endblock %}
+

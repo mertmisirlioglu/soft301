@@ -26,7 +26,7 @@
                     <div class="collapse navbar-collapse" id="navbarCollapse">
                         <ul class="navbar-nav">
                             <li class="nav-item active">
-                                <a class="nav-link" href="#">Anasayfa <span class="sr-only">(current)</span></a>
+                                <a class="nav-link" href="#">MainPage <span class="sr-only">(current)</span></a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#">Music</a>
@@ -40,7 +40,7 @@
 
                             {% if user.is_authenticated %}
                             <li class="nav-item">
-                                <a class="nav-link" href="{% url 'my_tickets' %}">My Profile</a>
+                                <a class="nav-link" href="{% url 'my_profile' %}">My Profile</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{% url 'logout' %}">Logout</a>
@@ -64,28 +64,28 @@
             <div class="col-md">
                 <div id="webSiteName">
                     <a href="{%  url 'home' %}">
-                        <h1>Online Ticket System</h1>
+                        <h2>Online Ticket System</h2>
                     </a>
                 </div>
             </div>
             <div class="col-md">
                 <div class="topicsName">
                     <a href="">
-                        <h1>Music</h1>
+                        <h3>Music</h3>
                     </a>
                 </div>
             </div>
             <div class="col-md">
                 <div class="topicsName">
                     <a href="">
-                        <h1>Stage</h1>
+                        <h3>Stage</h3>
                     </a>
                 </div>
             </div>
             <div class="col-md">
                 <div class="topicsName">
                     <a href="">
-                        <h1>Sports</h1>
+                        <h3>Sports</h3>
                     </a>
                 </div>
             </div>
@@ -102,13 +102,13 @@
                 </div>
                 <div class="accountTextDiv">
                     {% if user.is_authenticated %}
-                    <p>Welcome, {{ user.get_username }}. Thanks for logging in.<a href="{% url 'logout' %}">Logout</a>
-                    </p>
+                    <p class="login">Welcome, {{ user.get_username }}.<a href="{% url 'logout' %}">Logout</a>
+                    <a href="{% url 'my_profile' %}">MyProfile</a></p>
                     {% else %}
                     <p><a href="{% url 'login' %}">Login</a></p>
                     {% endif %}
-
                 </div>
+
             </div>
         </div>
 

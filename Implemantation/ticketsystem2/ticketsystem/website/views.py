@@ -74,7 +74,7 @@ def ticket_buy_view(request, pk):
 
             quantity = form.cleaned_data.get('quantity')
 
-            for i in range(0, quantity):
+            for i in range(0, int(quantity)):
                 ticket = Ticket(event=event, user=user)
                 ticket.save()
 
@@ -92,3 +92,11 @@ def my_tickets_view(request):
     ticket_list = Ticket.objects.all().filter(user=user)
     context = {"ticket_list": ticket_list}
     return render(request, 'profile/my_tickets.html', context)
+
+
+@login_required
+def my_profile_view(request):
+    user = request.user
+    user_infos = UserProfile.objects.all().filter(user=user)
+    context = {"user_infos": user_infos}
+    return render(request, 'profile/profile.html', context)
