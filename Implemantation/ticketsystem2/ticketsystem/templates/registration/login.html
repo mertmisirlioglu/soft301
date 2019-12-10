@@ -13,66 +13,6 @@
 <body>
 {% block content %}
     <div id="mainDiv">
-        <div id="topRow">
-            <h3 id="helpText">Help</h3>
-        </div>
-        <div id="headerRow">
-            <div id="webSiteName">
-                <a href="{% url 'home' %}">
-                    <h1>Online Ticket System</h1>
-                </a></div>
-            <div class="topicsName"><a href="">
-                <h1>Music</h1>
-            </a></div>
-            <div class="topicsName"><a href="">
-                <h1>Stage</h1>
-            </a></div>
-            <div class="topicsName"><a href="">
-                <h1>Sports</h1>
-            </a></div>
-            <div class="search-container">
-                <input type="text" placeholder="Search.." name="search">
-                <button type="submit">Submit</button>
-            </div>
-            <div class="avatarDiv">
-                <img src={% static "media/user-avatar.png" %} alt="user-avatar">
-            </div>
-            <div class="accountTextDiv">
-                {% if user.is_authenticated %}
-                    <p>Welcome, {{ user.get_username }}. Thanks for logging in.<a href="{% url 'logout' %}">Logout</a>
-                    </p>
-                {% else %}
-                    <p><a href="{% url 'login' %}">Login</a></p>
-                {% endif %}
-
-            </div>
-        </div>
-        <div id="searchFilterRow">
-            <div class="categories">
-                <select>
-                    <option value="Sport">Sport</option>
-                    <option value="Music">Music</option>
-                    <option value="Stage">Stage</option>
-                </select>
-            </div>
-            <div class="categories">
-                <select>
-                    <option value="Today">Today</option>
-                    <option value="Tomorrow">Tomorrow</option>
-                    <option value="In this week">This week</option>
-                </select>
-            </div>
-            <div class="categories">
-                <select>
-                    <option value="Istanbul">Istanbul</option>
-                    <option value="Ankara">Ankara</option>
-                    <option value="Izmir">İzmir</option>
-                </select>
-            </div>
-            <div class="filterButton">
-                <button type="submit">Go</button>
-            </div>
-        </div>
         <div id="mainRow">
             <div class="mainPageDiv">
                 <div id="signupPart">
@@ -91,9 +31,13 @@
                 <div id="loginPart">
                     <h2>Login</h2>
                     <form method="post">
+                        {% for message in messages %}
+                            {{ message }}
+                        {% endfor %}
                         {% csrf_token %}
                         {{ form.as_p }}
                         <button type="submit">Login</button>
+                        <a href="" >Forgot Password</a>
                     </form>
                 </div>
             </div>

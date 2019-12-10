@@ -23,26 +23,23 @@
                                     <div id="ticketSelectionRow">
                                         <header>TICKET SELECTION</header>
                                         </div>
-                                        <div id="adultRow">
+                                        <div class="adultRow">
                                             <header>ADULT</header>
-                                            <div id= "adultSelects">
-                                            <select id="selectTicketType" >
-                                                <option value="TicketType">Standing -00.0TL</option>
-                                            </select>
-                                            <select id="selectQuantity" >
+                                            <div class="quantityDiv">
                                                   <form method="post">
-                                                    {% csrf_token %}
-                                                     {{ form.as_p }}
-                                                     <button type="submit">Buy</button>
+                                                        {% csrf_token %}
+                                                        {{ form.as_p }}
+                                                        <button type="submit">Buy</button>
                                                   </form>
-                                            </select>
+
                                             </div>
-                                            </div>
-                                            <div id="blockRow">
-                                                <header>BLOCK</header>
-                                                <select id="selectType" >
-                                                    <option value="Type">STANDING</option>
-                                                </select>
+
+                                        </div>
+                                                <div id="blockRow">
+                                                    <header>BLOCK</header>
+                                                    <select id="selectType" >
+                                                     <option value="Type">STANDING</option>
+                                                    </select>
                                                 </div>
                                         <div id="seatingPlanRow">
                                             <header>SEATING PLAN</header>

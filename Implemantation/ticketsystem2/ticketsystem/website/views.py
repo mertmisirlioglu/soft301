@@ -1,5 +1,4 @@
 from django.contrib import messages
-# Create your views here.
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
@@ -26,11 +25,11 @@ def login_view(request):
             login(request, user)
             return redirect('home')
         else:
-            messages.error(request, 'username or password not correct')
+            messages.error(request, 'Username or Password is not correct!')
             return redirect('login')
     else:
         form = AuthenticationForm()
-        return render(request, 'registration/login.html',
+    return render(request, 'registration/login.html',
                       {'form': form})
 
 
@@ -74,7 +73,7 @@ def ticket_buy_view(request, pk):
 
             quantity = form.cleaned_data.get('quantity')
 
-            for i in range(0, quantity):
+            for i in range(0, int(quantity)):
                 ticket = Ticket(event=event, user=user)
                 ticket.save()
 
@@ -92,3 +91,11 @@ def my_tickets_view(request):
     ticket_list = Ticket.objects.all().filter(user=user)
     context = {"ticket_list": ticket_list}
     return render(request, 'profile/my_tickets.html', context)
+
+
+@login_required
+def my_profile_view(request):
+    user = request.user
+    user_infos = UserProfile.objects.all().filter(user=user)
+    context = {"user_infos": user_infos}
+    return render(request, 'profile/profile.html', context)

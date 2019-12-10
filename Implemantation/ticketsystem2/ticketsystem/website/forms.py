@@ -44,7 +44,8 @@ class UserReg(forms.ModelForm):
 
 
 class BuyTicketForm(forms.Form):
-    quantity = forms.IntegerField()
+    Quantity = (('1',1),('2',2),('3',3),('4',4),('5',5),('6',6),('7',7),('8',8),('9',9))
+    quantity = forms.ChoiceField(choices=Quantity, label='', initial='', required=True)
 
 
 
