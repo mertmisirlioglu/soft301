@@ -1,0 +1,37 @@
+{%  extends 'base.html' %}
+
+
+    {% block head %}
+        <title>Event Review</title>
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static "css/event/event_review.css" %}">
+    {% endblock %}
+
+{% block content %}
+
+        <div id="event-review">
+            <div class="event-name">
+                <h3>Event name =  {{ event.name }}</h3>
+            </div>
+            <div id="event-info">
+                <div id="event-img">
+                     <p>event-img</p>
+                </div>
+                <div id="event-date">
+                    <p>Event date =  {{ event.date }}</p>
+                </div>
+                 <div id="event-place">
+                     <p>Event stage =  {{ event.stage }}</p>
+                 </div>
+                <div id="event-price">
+                    <p>Event price =  {{ event.price }}</p>
+                </div>
+                <div id="event-buy-ticket">
+                     <p><a href={{ event.get_buy_ticket_url }}>Buy Ticket</a></p>
+                </div>
+            </div>
+        </div>
+
+{% endblock %}
+
+

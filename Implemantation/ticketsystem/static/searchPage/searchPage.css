@@ -1,0 +1,213 @@
+body{
+    margin: auto;
+}
+
+#mainDiv{
+  float: none;
+  width: 100%;
+  height: 768px;
+  margin: auto;
+}
+
+#helpText{
+  text-align: right;
+}
+
+#topRow{
+    float: none;
+    width: 100%;
+    height: 5%;
+    margin: auto;
+}
+
+#headerRow{
+    float: none;
+    width: 95%;
+    height: 15%;
+    margin: auto;
+    margin-left: 6%;
+}
+
+#webSiteName{
+  float: left;
+  width: 14%;
+  height: 95%;
+  margin: auto;
+}
+
+.topicsName{
+  float: left;
+  width: 14%;
+  height: 95%;
+  margin: auto;
+  
+}
+
+
+.avatarDiv{
+  float: left;
+  width: 7%;
+  height: 95%;
+  margin: auto;
+  margin-left: 2%;
+}
+
+.avatarDiv img{
+  max-width:100%;
+  max-height:100%;
+}
+
+.accountTextDiv{
+  float: left;
+  width: 14%;
+  height: 95%;
+  margin: auto;
+  padding-top: 1%;
+  margin-left:1%;
+}
+
+.accountTextDiv a{
+  margin-top: 1%;
+}
+
+.search-container{
+    float: left;
+    width: 15%;
+    height: 80%;
+    margin: auto;
+    padding-top: 2%;
+}
+
+.search-container input{
+ float: left;
+ width: 65%;
+ height: 20%;
+ margin: auto;
+}
+
+#searchFilterRow{
+    float: none;
+    width: 80%;
+    height: 10%;
+    margin: auto;
+    text-align: center;
+}
+
+#mainRow{
+  width: 95%;
+  height: 70%;
+  margin: auto;
+  background-color: red;
+}
+
+.categories{
+  float: left;
+  width: 25%;
+  height: 90%;
+  margin: auto;
+  padding-top: 1%;
+}
+
+.categories select{
+  width: 50%;
+  height: 50%;
+}
+
+.filterButton{
+  float: left;
+  width: 15%;
+  height: 100%;
+  margin: auto;
+  padding-top: 1%;
+}
+
+.filterButton button{
+  font-size:20px;
+  width: 25%;
+}
+
+.mainPageDiv{
+  position: relative;
+    width: 85%;
+    height: 100%;
+    background-color: red;
+}
+
+#searchResultRow{
+  position: relative;
+  width: 85%;
+  height: 5%;
+  background-color: pink;
+  margin: auto;
+}
+
+#searchInfo{
+  float: left;
+}
+
+.pageButtons{
+  display: inline;
+  margin-left: 28%;
+}
+
+#pageButtons button{
+  font-size:13px;
+  height: 19px;
+  width: auto;
+}
+
+#leftPageArrow{
+  background-image: url(../../media/left-arrow-button.png);
+    background-size: 15px 15px;
+    width: auto;
+    height: 19px;  
+}
+#rightPageArrow{
+  background-image: url(../../media/right-arrow-button.png);
+    background-size: 15px 15px; 
+    width: auto;
+    height: 19px; 
+}
+
+#searchTypesRow{
+  position: relative;
+  width: 85%;
+  height: 30px;
+  background-color: greenyellow;
+  margin: auto;
+}
+
+#eventText{
+  display: inline;
+  vertical-align: middle;
+  margin-left: 7%;
+}
+#stageText{
+  display: inline;
+  vertical-align: middle;
+  margin-left: 58%;
+}
+#dateText{
+  display: inline;
+  vertical-align: middle;
+  margin-left: 17%;
+}
+
+.searchContentRow{
+  position: relative;
+  width: 85%;
+  height: 150px;
+  padding: -0.1%;
+  background-color: orange;
+  border: 1px solid black;
+  margin: auto;
+}
+
+.spaceDivs{
+  position: relative;
+  width: 85%;
+  height: 2px;
+}
+
+
+

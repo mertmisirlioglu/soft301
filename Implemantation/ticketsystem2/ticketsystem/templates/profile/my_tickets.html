@@ -1,0 +1,9 @@
+{% extends 'profile/profile.html' %}
+
+
+{% block info %}
+    {% for ticket in ticket_list %}
+        <p>Ticket pk : {{ ticket.pk }} // Which Event : {{ ticket.event }} // Which Stage : {{ ticket.event.stage }}</p>
+    {% endfor %}
+{% endblock %}
+

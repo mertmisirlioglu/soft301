@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    {% block head %}
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static "css/registration/login.css" %}">
+    {% endblock %}
+</head>
+<body>
+{% block content %}
+    <div id="mainDiv">
+        <div id="mainRow">
+            <div class="mainPageDiv">
+                <div id="signupPart">
+                    <div class="signupHeader">
+                        <h2>Create Account</h2>
+                    </div>
+                    <div id="signupText">
+                        <h3>Don't you have an account? Create now!</h3>
+                    </div>
+                    <div class="signupButton">
+                        <button type="submit">
+                            <a href="{% url 'signup' %}">Create Account</a>
+                        </button>
+                    </div>
+                </div>
+                <div id="loginPart">
+                    <h2>Login</h2>
+                    <form method="post">
+                        {% for message in messages %}
+                            {{ message }}
+                        {% endfor %}
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button type="submit">Login</button>
+                        <a href="" >Forgot Password</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+</body>
+
+</html>
