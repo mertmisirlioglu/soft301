@@ -30,6 +30,7 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -38,6 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'website',
+    'bootstrap_datepicker_plus',
+    'django_forms_bootstrap',
+    'bootstrap4',
+    'django_extensions'
 
 ]
 
@@ -53,6 +58,9 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'ticketsystem.urls'
 
+BOOTSTRAP4 = {
+    'include_jquery': True
+}
 
 TEMPLATES = [
     {
@@ -121,6 +129,7 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
 
 
 # Static files (CSS, JavaScript, Images)

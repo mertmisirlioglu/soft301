@@ -12,8 +12,9 @@
 {% endblock %}
 </head>
 
-<body>
+
 {% block content %}
+    <body>
 <div id="mainDiv">
 
     <h1 id="header">My Profile</h1>
@@ -36,14 +37,18 @@
         {% endblock %}
     </div>
     <div id="main_menu">
-        <i>{{ user.get_username }}</i><br><br>
+        <i>{% for info in user_infos %}
+          {{ info.user.first_name }}
+          {{ info.user.last_name }}
+        {% endfor %}</i><br><br>
         <a href="{% url 'my_profile' %}">My Profile</a><br>
-        <i>Edit Profile</i><br>
+        <a href="{% url 'edit_my_profile' %}">Edit Profile</a><br>
         <a href="{% url 'my_tickets' %}">My Tickets</a><br>
     </div>
 </div>
+    </body>
 {% endblock %}
 
-</body>
+
 
 </html>

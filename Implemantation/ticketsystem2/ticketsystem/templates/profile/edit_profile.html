@@ -1,0 +1,12 @@
+{%  extends 'profile/profile.html' %}
+
+{% block info %}
+       <title>Edit Profile</title>
+        {% load static %}
+        <form method="post">
+            {% csrf_token %}
+            {{ edit_profile_form.as_p }}
+            <button type="submit">Save Changes</button>
+        </form>
+    {% endblock %}
+
