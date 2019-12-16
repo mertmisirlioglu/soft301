@@ -6,7 +6,7 @@ from django.shortcuts import redirect, get_object_or_404
 from django.shortcuts import render
 
 from website.models import Event, Ticket, UserProfile
-from .forms import UserReg, ExtendedUserCreationForm, BuyTicketForm
+from .forms import UserReg, ExtendedUserCreationForm, BuyTicketForm, EditProfile
 
 
 def home(request):
@@ -30,7 +30,7 @@ def login_view(request):
     else:
         form = AuthenticationForm()
     return render(request, 'registration/login.html',
-                      {'form': form})
+                  {'form': form})
 
 
 def logout_view(request):
@@ -69,10 +69,7 @@ def ticket_buy_view(request, pk):
         user = request.user
         form = BuyTicketForm(request.POST)
         if form.is_valid():
-            print('mert')
-
             quantity = form.cleaned_data.get('quantity')
-
             for i in range(0, int(quantity)):
                 ticket = Ticket(event=event, user=user)
                 ticket.save()
@@ -99,3 +96,18 @@ def my_profile_view(request):
     user_infos = UserProfile.objects.all().filter(user=user)
     context = {"user_infos": user_infos}
     return render(request, 'profile/profile.html', context)
+
+
+@login_required
+def edit_my_profile(request):
+    user = request.user
+    edit_profile_form = EditProfile(request.POST or None)
+    if edit_profile_form.is_valid():
+        profile = edit_profile_form.save(commit=False)
+        profile.user = user
+        profile.save()
+        username = edit_profile_form.cleaned_data.get('username')
+        password = edit_profile_form.cleaned_data.get('password1')
+        user = authenticate(username=username, password=password)
+        login(request, user)
+    return render(request, 'profile/edit_profile.html', {'edit_profile_form': EditProfile})
