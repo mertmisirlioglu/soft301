@@ -3,7 +3,12 @@
 
 {% block info %}
     {% for ticket in ticket_list %}
-        <p>Ticket pk : {{ ticket.pk }} // Which Event : {{ ticket.event }} // Which Stage : {{ ticket.event.stage }}</p>
+        <p>Ticket No : <a href={{ ticket.get_ticket_review_url}}>{{ ticket.pk }}</a>
+            <br>
+            Event name : {{ ticket.event }}
+            <br>
+            Stage name : {{ ticket.event.stage}}
+        </p>
     {% endfor %}
 {% endblock %}
 

@@ -1,12 +1,16 @@
 from django.contrib import messages
-from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth import login, authenticate, logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from django.shortcuts import redirect, get_object_or_404
 from django.shortcuts import render
 
 from website.models import Event, Ticket, UserProfile
-from .forms import UserReg, ExtendedUserCreationForm, BuyTicketForm, EditProfile
+from .forms import (UserReg,
+                    ExtendedUserCreationForm,
+                    BuyTicketForm,
+                    EditProfileForm
+                    )
 
 
 def home(request):
@@ -41,6 +45,7 @@ def logout_view(request):
 def signup(request):
     form = ExtendedUserCreationForm(request.POST or None)
     profile_form = UserReg(request.POST or None)
+    profile_form.birthday = request.POST.get('birthday', '')
     print(form.errors)
     if form.is_valid() and profile_form.is_valid():
         user = form.save()
@@ -91,6 +96,13 @@ def my_tickets_view(request):
 
 
 @login_required
+def ticket_preview(request, pk):
+    ticket = get_object_or_404(Ticket, pk=pk)
+    context = {"ticket": ticket}
+    return render(request, 'ticket/ticket_review.html', context)
+
+
+@login_required
 def my_profile_view(request):
     user = request.user
     user_infos = UserProfile.objects.all().filter(user=user)
@@ -100,14 +112,31 @@ def my_profile_view(request):
 
 @login_required
 def edit_my_profile(request):
-    user = request.user
-    edit_profile_form = EditProfile(request.POST or None)
-    if edit_profile_form.is_valid():
-        profile = edit_profile_form.save(commit=False)
-        profile.user = user
-        profile.save()
-        username = edit_profile_form.cleaned_data.get('username')
-        password = edit_profile_form.cleaned_data.get('password1')
-        user = authenticate(username=username, password=password)
-        login(request, user)
-    return render(request, 'profile/edit_profile.html', {'edit_profile_form': EditProfile})
+    if request.method == 'POST':
+        form = EditProfileForm(request.POST, instance=request.user)
+
+        if form.is_valid():
+            form.save()
+            return redirect('/account/profile')
+    else:
+        form = EditProfileForm(instance=request.user)
+        args = {'form': form}
+        return render(request, 'profile/edit_profile.html', args)
+
+
+@login_required
+def change_password(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(data=request.POST, user=request.user)
+
+        if form.is_valid():
+            form.save()
+            update_session_auth_hash(request, form.user)
+            return redirect('/account/profile')
+        else:
+            return redirect('/account/change-password/')
+    else:
+        form = PasswordChangeForm(user=request.user)
+
+        args = {'form': form}
+        return render(request, 'profile/change_password.html', args)
