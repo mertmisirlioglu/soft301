@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from django.shortcuts import redirect, get_object_or_404
 from django.shortcuts import render
+from django.contrib.admin.views.decorators import staff_member_required
 
 from website.models import Event, Ticket, UserProfile
 from .forms import (UserReg,
@@ -141,3 +142,50 @@ def change_password(request):
 
         args = {'form': form}
         return render(request, 'profile/change_password.html', args)
+
+
+def add_operator(request):
+    form = ExtendedUserCreationForm(request.POST or None)
+    profile_form = UserReg(request.POST or None)
+    print(form.errors)
+    if form.is_valid() and profile_form.is_valid():
+        user = form.save()
+        profile = profile_form.save(commit=False)
+        profile.user = user
+        profile.isOperator = True
+        profile.save()
+        username = form.cleaned_data.get('username')
+        password = form.cleaned_data.get('password1')
+        user = authenticate(username=username, password=password)
+        login(request, user)
+        return redirect('home')
+    else:
+        return render(request, 'registration/signup.html',
+                      {'form': ExtendedUserCreationForm, 'profile_form': UserReg})
+
+
+@staff_member_required
+def operators_list_view(request):
+    operators_list = UserProfile.objects.all().filter(isOperator=True)
+    context = {'operators_list':operators_list}
+    return render(request,'admin/operator_list_view.html',context)
+
+
+@staff_member_required
+def users_list_view(request):
+    users_list = UserProfile.objects.all()
+    context = {'users_list':users_list}
+    return render(request,'admin/user_list_view.html',context)
+
+
+@staff_member_required
+def list_all_events(request):
+    accepted_event_list = Event.objects.all().filter(isAccepted=True,isAvailable=True)
+    waiting_event_list = Event.objects.all().filter(isAccepted=False)
+    disactive_event_list = Event.objects.all().filter(isAvailable=False)
+    # bitmedi devam edicek
+    context = {'accepted_event_list':accepted_event_list,
+               'waiting_event_list':waiting_event_list,
+               'disactive_event_list':disactive_event_list}
+
+
