@@ -36,6 +36,9 @@ class Ticket(models.Model):
     seat_number = models.CharField(max_length=10)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
 
+    def get_ticket_review_url(self):
+        return f"/account/tickets/{self.pk}/preview"
+
 
 class UserProfile(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)

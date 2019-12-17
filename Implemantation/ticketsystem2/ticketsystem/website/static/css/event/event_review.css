@@ -185,7 +185,6 @@ body{
     width: 95%;
     height: 20%;
     margin: auto;
-    background-color: red;
 }
 
 #event-img{
@@ -193,7 +192,6 @@ body{
     width: 15%;
     height: 85%;
     margin: auto;
-     background-color: purple;
 }
 
 #event-date{
@@ -201,7 +199,7 @@ body{
     width: 15%;
     height: 85%;
     margin: auto;
-     background-color: yellow;
+
 }
 
 #event-place{

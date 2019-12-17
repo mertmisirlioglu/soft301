@@ -1,0 +1,59 @@
+{%  extends 'base.html' %}
+
+
+    {% block head %}
+        <title>Event Review</title>
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static "css/ticket/ticket_review.css" %}">
+    {% endblock %}
+{% block content %}
+<body>
+  <div id="mainDiv">
+    <div id="mainRow">
+     <div class="frow">
+      <h4 id="head">{{ ticket.event.name }}</h4>
+      <div id="firstblock">
+        <div class="photo">
+        <p>image</p>
+      </div>
+        <div id="details">
+          <p >Date,Time</p >
+         
+          <p>{{ ticket.event.date }}</p>
+        </div>
+        <div id="Stage">
+          <p >Stage name</p >
+         
+          <p>{{ ticket.event.stage }}</p>
+        </div>
+        <div id="eventdetails">
+          <p >Event Rules:</p >
+         
+          <p>(informations)</p>
+        </div>
+      </div>
+    </div>
+        <div class="srow">
+      <h4 id="head">Ticket Details</h4>
+      <div id="firstblock">
+        <div class="photo">
+         <img  src="karekod.jpg" class="karekod">
+         <p id="qrcode">QR code:</p>
+        </div>
+        <div id="details">
+         <i>Owner: {{ ticket.user.first_name }} {{ ticket.user.last_name }}</i>
+        </div>
+        <div id="Stage">
+          <i>Ticket no:{{ ticket.pk }}</i>
+        </div>
+        <div id="eventdetails">
+         <i>Chair no:{{ ticket.seat_number }}</i>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+</body>
+
+{% endblock %}
+</html>

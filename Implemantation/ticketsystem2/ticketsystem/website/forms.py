@@ -1,8 +1,7 @@
 from django import forms
 from .models import UserProfile
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm
-from bootstrap_datepicker_plus import DatePickerInput
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.admin import widgets
 
 
@@ -32,19 +31,15 @@ class UserReg(forms.ModelForm):
 
     gender = forms.ChoiceField(choices=GENDER, label='', initial='',
                                widget=forms.Select(), required=True)
-
+    birthday = ''
     phone_number = forms.CharField()
 
     class Meta:
         model = UserProfile
         fields = (
             'gender',
-            'birthday',
             'phone_number',
         )
-        widgets = {
-            'birthday': DatePickerInput()
-        }
 
 
 class BuyTicketForm(forms.Form):
@@ -52,15 +47,13 @@ class BuyTicketForm(forms.Form):
     quantity = forms.ChoiceField(choices=Quantity, label='', initial='', required=True)
 
 
-class EditProfile(forms.ModelForm):
-    phone_number = forms.CharField()
-    email = forms.EmailField(required=True)
-    username = forms.CharField(max_length=20)
+class EditProfileForm(UserChangeForm):
+    password = None
 
     class Meta:
-        model = UserProfile
+        model = User
         fields = (
-            'username',
             'email',
-            'phone_number',
+            'first_name',
+            'last_name'
         )
