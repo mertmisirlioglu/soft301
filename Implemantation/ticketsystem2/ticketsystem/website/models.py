@@ -41,7 +41,7 @@ class Ticket(models.Model):
 
 
 class UserProfile(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    id =  models.AutoField(primary_key=True)
     GENDER = (
         ('M', 'Male'),
         ('F', 'Female'),
@@ -49,24 +49,17 @@ class UserProfile(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     gender = models.CharField(max_length=1, choices=GENDER)
-    email = models.EmailField(primary_key=True)
+
     birthday = models.DateField()
     phone_number = models.CharField(max_length=11)
-    password = models.CharField(max_length=20)
-    state = models.CharField(max_length=10, null=True, blank=True)
     img = models.URLField(null=True, blank=True)
     isOperator = models.BooleanField(default=False)
-
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     def __str__(self):
         return self.user.username
 
 
-class Operator(UserProfile):
-    pass
 
-
-class Visitor(models.Model):
-    pass
 
 
 class Concert(Event):
