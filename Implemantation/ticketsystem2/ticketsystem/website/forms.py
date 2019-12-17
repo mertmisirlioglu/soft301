@@ -1,8 +1,7 @@
 from django import forms
-from .models import UserProfile
+from .models import UserProfile, Event
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
-from django.contrib.admin import widgets
 
 
 class ExtendedUserCreationForm(UserCreationForm):
@@ -58,4 +57,22 @@ class EditProfileForm(UserChangeForm):
             'last_name'
         )
 
+
+class AddEvent(forms.ModelForm):
+    name = forms.CharField(max_length=50)
+    date = forms.DateField()
+    quota = forms.IntegerField()
+    price = forms.IntegerField()
+    rules = forms.CharField(max_length=500)
+
+    class Meta:
+        model = Event
+        fields = (
+            'name',
+            'stage',
+            'date',
+            'quota',
+            'price',
+            'rules'
+        )
 
