@@ -7,12 +7,13 @@ from django.contrib.admin import widgets
 
 class ExtendedUserCreationForm(UserCreationForm):
     email = forms.EmailField(required=True)
-
-
+    first_name = forms.CharField(max_length=50)
+    last_name = forms.CharField(max_length=50)
 
     class Meta:
         model = User
-        fields = ('username', 'email', 'password1', 'password2')
+        fields = ('username', 'email', 'first_name',
+                  'last_name', 'password1', 'password2')
 
     def save(self, commit=True):
         user = super().save(commit=False)
@@ -37,8 +38,7 @@ class UserReg(forms.ModelForm):
             'birthday',
             'gender',
             'phone_number',
-            'first_name',
-            'last_name',
+
         )
 
 
