@@ -45,7 +45,7 @@ def logout_view(request):
 def signup(request):
     form = ExtendedUserCreationForm(request.POST or None)
     profile_form = UserReg(request.POST or None)
-    profile_form.birthday = request.POST.get('birthday', '')
+    # profile_form.birthday = request.POST.get('birthday', '')
     print(form.errors)
     if form.is_valid() and profile_form.is_valid():
         user = form.save()
@@ -57,7 +57,8 @@ def signup(request):
         user = authenticate(username=username, password=password)
         login(request, user)
         return redirect('home')
-    return render(request, 'registration/signup.html',
+    else:
+        return render(request, 'registration/signup.html',
                   {'form': ExtendedUserCreationForm, 'profile_form': UserReg})
 
 
