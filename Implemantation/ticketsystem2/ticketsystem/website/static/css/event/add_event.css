@@ -1,0 +1,59 @@
+body{
+    margin: auto;
+}
+
+#mainDiv {
+    float: none;
+    width: 100%;
+    height: 768px;
+    margin: auto;
+}
+
+.mainPageDiv{
+    float: none;
+    width: 85%;
+    height: 100%;
+    margin: auto;
+    background-color: red;
+}
+
+#signupPart{
+  float: left;
+  width: 50%;
+  height: 100%;
+  margin: auto;
+  background-color: blue;
+}
+
+#loginPart{
+  float: left;
+  width: 50%;
+  height: 100%;
+  margin: auto;
+  background-color: gray;
+}
+.firstpart{
+
+  background-color: pink;
+  width:50%;
+  position: relative;
+  left: 370px;
+  top:5px;
+}
+.firstpart h2{
+ 
+  width: 200px;
+  position: relative;
+  left: 250px;
+  padding-left: 40px;
+  
+  
+  }
+  .secondpart{
+position: relative;
+background-color: white;
+width:50%;
+height:90%;
+left:370px;
+bottom: 10px;
+  }

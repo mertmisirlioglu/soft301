@@ -10,7 +10,8 @@ from website.models import Event, Ticket, UserProfile
 from .forms import (UserReg,
                     ExtendedUserCreationForm,
                     BuyTicketForm,
-                    EditProfileForm
+                    EditProfileForm,
+                    AddEvent
                     )
 
 
@@ -60,7 +61,7 @@ def signup(request):
         return redirect('home')
     else:
         return render(request, 'registration/signup.html',
-                  {'form': ExtendedUserCreationForm, 'profile_form': UserReg})
+                      {'form': ExtendedUserCreationForm, 'profile_form': UserReg})
 
 
 def event_preview(request, pk):
@@ -142,6 +143,16 @@ def change_password(request):
 
         args = {'form': form}
         return render(request, 'profile/change_password.html', args)
+
+
+@login_required
+def add_event(request):
+    if request.method == 'POST':
+        form = AddEvent(request.POST or None)
+        print(form.errors)
+        if form.is_valid():
+            event = form.save()
+    return render(request, 'event/add_event.html', {'form': AddEvent})
 
 
 def add_operator(request):
