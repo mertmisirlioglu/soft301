@@ -8,8 +8,6 @@
 
 
 {% block content %}
-
-                 <!-- Bu kısım değiştirilecek-->
                   <div class="mainPageDiv">
                       <div id="miniPageDiv">
                         <div id="artistNameRow">
@@ -29,7 +27,7 @@
                                                   <form method="post">
                                                         {% csrf_token %}
                                                         {{ form.as_p }}
-                                                        <button type="submit">Buy</button>
+                                                        <button class="btn btn-success" type="submit">Buy</button>
                                                   </form>
 
                                             </div>

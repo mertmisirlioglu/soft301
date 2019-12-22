@@ -1,12 +1,18 @@
 from django.contrib import messages
-from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth import login, authenticate, logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from django.shortcuts import redirect, get_object_or_404
 from django.shortcuts import render
+from django.contrib.admin.views.decorators import staff_member_required
 
 from website.models import Event, Ticket, UserProfile
-from .forms import UserReg, ExtendedUserCreationForm, BuyTicketForm
+from .forms import (UserReg,
+                    ExtendedUserCreationForm,
+                    BuyTicketForm,
+                    EditProfileForm,
+                    AddEvent
+                    )
 
 
 def home(request):
@@ -30,7 +36,7 @@ def login_view(request):
     else:
         form = AuthenticationForm()
     return render(request, 'registration/login.html',
-                      {'form': form})
+                  {'form': form})
 
 
 def logout_view(request):
@@ -41,6 +47,7 @@ def logout_view(request):
 def signup(request):
     form = ExtendedUserCreationForm(request.POST or None)
     profile_form = UserReg(request.POST or None)
+    # profile_form.birthday = request.POST.get('birthday', '')
     print(form.errors)
     if form.is_valid() and profile_form.is_valid():
         user = form.save()
@@ -52,8 +59,9 @@ def signup(request):
         user = authenticate(username=username, password=password)
         login(request, user)
         return redirect('home')
-    return render(request, 'registration/signup.html',
-                  {'form': ExtendedUserCreationForm, 'profile_form': UserReg})
+    else:
+        return render(request, 'registration/signup.html',
+                      {'form': ExtendedUserCreationForm, 'profile_form': UserReg})
 
 
 def event_preview(request, pk):
@@ -69,10 +77,7 @@ def ticket_buy_view(request, pk):
         user = request.user
         form = BuyTicketForm(request.POST)
         if form.is_valid():
-            print('mert')
-
             quantity = form.cleaned_data.get('quantity')
-
             for i in range(0, int(quantity)):
                 ticket = Ticket(event=event, user=user)
                 ticket.save()
@@ -94,8 +99,104 @@ def my_tickets_view(request):
 
 
 @login_required
+def ticket_preview(request, pk):
+    ticket = get_object_or_404(Ticket, pk=pk)
+    context = {"ticket": ticket}
+    return render(request, 'ticket/ticket_review.html', context)
+
+
+@login_required
 def my_profile_view(request):
     user = request.user
     user_infos = UserProfile.objects.all().filter(user=user)
     context = {"user_infos": user_infos}
     return render(request, 'profile/profile.html', context)
+
+
+@login_required
+def edit_my_profile(request):
+    if request.method == 'POST':
+        form = EditProfileForm(request.POST, instance=request.user)
+
+        if form.is_valid():
+            form.save()
+            return redirect('/account/profile')
+    else:
+        form = EditProfileForm(instance=request.user)
+        args = {'form': form}
+        return render(request, 'profile/edit_profile.html', args)
+
+
+@login_required
+def change_password(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(data=request.POST, user=request.user)
+
+        if form.is_valid():
+            form.save()
+            update_session_auth_hash(request, form.user)
+            return redirect('/account/profile')
+        else:
+            return redirect('/account/change-password/')
+    else:
+        form = PasswordChangeForm(user=request.user)
+
+        args = {'form': form}
+        return render(request, 'profile/change_password.html', args)
+
+
+@login_required
+def add_event(request):
+    if request.method == 'POST':
+        form = AddEvent(request.POST or None)
+        print(form.errors)
+        if form.is_valid():
+            event = form.save()
+    return render(request, 'event/add_event.html', {'form': AddEvent})
+
+
+def add_operator(request):
+    form = ExtendedUserCreationForm(request.POST or None)
+    profile_form = UserReg(request.POST or None)
+    print(form.errors)
+    if form.is_valid() and profile_form.is_valid():
+        user = form.save()
+        profile = profile_form.save(commit=False)
+        profile.user = user
+        profile.isOperator = True
+        profile.save()
+        username = form.cleaned_data.get('username')
+        password = form.cleaned_data.get('password1')
+        user = authenticate(username=username, password=password)
+        login(request, user)
+        return redirect('home')
+    else:
+        return render(request, 'registration/signup.html',
+                      {'form': ExtendedUserCreationForm, 'profile_form': UserReg})
+
+
+@staff_member_required
+def operators_list_view(request):
+    operators_list = UserProfile.objects.all().filter(isOperator=True)
+    context = {'operators_list':operators_list}
+    return render(request,'admin/operator_list_view.html',context)
+
+
+@staff_member_required
+def users_list_view(request):
+    users_list = UserProfile.objects.all()
+    context = {'users_list':users_list}
+    return render(request,'admin/user_list_view.html',context)
+
+
+@staff_member_required
+def list_all_events(request):
+    accepted_event_list = Event.objects.all().filter(isAccepted=True,isAvailable=True)
+    waiting_event_list = Event.objects.all().filter(isAccepted=False)
+    disactive_event_list = Event.objects.all().filter(isAvailable=False)
+    # bitmedi devam edicek
+    context = {'accepted_event_list':accepted_event_list,
+               'waiting_event_list':waiting_event_list,
+               'disactive_event_list':disactive_event_list}
+
+
