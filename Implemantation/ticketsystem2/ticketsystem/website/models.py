@@ -41,7 +41,7 @@ class Ticket(models.Model):
 
 
 class UserProfile(models.Model):
-    id =  models.AutoField(primary_key=True)
+    id = models.AutoField(primary_key=True)
     GENDER = (
         ('M', 'Male'),
         ('F', 'Female'),
@@ -54,11 +54,10 @@ class UserProfile(models.Model):
     img = models.URLField(null=True, blank=True)
     isOperator = models.BooleanField(default=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    balance = models.IntegerField(default=0)
+
     def __str__(self):
         return self.user.username
-
-
-
 
 
 class Concert(Event):

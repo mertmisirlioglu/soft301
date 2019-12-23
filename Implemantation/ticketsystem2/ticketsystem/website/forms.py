@@ -76,3 +76,10 @@ class AddEvent(forms.ModelForm):
             'rules'
         )
 
+
+class PaymentForm(forms.Form):
+    name = forms.CharField(max_length=50)
+    credit_card = forms.CharField(max_length=50)
+    expire_date = forms.CharField()
+    cvv = forms.IntegerField()
+    amount = forms.IntegerField()

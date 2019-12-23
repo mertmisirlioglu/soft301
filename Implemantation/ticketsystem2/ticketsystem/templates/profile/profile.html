@@ -33,6 +33,8 @@
                 <p>Birthday: {{ info.birthday }}</p>
                 <p>Phone Number: {{ info.phone_number }}</p>
                 <p>Email: {{  info.user.email }}</p>
+                <p>Balance: {{  info.balance }}</p>
+                <a href="{% url 'add_balance' %}"><button type="button" class="btn btn-secondary">Add Balance</button></a>
             {% endfor %}
         {% endblock %}
     </div>

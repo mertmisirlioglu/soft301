@@ -41,4 +41,5 @@ urlpatterns = [
     path('admin/operator/add', views.add_operator , name='operator_add'),
     path('admin/operator/all', views.operators_list_view , name='operator_all'),
     path('admin/user/all', views.users_list_view, name='users_all'),
+    path('balance/add/', views.add_balance, name='add_balance'),
 ]
