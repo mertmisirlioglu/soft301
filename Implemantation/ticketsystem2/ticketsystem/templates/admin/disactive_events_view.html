@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block head %}
+    <title>Disactive Events List View</title>
+{% endblock %}
+{% block content %}
+
+       <table>
+    <thead>
+    <tr class="table-headers">
+    <th>ID</th>
+        <th>Event Name</th>
+    <th>Stage</th>
+    <th>Date</th>
+    <th>Price</th>
+    <th>Quota</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+
+    {% for event in disactive_event_list %}
+
+
+ <tr>
+      <td>{{ event.id}}</td>
+      <td>{{ event.name}}</td>
+      <td>{{ event.stage }}</td>
+      <td>{{ event.date }}</td>
+      <td>{{ event.price }}</td>
+     <td>{{ event.quota }}</td>
+    </tr>
+
+
+
+{% endfor %}
+
+{% endblock %}

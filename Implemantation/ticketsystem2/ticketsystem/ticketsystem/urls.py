@@ -42,4 +42,8 @@ urlpatterns = [
     path('admin/operator/all', views.operators_list_view , name='operator_all'),
     path('admin/user/all', views.users_list_view, name='users_all'),
     path('balance/add/', views.add_balance, name='add_balance'),
+    path('admin/event/waiting/', views.waiting_events, name='waiting_events'),
+    path('admin/event/active/', views.accepted_events, name='active_events'),
+    path('admin/event/disactive/', views.disactive_events, name='disactive_events'),
+    path('admin/event/approve/<int:event_id>', views.approve_event, name='approve_event'),
 ]

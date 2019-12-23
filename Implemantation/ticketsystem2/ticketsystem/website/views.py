@@ -82,8 +82,8 @@ def ticket_buy_view(request, pk):
             quantity = int(quantity)
             if event.quota <= quantity:
                 return redirect('home')
-            if user_infos.balance >= event.price*quantity:
-                user_infos.balance = user_infos.balance - event.price*quantity
+            if user_infos.balance >= event.price * quantity:
+                user_infos.balance = user_infos.balance - event.price * quantity
                 user_infos.save()
                 event.quota -= quantity
                 event.save()
@@ -99,7 +99,6 @@ def ticket_buy_view(request, pk):
 
     context = {'event': event, 'form': form}
     return render(request, 'ticket/buyTicketPage.html', context)
-
 
 
 @login_required
@@ -203,14 +202,33 @@ def users_list_view(request):
 
 
 @staff_member_required
-def list_all_events(request):
-    accepted_event_list = Event.objects.all().filter(isAccepted=True, isAvailable=True)
+def waiting_events(request):
     waiting_event_list = Event.objects.all().filter(isAccepted=False)
+    context = {'waiting_event_list': waiting_event_list}
+    return render(request, 'admin/waiting_events_view.html', context)
+
+
+@staff_member_required
+def accepted_events(request):
+    accepted_event_list = Event.objects.all().filter(isAccepted=True, isAvailable=True)
+    context = {'accepted_event_list': accepted_event_list}
+    return render(request, 'admin/accepted_events_view.html', context)
+
+
+@staff_member_required
+def disactive_events(request):
     disactive_event_list = Event.objects.all().filter(isAvailable=False)
-    # bitmedi devam edicek
-    context = {'accepted_event_list': accepted_event_list,
-               'waiting_event_list': waiting_event_list,
-               'disactive_event_list': disactive_event_list}
+    context = {'disactive_event_list': disactive_event_list}
+    return render(request, 'admin/disactive_events_view.html', context)
+
+
+@staff_member_required
+def approve_event(request, event_id):
+    event = get_object_or_404(Event, pk=event_id)
+    event.isAccepted = True
+    event.isAvailable = True
+    event.save()
+    return redirect('active_events')
 
 
 def add_balance(request):
@@ -223,5 +241,4 @@ def add_balance(request):
         user_infos.save()
         return redirect('my_profile')
     else:
-        return render(request,'profile/add_balance.html',{'form':form})
-
+        return render(request, 'profile/add_balance.html', {'form': form})
