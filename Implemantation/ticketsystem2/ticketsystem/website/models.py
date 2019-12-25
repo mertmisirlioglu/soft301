@@ -14,6 +14,7 @@ class Stage(models.Model):
 class Event(models.Model):
     name = models.CharField(max_length=50)
     stage = models.ForeignKey(Stage, on_delete=models.CASCADE)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     date = models.DateField()
     quota = models.IntegerField()
     price = models.IntegerField()

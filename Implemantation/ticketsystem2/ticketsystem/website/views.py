@@ -7,6 +7,7 @@ from django.shortcuts import render
 from django.contrib.admin.views.decorators import staff_member_required
 import time
 from django.contrib import messages
+from .forms import EditEventForm
 
 from website.models import Event, Ticket, UserProfile
 from .forms import (UserReg,
@@ -171,7 +172,10 @@ def add_event(request):
         form = AddEvent(request.POST or None)
         print(form.errors)
         if form.is_valid():
-            event = form.save()
+            form.save()
+            return redirect('my_profile')
+        else:
+            return redirect('add_event')
     return render(request, 'event/add_event.html', {'form': AddEvent})
 
 
@@ -211,9 +215,21 @@ def users_list_view(request):
 
 
 @staff_member_required
-def list_all_events(request):
-    accepted_event_list = Event.objects.all().filter(isAccepted=True, isAvailable=True)
+def waiting_events(request):
     waiting_event_list = Event.objects.all().filter(isAccepted=False)
+    context = {'waiting_event_list': waiting_event_list}
+    return render(request, 'admin/waiting_events_view.html', context)
+
+
+@staff_member_required
+def accepted_events(request):
+    accepted_event_list = Event.objects.all().filter(isAccepted=True)
+    context = {'accepted_event_list': accepted_event_list}
+    return render(request, 'admin/accepted_events_view.html', context)
+
+
+@staff_member_required
+def disactive_events(request):
     disactive_event_list = Event.objects.all().filter(isAvailable=False)
     # bitmedi devam edicek
     context = {'accepted_event_list': accepted_event_list,
@@ -233,3 +249,15 @@ def add_balance(request):
     else:
         return render(request,'profile/add_balance.html',{'form':form})
 
+
+def edit_event(request):
+    if request.method == 'POST':
+        form = EditEventForm(request.POST, instance=request.user)
+
+        if form.is_valid():
+            form.save()
+            return redirect('/account/profile')
+    else:
+        form = EditEventForm(instance=request.user)
+        args = {'form': form}
+        return render(request, 'event/edit_event.html', args)

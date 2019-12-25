@@ -30,6 +30,7 @@ urlpatterns = [
     path('account/tickets/<int:pk>/preview', views.ticket_preview, name='ticket_preview'),
     path('account/profile/', views.my_profile_view, name='my_profile'),
     path('account/profile/edit', views.edit_my_profile, name='edit_my_profile'),
+    path('account/profile/edit-event', views.edit_event, name='edit_event'),
     path('account/change-password/', views.change_password, name='change_password'),
     path('account/reset-password/', PasswordResetView.as_view(), name='password_reset'),
     path('account/reset-password/done/', PasswordResetDoneView.as_view(), name='password_reset_done'),
@@ -40,5 +41,11 @@ urlpatterns = [
     path('admin/operator/add', views.add_operator , name='operator_add'),
     path('admin/operator/all', views.operators_list_view , name='operator_all'),
     path('admin/user/all', views.users_list_view, name='users_all'),
+    path('balance/add/', views.add_balance, name='add_balance'),
+    path('admin/event/waiting/', views.waiting_events, name='waiting_events'),
+    path('admin/event/active/', views.accepted_events, name='active_events'),
+    path('admin/event/disactive/', views.disactive_events, name='disactive_events'),
+    path('admin/event/approve/<int:event_id>', views.approve_event, name='approve_event'),
+
     path('event/search-event/', views.search_event, name='search_event')
 ]
