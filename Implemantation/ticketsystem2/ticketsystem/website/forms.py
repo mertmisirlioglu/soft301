@@ -73,7 +73,8 @@ class AddEvent(forms.ModelForm):
             'date',
             'quota',
             'price',
-            'rules'
+            'rules',
+            'owner'
         )
 
 
@@ -83,3 +84,15 @@ class PaymentForm(forms.Form):
     expire_date = forms.CharField()
     cvv = forms.IntegerField()
     amount = forms.IntegerField()
+
+
+class EditEventForm(forms.ModelForm):
+    class Meta:
+        model = Event
+        fields = (
+            'name',
+            'stage',
+            'quota',
+            'price',
+            'rules'
+        )
