@@ -100,7 +100,7 @@ def ticket_buy_view(request, pk):
                     ticket = Ticket(event=event, user=user)
                     ticket.save()
 
-                messages.success(request, ("You buyed " + str(quantity) + " ticket.\nYou spend " + str(event.price*quantity) + "$"))
+                messages.success(request, ("You bought " + str(quantity) + " ticket.\nYou spend " + str(event.price*quantity) + "$"))
 
     else:
         form = BuyTicketForm()
