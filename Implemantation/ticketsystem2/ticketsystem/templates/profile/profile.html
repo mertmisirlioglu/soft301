@@ -48,7 +48,6 @@
         <a href="{% url 'my_profile' %}">My Profile</a><br>
         <a href="{% url 'edit_my_profile' %}">Edit Profile</a><br>
         <a href="{% url 'my_tickets' %}">My Tickets</a><br>
-        <a href="{% url 'home' %}">Home</a><br>
         <br><br>
         {% for info in user_infos %}
             {% if info.isOperator %}
