@@ -5,6 +5,9 @@ from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from django.shortcuts import redirect, get_object_or_404
 from django.shortcuts import render
 from django.contrib.admin.views.decorators import staff_member_required
+import time
+from django.contrib import messages
+from .forms import EditEventForm
 
 from website.models import Event, Ticket, UserProfile
 from .forms import (UserReg,
@@ -70,6 +73,10 @@ def event_preview(request, pk):
     return render(request, 'event/event_review.html', context)
 
 
+def search_event(request):
+    return render(request, 'event/searchPage.html')
+
+
 @login_required
 def ticket_buy_view(request, pk):
     event = get_object_or_404(Event, pk=pk)
@@ -80,20 +87,22 @@ def ticket_buy_view(request, pk):
         if form.is_valid():
             quantity = form.cleaned_data.get('quantity')
             quantity = int(quantity)
-            if event.quota <= quantity:
-                return redirect('home')
-            if user_infos.balance >= event.price * quantity:
+            if event.quota < quantity:
+                messages.error(request, ("No quota available for buying "+ str(quantity)+" ticket"))
+            elif user_infos.balance < event.price*quantity:
+                messages.error(request, ("Your amount is not enough for buying " + str(quantity) + " ticket.\nYou need "+str(event.price*quantity-user_infos.balance)+"$ more."))
+
+            else:
                 user_infos.balance = user_infos.balance - event.price * quantity
                 user_infos.save()
                 event.quota -= quantity
                 event.save()
-            else:
-                return redirect('home')
-            for i in range(0, int(quantity)):
-                ticket = Ticket(event=event, user=user)
-                ticket.save()
+                for i in range(0, int(quantity)):
+                    ticket = Ticket(event=event, user=user)
+                    ticket.save()
 
-            return redirect('home')
+                messages.success(request, ("You bought " + str(quantity) + " ticket.\nYou spend " + str(event.price*quantity) + "$"))
+
     else:
         form = BuyTicketForm()
 
@@ -162,7 +171,10 @@ def add_event(request):
         form = AddEvent(request.POST or None)
         print(form.errors)
         if form.is_valid():
-            event = form.save()
+            form.save()
+            return redirect('my_profile')
+        else:
+            return redirect('add_event')
     return render(request, 'event/add_event.html', {'form': AddEvent})
 
 
@@ -242,3 +254,16 @@ def add_balance(request):
         return redirect('my_profile')
     else:
         return render(request, 'profile/add_balance.html', {'form': form})
+
+
+def edit_event(request):
+    if request.method == 'POST':
+        form = EditEventForm(request.POST, instance=request.user)
+
+        if form.is_valid():
+            form.save()
+            return redirect('/account/profile')
+    else:
+        form = EditEventForm(instance=request.user)
+        args = {'form': form}
+        return render(request, 'event/edit_event.html', args)

@@ -94,6 +94,8 @@ WSGI_APPLICATION = 'ticketsystem.wsgi.application'
 #     }
 # }
 
+
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',

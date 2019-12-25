@@ -1,57 +1,65 @@
-{%  extends 'base.html' %}
+{% extends 'base.html' %}
 
-    {% block head %}
-       <title>Buy Ticket</title>
-        {% load static %}
-        <link rel="stylesheet" type="text/css" href="{% static "css/ticket/buyTicketPage.css" %}">
-    {% endblock %}
+{% block head %}
+    <title>Buy Ticket</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static "css/ticket/buyTicketPage.css" %}">
+
+{% endblock %}
 
 
 {% block content %}
-                  <div class="mainPageDiv">
-                      <div id="miniPageDiv">
-                        <div id="artistNameRow">
-                            <header>Artist Name</header>
-                         </div>
-                         <div id="ticketMainRow">
-                             <div id="eventInfoDiv">
-                                 <div id="eventPictureDiv">event picture</div>
-                             </div>
-                                <div id="ticketSelectionDiv">
-                                    <div id="ticketSelectionRow">
-                                        <header>TICKET SELECTION</header>
-                                        </div>
-                                        <div class="adultRow">
-                                            <header>ADULT</header>
-                                            <div class="quantityDiv">
-                                                  <form method="post">
-                                                        {% csrf_token %}
-                                                        {{ form.as_p }}
-                                                        <button class="btn btn-success" type="submit">Buy</button>
-                                                  </form>
+    <div class="mainPageDiv">
+        <div id="miniPageDiv">
+            <div id="artistNameRow">
+                <header>Artist Name</header>
+            </div>
+            <div id="ticketMainRow">
+                <div id="eventInfoDiv">
+                    <div id="eventPictureDiv">event picture</div>
+                </div>
+                <div id="ticketSelectionDiv">
+                    <div id="ticketSelectionRow">
+                        <header>TICKET SELECTION</header>
+                    </div>
+                    <div class="adultRow">
+                        <header>ADULT</header>
+                        <div class="quantityDiv">
+                            <form method="post">
+                                {% csrf_token %}
+                                {{ form.as_p }}
+                                <button class="btn btn-success" type="submit">Buy</button>
+                            </form>
 
-                                            </div>
-
-                                        </div>
-                                                <div id="blockRow">
-                                                    <header>BLOCK</header>
-                                                    <select id="selectType" >
-                                                     <option value="Type">STANDING</option>
-                                                    </select>
-                                                </div>
-                                        <div id="seatingPlanRow">
-                                            <header>SEATING PLAN</header>
-                                            <div>picture</div>
-                                            </div>
-                                    </div>
-                                    <div id="yourTicketDiv">
-                                            <div id="yourTicketRow">
-                                                    <header>YOUR TICKETS</header>
-                                                    </div>
-                                        </div>
-                         </div>
                         </div>
-                     </div>
-                 </div>
 
- {% endblock %}
+                    </div>
+                    <div id="blockRow">
+                        <header>BLOCK</header>
+                        <select id="selectType">
+                            <option value="Type">STANDING</option>
+                        </select>
+                    </div>
+                    <div id="seatingPlanRow">
+                        <header>SEATING PLAN</header>
+                        <div>picture</div>
+                    </div>
+                </div>
+                <div id="yourTicketDiv">
+                    <div id="yourTicketRow">
+                        <header>YOUR TICKETS</header>
+                        {% if messages %}
+                            <ul class="messages">
+                                {% for message in messages %}
+                                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+{% endblock %}

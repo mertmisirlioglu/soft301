@@ -46,6 +46,14 @@
         <a href="{% url 'my_profile' %}">My Profile</a><br>
         <a href="{% url 'edit_my_profile' %}">Edit Profile</a><br>
         <a href="{% url 'my_tickets' %}">My Tickets</a><br>
+        <br><br>
+        {% for info in user_infos %}
+            {% if info.isOperator %}
+                <a href="{% url 'add_event' %}">Add Event</a><br>
+                <a href="{% url 'edit_event' %}">Edit Event</a><br>
+            {% endif %}
+        {% endfor %}
+
     </div>
 </div>
     </body>

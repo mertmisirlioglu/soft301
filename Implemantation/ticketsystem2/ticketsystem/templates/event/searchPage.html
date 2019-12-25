@@ -1,0 +1,44 @@
+{%  extends 'base.html' %}
+
+    {% block head %}
+       <title>Search Page</title>
+        {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static "css/searchPage/searchPage.css" %}">
+    <title>{% block title %}{%  endblock %}</title>
+  {% endblock %}
+
+
+{% block content %}
+                 <div class="mainpageDiv">
+                        <div id="searchResultRow">
+                            <div id="searchInfo">Search information.
+                            </div>
+                            <div class="pageButtons">
+                            <button  id="leftPageArrow"></button>
+                            <button id= "pageButtons" type="pageNo">1</button>
+                            <button id= "pageButtons" type="pageNo">2</button>
+                            <button id= "pageButtons" type="pageNo">3</button>
+                            <button id= "pageButtons" type="pageNo">4</button>
+                            <button id= "pageButtons" type="pageNo">5</button>
+                            <button id= "pageButtons" type="pageNo">6</button>
+                            <button  id="rightPageArrow"></button>  
+                            </div>
+                         </div>
+                        <div id="searchTypesRow">
+                            <header id="eventText">Event</header>
+                            <header id="stageText">Stage</header>
+                            <header id="dateText">Date</header>
+                        </div>
+                        <div class="searchContentRow">
+                        </div>
+                        <div class="spaceDivs"></div>
+                        <div class="searchContentRow">
+                            </div>
+                            <div class="spaceDivs"></div>
+                            <div class="searchContentRow">
+                                </div>
+                     </div>
+                 </div>
+         </div>
+     </div>
+{% endblock %}
