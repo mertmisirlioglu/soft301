@@ -93,10 +93,11 @@
             <div class="col-md">
                 <div class="search-container">
                     <input type="text" placeholder="Search.." name="search">
-                    <button type="submit">Submit</button>
+        {% block searchButton %}
+    <a class="btn btn-success" type="submit" href={% url 'search_event' %} role="button">Search</a>
+        {% endblock %}
                 </div>
             </div>
-
             <div class="col-md">
                 <div class="avatarDiv">
                     <img src={% static "media/user-avatar.png" %} alt="user-avatar">

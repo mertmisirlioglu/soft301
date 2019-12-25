@@ -72,6 +72,10 @@ def event_preview(request, pk):
     return render(request, 'event/event_review.html', context)
 
 
+def search_event(request):
+    return render(request, 'event/searchPage.html')
+
+
 @login_required
 def ticket_buy_view(request, pk):
     event = get_object_or_404(Event, pk=pk)
