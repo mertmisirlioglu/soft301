@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block head %}
+    <title>Stage List View</title>
+{% endblock %}
+{% block content %}
+    <a href="{% url 'stage_add' %}"><button type="button" class="btn btn-danger">Add Stage</button></a>
+       <table>
+    <thead>
+    <tr class="table-headers">
+    <th>ID</th>
+        <th>Place</th>
+    <th>Address</th>
+    <th>Quoata</th>
+
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+
+
+
+{% if messages %}
+                            <ul class="messages">
+                                {% for message in messages %}
+                                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+    {% for stage in stage_list %}
+
+
+
+ <tr>
+      <td>{{ stage.id}}</td>
+      <td>{{ stage.place}}</td>
+      <td>{{ stage.address }}</td>
+      <td>{{ stage.quota }}</td>
+         <td><a href="{{ stage.get_edit_stage_url }}"> <button type="button" class="btn btn-danger">Edit</button></a></td>
+ <td><a href="{{ stage.get_delete_stage_url }}"> <button type="button" class="btn btn-danger">Delete</button></a></td>
+    </tr>
+
+
+
+{% endfor %}
+
+{% endblock %}

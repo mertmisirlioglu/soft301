@@ -10,7 +10,11 @@ class Stage(models.Model):
     def __str__(self):
         return '' + self.place
 
+    def get_edit_stage_url(self):
+        return f"/admin/stage/{self.pk}/edit"
 
+    def get_delete_stage_url(self):
+        return f"/admin/stage/{self.pk}/delete"
 
 class UserProfile(models.Model):
     id = models.AutoField(primary_key=True)
@@ -78,14 +82,18 @@ class Event(models.Model):
         return '' + self.name
 
 
+class Transaction(models.Model):
+    date = models.DateField(auto_now_add=True)
+
+
 class Ticket(models.Model):
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
     seat_number = models.CharField(max_length=10)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+    transaction = models.ForeignKey(Transaction,on_delete=models.CASCADE)
 
     def get_ticket_review_url(self):
         return f"/account/tickets/{self.pk}/preview"
-
 
 
 

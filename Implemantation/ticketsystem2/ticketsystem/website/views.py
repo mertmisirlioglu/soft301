@@ -10,9 +10,9 @@ from django.shortcuts import render
 from django.contrib.admin.views.decorators import staff_member_required
 import time
 from django.contrib import messages
-from .forms import EditEventForm
+from .forms import EditEventForm, AddStage
 
-from website.models import Event, Ticket, UserProfile
+from website.models import Event, Ticket, UserProfile, Stage
 from .forms import (UserReg,
                     ExtendedUserCreationForm,
                     BuyTicketForm,
@@ -25,8 +25,6 @@ def home(request):
     event_list = Event.objects.all()
     context = {"event_list": event_list}
     return render(request, 'home.html', context)
-
-
 
 
 def go(request):
@@ -113,15 +111,17 @@ def event_preview(request, pk):
 def search_event(request):
     return render(request, 'event/searchPage.html')
 
-def event_check(request,event_id):
+
+def event_check(request, event_id):
     event = Event.objects.get(pk=event_id)
     if event.isRejected:
         messages.error(request, 'Your request is rejected.')
     elif event.isAccepted:
-        messages.success(request,'Your request is accepted.')
+        messages.success(request, 'Your request is accepted.')
     else:
-        messages.error(request,'Your request in queue.')
+        messages.error(request, 'Your request in queue.')
     return redirect('my_events')
+
 
 @login_required
 def ticket_buy_view(request, pk):
@@ -278,7 +278,7 @@ def users_list_view(request):
 
 @staff_member_required
 def waiting_events(request):
-    waiting_event_list = Event.objects.all().filter(isAccepted=False,isRejected=False)
+    waiting_event_list = Event.objects.all().filter(isAccepted=False, isRejected=False)
     context = {'waiting_event_list': waiting_event_list}
     return render(request, 'admin/waiting_events_view.html', context)
 
@@ -341,7 +341,7 @@ def edit_event(request, event_id):
 
         form = EditEventForm(instance=event)
         args = {'form': form,
-                'user_infos':user_infos}
+                'user_infos': user_infos}
         return render(request, 'event/edit_event.html', args)
 
 
@@ -355,21 +355,71 @@ def delete_event(request, event_id):
     event.delete()
     return redirect('my_events')
 
-def type_event_get(request,type):
-    event_list=Event.objects.all().filter(type=type)
+
+def type_event_get(request, type):
+    event_list = Event.objects.all().filter(type=type)
     return event_list
 
+
 def concert_events(request):
-    return render(request,'ticket/concert-events.html',{'concert_list':type_event_get(request,'C')})
+    return render(request, 'ticket/concert-events.html', {'concert_list': type_event_get(request, 'C')})
+
 
 def theatre_events(request):
-    return render(request,'ticket/theatre-events.html',{'theatre_list':type_event_get(request,'T')})
+    return render(request, 'ticket/theatre-events.html', {'theatre_list': type_event_get(request, 'T')})
+
 
 def sport_events(request):
-    return render(request,'ticket/sport-events.html',{'sport_list':type_event_get(request,'S')})
+    return render(request, 'ticket/sport-events.html', {'sport_list': type_event_get(request, 'S')})
 
-def reject_event(request,event_id):
+
+def reject_event(request, event_id):
     event = Event.objects.get(pk=event_id)
     event.isRejected = True
     event.save()
     return redirect('waiting_events')
+
+
+def add_stage_view(request):
+    form = AddStage(request.POST or None)
+    if request.method == 'POST':
+        form = AddStage(request.POST or None)
+        print(form.errors)
+        if form.is_valid():
+            form.save()
+            return redirect('stage_all')
+        else:
+            return redirect('stage_add')
+    return render(request, 'admin/add_stage.html', {'form': form})
+
+
+def stage_list_view(request):
+    stage_list = Stage.objects.all().filter()
+    context = {'stage_list': stage_list}
+    return render(request, 'admin/stage_list_view.html', context)
+
+
+def edit_stage_view(request, stage_id):
+    stage = Stage.objects.get(pk=stage_id)
+    if request.method == 'POST':
+
+        form = AddStage(request.POST, instance=stage)
+
+        if form.is_valid():
+            form.save()
+            return redirect('stage_all')
+    else:
+
+        form = AddStage(instance=stage)
+        args = {'form': form}
+        return render(request, 'admin/add_stage.html', args)
+
+
+def delete_stage_view(request, stage_id):
+    stage = Stage.objects.get(pk=stage_id)
+    event_list = Event.objects.all().filter(stage=stage)
+    if len(event_list) > 0:
+        stage.delete()
+    else:
+        messages.error(request, "You cannot delete this stage. There will be an event on this stage.")
+    return redirect('stage_all')
