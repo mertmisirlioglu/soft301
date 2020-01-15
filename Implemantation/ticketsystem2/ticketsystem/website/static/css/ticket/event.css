@@ -1,0 +1,29 @@
+#firstblock{
+    position: relative;
+    background-color: wheat;
+      display: inline-block;
+    width:40%;
+height:15%;
+    left:30%;
+
+}
+div {
+      display: inline-block;
+
+}
+div p{
+    padding: 6px;
+}
+.photo{
+position: relative;
+border:2px solid black;
+width: 30%;
+height: 50%;
+}
+
+ #content{
+     position: absolute;
+      width: 90%;
+     height: 160%;
+     background-color: antiquewhite;
+ }

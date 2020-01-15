@@ -355,6 +355,18 @@ def delete_event(request, event_id):
     event.delete()
     return redirect('my_events')
 
+def type_event_get(request,type):
+    event_list=Event.objects.all().filter(type=type)
+    return event_list
+
+def concert_events(request):
+    return render(request,'ticket/concert-events.html',{'concert_list':type_event_get(request,'C')})
+
+def theatre_events(request):
+    return render(request,'ticket/theatre-events.html',{'theatre_list':type_event_get(request,'T')})
+
+def sport_events(request):
+    return render(request,'ticket/sport-events.html',{'sport_list':type_event_get(request,'S')})
 
 def reject_event(request,event_id):
     event = Event.objects.get(pk=event_id)
