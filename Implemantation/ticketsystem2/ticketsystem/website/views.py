@@ -1,7 +1,10 @@
+import datetime
+
 from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
+from django.contrib.auth.models import User
 from django.shortcuts import redirect, get_object_or_404
 from django.shortcuts import render
 from django.contrib.admin.views.decorators import staff_member_required
@@ -24,13 +27,6 @@ def home(request):
     return render(request, 'home.html', context)
 
 
-def post(request):
-    form = EditProfileForm(request.POST)
-    if form.is_valid():
-        text = form.cleaned_data['birthday']
-
-    args = {'form': form, 'text': text}
-    return render(request, args)
 
 
 def go(request):
@@ -61,22 +57,52 @@ def logout_view(request):
 
 
 def signup(request):
-    form = ExtendedUserCreationForm(request.POST or None)
-    profile_form = UserReg(request.POST or None)
-    print(form.errors)
-    if form.is_valid() and profile_form.is_valid():
-        user = form.save()
-        profile = profile_form.save(commit=False)
-        profile.user = user
+    if request.method == "POST":
+        first_name = request.POST['first_name']
+        last_name = request.POST['last_name']
+        username = request.POST['username']
+        email = request.POST['email']
+        password1 = request.POST['password1']
+        password2 = request.POST['password2']
+        birthday = request.POST['birthday']
+        created_at = datetime.datetime.now()
+        phone_number = request.POST['phone_number']
+        converted = datetime.datetime.strptime(birthday, '%Y-%m-%d')
+        gender = request.POST['gender']
+        if password1 != password2:
+            messages.error(request, 'Passwords do not match.')
+            return redirect('signup')
+        if len(password1) < 8:
+            messages.error(request, 'password does not less than 8 characters')
+            return redirect('signup')
+        if converted.year > created_at.year:
+            messages.error(request, 'Invalid birthday date')
+            return redirect('signup')
+        if email and User.objects.filter(email=email).exclude(username=username).exists():
+            messages.error(request, 'Email is already exist in the system.')
+            return redirect('signup')
+        if User.objects.filter(username=username).exists():
+            messages.error(request, 'Username is already exist in the system. Please enter a different username')
+            return redirect('signup')
+
+        user = User.objects.create_user(
+            first_name=first_name,
+            last_name=last_name,
+            username=username,
+            email=email,
+            password=password1)
+        profile = UserProfile(gender=gender, birthday=birthday, phone_number=phone_number, user=user,
+                              created_at=created_at)
         profile.save()
-        username = form.cleaned_data.get('username')
-        password = form.cleaned_data.get('password1')
-        user = authenticate(username=username, password=password)
-        login(request, user)
-        return redirect('home')
+        user = authenticate(request, username=username, password=password1)
+        if user is not None:
+            login(request, user)
+            return redirect('home')
+        else:
+            messages.error(request, 'username or password not correct')
+            return redirect('signup')
     else:
-        return render(request, 'registration/signup.html',
-                      {'form': ExtendedUserCreationForm, 'profile_form': UserReg})
+        return render(request, 'registration/signup.html')
 
 
 def event_preview(request, pk):
