@@ -61,6 +61,8 @@
             </nav>
         </div>
 
+
+
         <div class="row" id='mainRow'>
             <div class="col-md">
                 <div id="webSiteName">
@@ -90,6 +92,10 @@
                     </a>
                 </div>
             </div>
+
+
+
+
             <div class="col-md">
                 <div class="search-container">
                     <input type="text" placeholder="Search.." name="search">
@@ -154,7 +160,51 @@
                 </div>
             </div>
         </div>
-
+  {% if request.user.is_superuser %}
+         <div class="row" id='adminRow'>
+          <div class="col-md">
+                <div class="topicsName">
+                    <a href="{% url 'active_events' %}">
+                        <h3>Active Events</h3>
+                    </a>
+                </div>
+            </div>
+      <div class="col-md">
+                <div class="topicsName">
+                    <a href="{% url 'rejected_events' %}">
+                        <h3>Rejected Events</h3>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md">
+                <div class="topicsName">
+                    <a href="{% url 'disactive_events' %}">
+                        <h3>Disactive Events</h3>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md">
+                <div class="topicsName">
+                    <a href="{% url 'waiting_events' %}">
+                        <h3>Waiting Events</h3>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md">
+                <div class="topicsName">
+                    <a href="{% url 'users_all' %}">
+                        <h3>Users</h3>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md">
+                <div class="topicsName">
+                    <a href="{% url 'operator_all' %}">
+                        <h3>Operators</h3>
+                    </a>
+                </div>
+            </div>
+{% endif %}
     </header>
     <div class="container-xl">
 

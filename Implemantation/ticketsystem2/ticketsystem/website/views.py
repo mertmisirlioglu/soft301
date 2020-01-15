@@ -113,6 +113,15 @@ def event_preview(request, pk):
 def search_event(request):
     return render(request, 'event/searchPage.html')
 
+def event_check(request,event_id):
+    event = Event.objects.get(pk=event_id)
+    if event.isRejected:
+        messages.error(request, 'Your request is rejected.')
+    elif event.isAccepted:
+        messages.success(request,'Your request is accepted.')
+    else:
+        messages.error(request,'Your request in queue.')
+    return redirect('my_events')
 
 @login_required
 def ticket_buy_view(request, pk):
@@ -269,9 +278,16 @@ def users_list_view(request):
 
 @staff_member_required
 def waiting_events(request):
-    waiting_event_list = Event.objects.all()
+    waiting_event_list = Event.objects.all().filter(isAccepted=False,isRejected=False)
     context = {'waiting_event_list': waiting_event_list}
     return render(request, 'admin/waiting_events_view.html', context)
+
+
+@staff_member_required
+def rejected_events(request):
+    rejected_event_list = Event.objects.all().filter(isRejected=True)
+    context = {'rejected_event_list': rejected_event_list}
+    return render(request, 'admin/rejected_events_view.html', context)
 
 
 @staff_member_required
@@ -338,3 +354,10 @@ def delete_event(request, event_id):
         user_profile.save()
     event.delete()
     return redirect('my_events')
+
+
+def reject_event(request,event_id):
+    event = Event.objects.get(pk=event_id)
+    event.isRejected = True
+    event.save()
+    return redirect('waiting_events')

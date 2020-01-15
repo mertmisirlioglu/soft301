@@ -3,6 +3,11 @@ body {
     width: 100%;
 }
 
+#adminRow{
+    background-color:aquamarine;
+    padding-left: 15px;
+}
+
 #helpText {
     text-align: right;
 }

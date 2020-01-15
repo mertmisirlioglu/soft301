@@ -26,7 +26,7 @@ class UserProfile(models.Model):
     img = models.URLField(null=True, blank=True)
     isOperator = models.BooleanField(default=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-   
+
     balance = models.IntegerField(default=0)
 
 
@@ -49,6 +49,7 @@ class Event(models.Model):
     type = models.CharField(max_length=1, choices=TYPE)
     isAvailable = models.BooleanField(default=False)
     isAccepted = models.BooleanField(default=False)
+    isRejected  = models.BooleanField(default=False)
     rules = models.CharField(max_length=500)
     img = models.URLField(null=True, blank=True)
 
@@ -63,6 +64,12 @@ class Event(models.Model):
 
     def get_delete_event_url(self):
         return f"/event/{self.pk}/delete"
+
+    def get_check_event_url(self):
+        return f"/event/{self.pk}/check"
+
+    def get_reject_url(self):
+        return f"/admin/event/reject/{self.pk}"
 
     def get_approve_url(self):
         return f"/admin/event/approve/{self.pk}"

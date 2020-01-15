@@ -44,10 +44,13 @@ urlpatterns = [
     path('balance/add/', views.add_balance, name='add_balance'),
     path('admin/event/waiting/', views.waiting_events, name='waiting_events'),
     path('admin/event/active/', views.accepted_events, name='active_events'),
+    path('admin/event/reject/', views.rejected_events, name='rejected_events'),
     path('admin/event/disactive/', views.disactive_events, name='disactive_events'),
     path('admin/event/approve/<int:event_id>', views.approve_event, name='approve_event'),
+    path('admin/event/reject/<int:event_id>', views.reject_event, name='reject_event'),
     path('event/<int:event_id>/edit', views.edit_event, name='edit_event'),
     path('event/<int:event_id>/delete', views.delete_event, name='delete_event'),
+    path('event/<int:event_id>/check', views.event_check, name='check_event'),
     path('my-events/', views.my_events, name='my_events'),
     path('event/search-event/', views.search_event, name='search_event')
 ]
