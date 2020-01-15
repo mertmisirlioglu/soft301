@@ -13,21 +13,27 @@
         <div id="miniPageDiv">
             <div id="artistNameRow">
                 <header>Artist Name</header>
+
             </div>
             <div id="ticketMainRow">
                 <div id="eventInfoDiv">
                     <div id="eventPictureDiv">event picture</div>
+
                 </div>
+
                 <div id="ticketSelectionDiv">
                     <div id="ticketSelectionRow">
                         <header>TICKET SELECTION</header>
+
                     </div>
                     <div class="adultRow">
                         <header>ADULT</header>
                         <div class="quantityDiv">
                             <form method="post">
                                 {% csrf_token %}
+
                                 {{ form.as_p }}
+
                                 <button class="btn btn-success" type="submit">Buy</button>
                             </form>
 
@@ -50,6 +56,7 @@
                 <div id="yourTicketDiv">
                     <div id="yourTicketRow">
                         <header>YOUR TICKETS</header>
+                    <p>Remaining Quota: {{  event.quota  }}</p>
  {% if messages %}
                             <ul class="messages">
                                 {% for message in messages %}
