@@ -11,6 +11,9 @@ class Stage(models.Model):
         return '' + self.place
 
 
+
+
+
 class Event(models.Model):
     TYPE = (
         ('C', 'Concert'),
@@ -19,7 +22,7 @@ class Event(models.Model):
     )
     name = models.CharField(max_length=50)
     stage = models.ForeignKey(Stage, on_delete=models.CASCADE)
-    owner = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    owner = models.ForeignKey(UserProfile, on_delete=models.CASCADE, null=True)
     date = models.DateField()
     quota = models.IntegerField()
     price = models.IntegerField()
@@ -35,6 +38,12 @@ class Event(models.Model):
     def get_buy_ticket_url(self):
         return f"/event/{self.pk}/buy"
 
+    def get_edit_event_url(self):
+        return f"/event/{self.pk}/edit"
+
+    def get_delete_event_url(self):
+        return f"/event/{self.pk}/delete"
+
     def get_approve_url(self):
         return f"/admin/event/approve/{self.pk}"
 
@@ -49,6 +58,7 @@ class Ticket(models.Model):
 
     def get_ticket_review_url(self):
         return f"/account/tickets/{self.pk}/preview"
+
 
 
 class UserProfile(models.Model):
@@ -71,5 +81,6 @@ class UserProfile(models.Model):
 
     def __str__(self):
         return self.user.username
+
 
 
