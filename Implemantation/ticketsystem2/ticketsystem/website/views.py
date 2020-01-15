@@ -23,6 +23,7 @@ def home(request):
     context = {"event_list": event_list}
     return render(request, 'home.html', context)
 
+
 def post(request):
     form = EditProfileForm(request.POST)
     if form.is_valid():
@@ -30,6 +31,7 @@ def post(request):
 
     args = {'form': form, 'text': text}
     return render(request, args)
+
 
 def go(request):
     redirect(request, 'home.html')
@@ -101,8 +103,8 @@ def ticket_buy_view(request, pk):
                 messages.error(request, ("No quota available for buying " + str(quantity) + " ticket"))
             elif user_infos.balance < event.price * quantity:
                 messages.error(request, (
-                            "Your amount is not enough for buying " + str(quantity) + " ticket.\nYou need " + str(
-                        event.price * quantity - user_infos.balance) + "$ more."))
+                        "Your amount is not enough for buying " + str(quantity) + " ticket.\nYou need " + str(
+                    event.price * quantity - user_infos.balance) + "$ more."))
 
             else:
                 user_infos.balance = user_infos.balance - event.price * quantity
@@ -114,7 +116,7 @@ def ticket_buy_view(request, pk):
                     ticket.save()
 
                 messages.success(request, (
-                            "You bought " + str(quantity) + " ticket.\nYou spend " + str(event.price * quantity) + "$"))
+                        "You bought " + str(quantity) + " ticket.\nYou spend " + str(event.price * quantity) + "$"))
 
     else:
         form = BuyTicketForm()
@@ -126,8 +128,10 @@ def ticket_buy_view(request, pk):
 @login_required
 def my_tickets_view(request):
     user = request.user
+    user_infos = UserProfile.objects.all().filter(user=user)
     ticket_list = Ticket.objects.all().filter(user=user)
-    context = {"ticket_list": ticket_list}
+    context = {"ticket_list": ticket_list,
+               "user_infos": user_infos}
     return render(request, 'profile/my_tickets.html', context)
 
 
@@ -148,17 +152,17 @@ def my_profile_view(request):
 
 @login_required
 def edit_my_profile(request):
+    user = request.user
+    user_info = UserProfile.objects.get(user=user)
     if request.method == 'POST':
-        form = EditProfileForm(request.POST, instance=request.user)
-        if form.is_valid():
-            birthday = form.cleaned_data['birthday']
-            form.save()
-            args = {'form': form, 'birthday': birthday}
-            return render(request, 'profile/profile.html', args)
-    else:
-        form = EditProfileForm(instance=request.user)
-        args = {'form': form}
-        return render(request, 'profile/edit_profile.html', args)
+        user_info.gender = request.POST['gender']
+        user_info.phone_number = request.POST['phone_number']
+        user_info.birthday = request.POST['birthday']
+        user_info.save()
+        return redirect('my_profile')
+
+    context = {"user_info": user_info}
+    return render(request, 'profile/edit_profile.html', context)
 
 
 @login_required
@@ -181,15 +185,26 @@ def change_password(request):
 
 @login_required
 def add_event(request):
+    user_profile = UserProfile.objects.get(user=request.user)
     if request.method == 'POST':
         form = AddEvent(request.POST or None)
         print(form.errors)
         if form.is_valid():
-            form.save()
-            return redirect('my_profile')
+            event = form.save()
+            event.owner = user_profile
+            event.save()
+            return redirect('my_events')
         else:
             return redirect('add_event')
     return render(request, 'event/add_event.html', {'form': AddEvent})
+
+
+@login_required
+def my_events(request):
+    user_profile = UserProfile.objects.get(user=request.user)
+    event_list = Event.objects.all().filter(owner=user_profile)
+    context = {'event_list': event_list}
+    return render(request, 'event/my_events.html', context)
 
 
 @staff_member_required
@@ -270,14 +285,31 @@ def add_balance(request):
         return render(request, 'profile/add_balance.html', {'form': form})
 
 
-def edit_event(request):
+def edit_event(request, event_id):
+    event = Event.objects.get(pk=event_id)
+    user = request.user
+    user_infos = UserProfile.objects.get(user=user)
     if request.method == 'POST':
-        form = EditEventForm(request.POST, instance=request.user)
+
+        form = EditEventForm(request.POST, instance=event)
 
         if form.is_valid():
             form.save()
             return redirect('/account/profile')
     else:
-        form = EditEventForm(instance=request.user)
-        args = {'form': form}
+
+        form = EditEventForm(instance=event)
+        args = {'form': form,
+                'user_infos':user_infos}
         return render(request, 'event/edit_event.html', args)
+
+
+def delete_event(request, event_id):
+    event = Event.objects.get(pk=event_id)
+    ticket_list = Ticket.objects.all().filter(event=event)
+    for ticket in ticket_list:
+        user_profile = UserProfile.objects.get(user=ticket.user)
+        user_profile.balance += event.price
+        user_profile.save()
+    event.delete()
+    return redirect('my_events')

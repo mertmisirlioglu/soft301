@@ -46,16 +46,14 @@ class BuyTicketForm(forms.Form):
     quantity = forms.ChoiceField(choices=Quantity, label='', initial='', required=True)
 
 
-class EditProfileForm(UserChangeForm):
-    password = None
+class EditProfileForm(forms.ModelForm):
 
-    birthday = forms.DateField()
 
     class Meta:
         model = UserProfile
         fields = (
             'gender',
-            'phone_number',
+            'phone_number'
         )
 
 
@@ -75,8 +73,7 @@ class AddEvent(forms.ModelForm):
             'date',
             'quota',
             'price',
-            'rules',
-            'owner'
+            'rules'
         )
 
 

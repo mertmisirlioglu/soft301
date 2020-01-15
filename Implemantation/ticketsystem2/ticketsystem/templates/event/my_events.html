@@ -1,15 +1,14 @@
 {%  extends 'profile/profile.html' %}
 
 {% block info %}
-    {% load static %}
-        <form method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit">Add Event</button>
-        </form>
+   <ul>
+   {% for event in event_list %}
+  <li>{{ event.name }} <a href="{{ event.get_edit_event_url }}">Edit</a> <a href="{{ event.get_delete_event_url }}">Sil</a></li>
+   {% endfor %}
+</ul>
 
 {% endblock %}
-    {% block isOperator %}
+{% block isOperator %}
             <a href="{% url 'add_event' %}">Add Event</a><br>
             <a href="{% url 'my_events' %}">My Events</a><br>
         {% endblock %}
