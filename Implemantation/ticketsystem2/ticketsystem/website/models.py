@@ -12,15 +12,22 @@ class Stage(models.Model):
 
 
 class Event(models.Model):
+    TYPE = (
+        ('C', 'Concert'),
+        ('T', 'Theatre'),
+        ('S', 'Sports')
+    )
     name = models.CharField(max_length=50)
     stage = models.ForeignKey(Stage, on_delete=models.CASCADE)
     owner = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     date = models.DateField()
     quota = models.IntegerField()
     price = models.IntegerField()
+    type = models.CharField(max_length=1, choices=TYPE)
     isAvailable = models.BooleanField(default=False)
     isAccepted = models.BooleanField(default=False)
     rules = models.CharField(max_length=500)
+    img = models.URLField(null=True, blank=True)
 
     def get_preview_ticket_url(self):
         return f"/event/{self.pk}/preview"
@@ -64,13 +71,3 @@ class UserProfile(models.Model):
         return self.user.username
 
 
-class Concert(Event):
-    pass
-
-
-class Theatre(Event):
-    pass
-
-
-class Sport(Event):
-    pass

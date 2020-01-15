@@ -69,6 +69,7 @@ class AddEvent(forms.ModelForm):
     class Meta:
         model = Event
         fields = (
+            'type',
             'name',
             'stage',
             'date',
