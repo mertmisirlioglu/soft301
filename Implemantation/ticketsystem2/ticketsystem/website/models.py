@@ -65,7 +65,9 @@ class UserProfile(models.Model):
     img = models.URLField(null=True, blank=True)
     isOperator = models.BooleanField(default=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    created_at = models.DateTimeField()
     balance = models.IntegerField(default=0)
+
 
     def __str__(self):
         return self.user.username

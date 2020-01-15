@@ -22,13 +22,53 @@
 {% block content %}
   <div id="mainDiv">
     <div class="mainRow">
-      <form method="post">
-         {% csrf_token %}
-         {{ form.as_p }}
-          {{ profile_form.as_p }}
-          Birthday:<input id="datepicker" type="text" name="birthday">
-         <button type="submit">Sign Up</button>
-      </form>
+      <form method="POST" class="form">
+{% csrf_token %}
+{% if messages %}
+                            <ul class="messages">
+                                {% for message in messages %}
+                                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+       <div class="formgroup">
+            <input required type="text" placeholder="Firstname" class="form__input" name="first_name" />
+        </div>
+       <div class="formgroup">
+            <input required type="text" placeholder="Lastname" class="form__input" name="last_name" />
+        </div>
+        <div class="formgroup">
+            <input required type="text" placeholder="Username" class="form__input" name="username" />
+        </div>
+
+        <div class="formgroup">
+            <input required type="email" placeholder="E-mail" class="form__input" name="email"/>
+        </div>
+
+        <div class="formgroup">
+            <input required type="password" placeholder="Password" class="form__input" name="password1" />
+        </div>
+        <div class="formgroup">
+            <input required type="password" placeholder="Password Again" class="form__input" name="password2"/>
+        </div>
+          <div class="formgroup">
+            <input required type="date" placeholder="Birthday" name="birthday" class="form__input" />
+        </div>
+      <div class="formgroup">
+            <input required type="text" placeholder="Phone number" class="form__input" name="phone_number"/>
+        </div>
+
+        <div class="formgroup">
+            <select required name="gender" >
+                <option value="Female"  name="Female">Female</option>
+                <option value="Male" name="Male">Male</option>
+            </select>
+        </div>
+
+
+        <button type="submit" class="btn-success">Sign Up</button>
+
+    </form>
     </div>
   </div>
 {% endblock %}
