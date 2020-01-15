@@ -1,9 +1,9 @@
 #firstblock{
     position: relative;
-    background-color: wheat;
+    background-color: lavenderblush;
       display: inline-block;
     width:40%;
-height:15%;
+     height:15%;
     left:30%;
 
 }
@@ -25,5 +25,5 @@ height: 50%;
      position: absolute;
       width: 90%;
      height: 160%;
-     background-color: antiquewhite;
+     background-color:antiquewhite !important;
  }
