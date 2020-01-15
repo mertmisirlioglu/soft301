@@ -23,6 +23,17 @@ def home(request):
     context = {"event_list": event_list}
     return render(request, 'home.html', context)
 
+def post(request):
+    form = EditProfileForm(request.POST)
+    if form.is_valid():
+        text = form.cleaned_data['birthday']
+
+    args = {'form': form, 'text': text}
+    return render(request, args)
+
+def go(request):
+    redirect(request, 'home.html')
+
 
 def login_view(request):
     if request.method == 'POST':
@@ -50,7 +61,6 @@ def logout_view(request):
 def signup(request):
     form = ExtendedUserCreationForm(request.POST or None)
     profile_form = UserReg(request.POST or None)
-    # profile_form.birthday = request.POST.get('birthday', '')
     print(form.errors)
     if form.is_valid() and profile_form.is_valid():
         user = form.save()
@@ -88,9 +98,11 @@ def ticket_buy_view(request, pk):
             quantity = form.cleaned_data.get('quantity')
             quantity = int(quantity)
             if event.quota < quantity:
-                messages.error(request, ("No quota available for buying "+ str(quantity)+" ticket"))
-            elif user_infos.balance < event.price*quantity:
-                messages.error(request, ("Your amount is not enough for buying " + str(quantity) + " ticket.\nYou need "+str(event.price*quantity-user_infos.balance)+"$ more."))
+                messages.error(request, ("No quota available for buying " + str(quantity) + " ticket"))
+            elif user_infos.balance < event.price * quantity:
+                messages.error(request, (
+                            "Your amount is not enough for buying " + str(quantity) + " ticket.\nYou need " + str(
+                        event.price * quantity - user_infos.balance) + "$ more."))
 
             else:
                 user_infos.balance = user_infos.balance - event.price * quantity
@@ -101,7 +113,8 @@ def ticket_buy_view(request, pk):
                     ticket = Ticket(event=event, user=user)
                     ticket.save()
 
-                messages.success(request, ("You bought " + str(quantity) + " ticket.\nYou spend " + str(event.price*quantity) + "$"))
+                messages.success(request, (
+                            "You bought " + str(quantity) + " ticket.\nYou spend " + str(event.price * quantity) + "$"))
 
     else:
         form = BuyTicketForm()
@@ -137,10 +150,11 @@ def my_profile_view(request):
 def edit_my_profile(request):
     if request.method == 'POST':
         form = EditProfileForm(request.POST, instance=request.user)
-
         if form.is_valid():
+            birthday = form.cleaned_data['birthday']
             form.save()
-            return redirect('/account/profile')
+            args = {'form': form, 'birthday': birthday}
+            return render(request, 'profile/profile.html', args)
     else:
         form = EditProfileForm(instance=request.user)
         args = {'form': form}
@@ -215,7 +229,7 @@ def users_list_view(request):
 
 @staff_member_required
 def waiting_events(request):
-    waiting_event_list = Event.objects.all().filter(isAccepted=False)
+    waiting_event_list = Event.objects.all()
     context = {'waiting_event_list': waiting_event_list}
     return render(request, 'admin/waiting_events_view.html', context)
 

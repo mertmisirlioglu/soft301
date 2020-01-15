@@ -1,15 +1,6 @@
-{%  extends 'base.html' %}
-<html lang="en">
-{% block head %}
-<head>
-{% load static %}
-  <meta charset="UTF-8">
-  <link rel="stylesheet" type="text/css" href="{% static "css/event/add_event.css" %}">
-  <title>{% block title %}{%  endblock %}</title>
-</head>
-{% endblock %}
-<body>
-{% block content %}
+{% extends 'profile/profile.html' %}
+
+{% block info %}
     {% load static %}
         <form method="post">
             {% csrf_token %}
@@ -18,5 +9,3 @@
 
         </form>
 {% endblock %}
-</body>
-</html>

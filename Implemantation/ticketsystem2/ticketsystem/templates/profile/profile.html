@@ -35,6 +35,8 @@
                 <p>Email: {{  info.user.email }}</p>
                 <p>Balance: {{  info.balance }}</p>
                 <a href="{% url 'add_balance' %}"><button type="button" class="btn btn-secondary">Add Balance</button></a>
+
+
             {% endfor %}
         {% endblock %}
     </div>
@@ -46,6 +48,7 @@
         <a href="{% url 'my_profile' %}">My Profile</a><br>
         <a href="{% url 'edit_my_profile' %}">Edit Profile</a><br>
         <a href="{% url 'my_tickets' %}">My Tickets</a><br>
+        <a href="{% url 'home' %}">Home</a><br>
         <br><br>
         {% for info in user_infos %}
             {% if info.isOperator %}

@@ -28,8 +28,8 @@ class UserReg(forms.ModelForm):
 
     gender = forms.ChoiceField(choices=GENDER, label='', initial='',
                                widget=forms.Select(), required=True)
-    birthday = forms.CharField()
     phone_number = forms.CharField()
+    birthday = forms.DateField()
 
     class Meta:
         model = UserProfile
@@ -49,12 +49,13 @@ class BuyTicketForm(forms.Form):
 class EditProfileForm(UserChangeForm):
     password = None
 
+    birthday = forms.DateField()
+
     class Meta:
-        model = User
+        model = UserProfile
         fields = (
-            'email',
-            'first_name',
-            'last_name'
+            'gender',
+            'phone_number',
         )
 
 
