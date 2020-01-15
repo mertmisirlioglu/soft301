@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block head %}
+    <title>Waiting Events List View</title>
+{% endblock %}
+{% block content %}
+
+       <table>
+    <thead>
+    <tr class="table-headers">
+    <th>ID</th>
+        <th>Event Name</th>
+    <th>Stage</th>
+    <th>Date</th>
+    <th>Price</th>
+    <th>Quota</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    {% for event in waiting_event_list %}
+
+
+
+
+
+ <tr>
+      <td>{{ event.id}}</td>
+      <td>{{ event.name}}</td>
+      <td>{{ event.stage }}</td>
+      <td>{{ event.date }}</td>
+      <td>{{ event.price }}</td>
+     <td>{{ event.quota }}</td>
+     <a href="{{ event.get_approve_url }}"> <button type="button" class="btn btn-danger">Approve</button></a>
+    </tr>
+
+
+
+{% endfor %}
+
+{% endblock %}

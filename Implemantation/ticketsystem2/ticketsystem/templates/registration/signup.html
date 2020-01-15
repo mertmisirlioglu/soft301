@@ -9,12 +9,11 @@
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-{#  <script>#}
-{#  $( function() {#}
-{#    $( '#birthday_date' ).datepicker();#}
-{#      {{ profile_form.birthday }}#}
-{#  } );#}
-{#  </script>#}
+  <script>
+  $( function() {
+    $( "#datepicker" ).datepicker();
+  } );
+  </script>
     {% endblock %}
 
 </head>
@@ -27,7 +26,7 @@
          {% csrf_token %}
          {{ form.as_p }}
           {{ profile_form.as_p }}
-{#          Birthday:<input id="birthday_date" type="text" name="birthday">#}
+          Birthday:<input id="datepicker" type="text" name="birthday">
          <button type="submit">Sign Up</button>
       </form>
     </div>

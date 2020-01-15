@@ -28,6 +28,9 @@ class Event(models.Model):
     def get_buy_ticket_url(self):
         return f"/event/{self.pk}/buy"
 
+    def get_approve_url(self):
+        return f"/admin/event/approve/{self.pk}"
+
     def __str__(self):
         return '' + self.name
 
