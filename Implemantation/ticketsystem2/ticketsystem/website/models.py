@@ -12,6 +12,26 @@ class Stage(models.Model):
 
 
 
+class UserProfile(models.Model):
+    id = models.AutoField(primary_key=True)
+    GENDER = (
+        ('M', 'Male'),
+        ('F', 'Female'),
+    )
+
+    gender = models.CharField(max_length=1, choices=GENDER)
+
+    birthday = models.DateField()
+    phone_number = models.CharField(max_length=11)
+    img = models.URLField(null=True, blank=True)
+    isOperator = models.BooleanField(default=False)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+   
+    balance = models.IntegerField(default=0)
+
+
+    def __str__(self):
+        return self.user.username
 
 
 class Event(models.Model):
@@ -61,26 +81,6 @@ class Ticket(models.Model):
 
 
 
-class UserProfile(models.Model):
-    id = models.AutoField(primary_key=True)
-    GENDER = (
-        ('M', 'Male'),
-        ('F', 'Female'),
-    )
-
-    gender = models.CharField(max_length=1, choices=GENDER)
-
-    birthday = models.DateField()
-    phone_number = models.CharField(max_length=11)
-    img = models.URLField(null=True, blank=True)
-    isOperator = models.BooleanField(default=False)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    created_at = models.DateTimeField()
-    balance = models.IntegerField(default=0)
-
-
-    def __str__(self):
-        return self.user.username
 
 
 

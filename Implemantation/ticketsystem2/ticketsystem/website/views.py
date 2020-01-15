@@ -91,8 +91,7 @@ def signup(request):
             username=username,
             email=email,
             password=password1)
-        profile = UserProfile(gender=gender, birthday=birthday, phone_number=phone_number, user=user,
-                              created_at=created_at)
+        profile = UserProfile(gender=gender, birthday=birthday, phone_number=phone_number, user=user)
         profile.save()
         user = authenticate(request, username=username, password=password1)
         if user is not None:
