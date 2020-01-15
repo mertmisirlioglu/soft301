@@ -10,7 +10,11 @@ class Stage(models.Model):
     def __str__(self):
         return '' + self.place
 
+    def get_edit_stage_url(self):
+        return f"/admin/stage/{self.pk}/edit"
 
+    def get_delete_stage_url(self):
+        return f"/admin/stage/{self.pk}/delete"
 
 class UserProfile(models.Model):
     id = models.AutoField(primary_key=True)
@@ -26,7 +30,7 @@ class UserProfile(models.Model):
     img = models.URLField(null=True, blank=True)
     isOperator = models.BooleanField(default=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-   
+
     balance = models.IntegerField(default=0)
 
 
@@ -49,6 +53,7 @@ class Event(models.Model):
     type = models.CharField(max_length=1, choices=TYPE)
     isAvailable = models.BooleanField(default=False)
     isAccepted = models.BooleanField(default=False)
+    isRejected  = models.BooleanField(default=False)
     rules = models.CharField(max_length=500)
     img = models.URLField(null=True, blank=True)
 
@@ -64,6 +69,12 @@ class Event(models.Model):
     def get_delete_event_url(self):
         return f"/event/{self.pk}/delete"
 
+    def get_check_event_url(self):
+        return f"/event/{self.pk}/check"
+
+    def get_reject_url(self):
+        return f"/admin/event/reject/{self.pk}"
+
     def get_approve_url(self):
         return f"/admin/event/approve/{self.pk}"
 
@@ -71,14 +82,18 @@ class Event(models.Model):
         return '' + self.name
 
 
+class Transaction(models.Model):
+    date = models.DateField(auto_now_add=True)
+
+
 class Ticket(models.Model):
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
     seat_number = models.CharField(max_length=10)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+    transaction = models.ForeignKey(Transaction,on_delete=models.CASCADE)
 
     def get_ticket_review_url(self):
         return f"/account/tickets/{self.pk}/preview"
-
 
 
 

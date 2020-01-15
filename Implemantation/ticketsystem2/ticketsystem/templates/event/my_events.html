@@ -1,14 +1,25 @@
-{%  extends 'profile/profile.html' %}
+{% extends 'profile/profile.html' %}
 
 {% block info %}
-   <ul>
-   {% for event in event_list %}
-  <li>{{ event.name }} <a href="{{ event.get_edit_event_url }}">Edit</a> <a href="{{ event.get_delete_event_url }}">Sil</a></li>
-   {% endfor %}
-</ul>
+    <ul>
+     <span> {% if messages %}
+                            <ul class="messages">
+                                {% for message in messages %}
+                                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}</span>
+        {% for event in event_list %}
+            <li>{{ event.name }} <a href="{{ event.get_edit_event_url }}">Edit</a> <a
+                    href="{{ event.get_delete_event_url }}">Sil</a>{% ifequal event.isAccepted False %}<a
+
+                    href="{{ event.get_check_event_url }}">Check my request</a>{% endifequal %}
+            </li>
+        {% endfor %}
+    </ul>
 
 {% endblock %}
 {% block isOperator %}
-            <a href="{% url 'add_event' %}">Add Event</a><br>
-            <a href="{% url 'my_events' %}">My Events</a><br>
-        {% endblock %}
+    <a href="{% url 'add_event' %}">Add Event</a><br>
+    <a href="{% url 'my_events' %}">My Events</a><br>
+{% endblock %}
