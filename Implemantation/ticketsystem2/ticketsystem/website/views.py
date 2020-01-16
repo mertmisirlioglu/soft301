@@ -8,10 +8,12 @@ from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, get_object_or_404
 from django.shortcuts import render
+from ticketsystem.config import pagination
 from django.contrib.admin.views.decorators import staff_member_required
-import time
+
 from django.contrib import messages
 from .forms import EditEventForm, AddStage
+from django.db.models import Q
 
 from website.models import Event, Ticket, UserProfile, Stage, Transaction
 from .forms import (UserReg,
@@ -110,10 +112,6 @@ def event_preview(request, pk):
     event = get_object_or_404(Event, pk=pk)
     context = {"event": event}
     return render(request, 'event/event_review.html', context)
-
-
-def search_event(request):
-    return render(request, 'event/searchPage.html')
 
 
 def event_check(request, event_id):
@@ -454,3 +452,17 @@ def search_event(request):
     else:
 
         return redirect('home')
+
+
+def overall_search(request):
+    template = "event/searchPage.html"
+    query = request.GET.get('q')
+    results = Event.objects.filter(Q(name__icontains=query) | Q(stage__place__icontains=query))
+    print(results)
+    pages = pagination(request, results, num=1)
+    context = {
+        'items': pages[0],
+        'page_range': pages[1],
+        'query': query,
+    }
+    return render(request, template, context)

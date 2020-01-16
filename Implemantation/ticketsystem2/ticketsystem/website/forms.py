@@ -47,8 +47,6 @@ class BuyTicketForm(forms.Form):
 
 
 class EditProfileForm(forms.ModelForm):
-
-
     class Meta:
         model = UserProfile
         fields = (
@@ -104,3 +102,5 @@ class EditEventForm(forms.ModelForm):
             'price',
             'rules'
         )
+
+

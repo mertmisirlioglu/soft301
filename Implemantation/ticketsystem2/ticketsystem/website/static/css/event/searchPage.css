@@ -156,18 +156,6 @@ body{
   width: auto;
 }
 
-#leftPageArrow{
-  background-image: url(../../media/left-arrow-button.png);
-    background-size: 15px 15px;
-    width: auto;
-    height: 19px;  
-}
-#rightPageArrow{
-  background-image: url(../../media/right-arrow-button.png);
-    background-size: 15px 15px; 
-    width: auto;
-    height: 19px; 
-}
 
 #searchTypesRow{
   position: relative;

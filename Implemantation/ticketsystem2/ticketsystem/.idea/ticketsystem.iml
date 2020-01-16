@@ -15,10 +15,18 @@
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$" />
 <<<<<<< HEAD
+<<<<<<< HEAD
     <orderEntry type="jdk" jdkName="Python 3.6 (py36)" jdkType="Python SDK" />
 =======
     <orderEntry type="jdk" jdkName="Python 3.6" jdkType="Python SDK" />
 >>>>>>> session-update
+=======
+
+    <orderEntry type="jdk" jdkName="Python 3.6 (py36)" jdkType="Python SDK" />
+
+    <orderEntry type="jdk" jdkName="Python 3.6" jdkType="Python SDK" />
+
+>>>>>>> master
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
   <component name="TemplatesService">
