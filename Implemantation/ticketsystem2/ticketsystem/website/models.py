@@ -98,3 +98,9 @@ class Ticket(models.Model):
 
     def get_ticket_review_url(self):
         return f"/account/tickets/{self.pk}/preview"
+
+
+
+
+
+

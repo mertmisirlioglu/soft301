@@ -15,7 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from django.contrib.auth.views import PasswordResetDoneView, PasswordResetView, PasswordResetConfirmView, PasswordResetCompleteView
+from django.contrib.auth.views import PasswordResetDoneView, PasswordResetView, PasswordResetConfirmView, \
+    PasswordResetCompleteView
 from website import views
 
 urlpatterns = [
@@ -38,8 +39,8 @@ urlpatterns = [
          name='password_reset_confirm'),
     path('account/add-event', views.add_event, name='add_event'),
     path('account/reset-password/complete/', PasswordResetCompleteView.as_view(), name='password_reset_complete'),
-    path('admin/operator/add', views.add_operator , name='operator_add'),
-    path('admin/operator/all', views.operators_list_view , name='operator_all'),
+    path('admin/operator/add', views.add_operator, name='operator_add'),
+    path('admin/operator/all', views.operators_list_view, name='operator_all'),
     path('admin/user/all', views.users_list_view, name='users_all'),
     path('balance/add/', views.add_balance, name='add_balance'),
     path('admin/event/waiting/', views.waiting_events, name='waiting_events'),
@@ -63,6 +64,5 @@ urlpatterns = [
     path('my-events/', views.my_events, name='my_events'),
     path('my-transactions/', views.collect_tickets, name='my_transactions'),
     path('transaction/<int:transaction_id>', views.my_tickets_view, name='transaction'),
-    path('searched/event', views.search_event, name='search_event'),
-
+    path('event/search-all/', views.overall_search, name='overall_search'),
 ]
