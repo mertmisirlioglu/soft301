@@ -8,9 +8,10 @@
     {% endblock %}
 {% block content %}
 
-
-
-{% for sport in sport_list %}
+                   {% for message in messages %}
+                            {{ message }}
+                        {% endfor %}
+{% for event in events %}
 
       <div id="firstblock">
 
@@ -19,24 +20,24 @@
       </div>
 
           <div class="inf">
-          <h6 id="head">Event Name:  {{ sport.name }}</h6>
+          <h6 id="head">Event Name:  {{ event.name }}</h6>
                </div>
           <hr>
            <div class="inf" >
-          <p> Event Date:  {{ sport.date }}</p>
+          <p> Event Date:  {{ event.date }}</p>
                     </div>
 
           <div class="inf" >
-          <p> Event Stage:  {{ sport.stage }}</p>
+          <p> Event Stage:  {{ event.stage }}</p>
             </div>
             <div class="inf" >
 
           </div>
 
         </div>
-
-    <br>
+ <br>
      <br>
+
         {% endfor %}
 
 

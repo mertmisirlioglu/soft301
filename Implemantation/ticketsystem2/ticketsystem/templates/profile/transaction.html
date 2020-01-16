@@ -1,0 +1,21 @@
+{% extends 'profile/profile.html' %}
+
+
+{% block info %}
+    <table style="width:80%">
+
+    <tr>
+        <th>Tranaction Id </th>
+        <th>Tranaction Date </th>
+        </tr>
+    {% for transaction in transaction_list %}
+
+
+        <td>  <a href="{{ transaction.get_transaction_url }}">{{ transaction.id }}</a></td>
+        <td>{{ transaction.date }}</td>
+
+
+    {% endfor %}
+     </table>
+{% endblock %}
+
