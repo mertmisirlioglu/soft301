@@ -98,14 +98,10 @@
 
             <div class="col-md">
                 <div class="search-container">
-                 <form method="post" action="{% url 'search_event' %}">
-                      {% csrf_token %}
-                    <input type="text" placeholder="Search.." name="search">
-                     <button  class="btn btn-success" type="submit">search</button>
-                     </form>
-        {% block searchButton %}
-
-        {% endblock %}
+                    <form method="GET" action="{% url 'overall_search' %}">
+                    <input required name="q" value="{{ request.GET.q }}" placeholder="search..">
+                    <button class="btn btn-success" type="submit">Search</button>
+                    </form>
                 </div>
             </div>
             <div class="col-md">
@@ -151,19 +147,15 @@
             <div class="col-md">
                 <div class="categories">
                     <select>
-                        <option value="Istanbul">Istanbul</option>
-                        <option value="Ankara">Ankara</option>
-                        <option value="Izmir">İzmir</option>
+                        <option value="İstanbul">İstanbul</option>
                     </select>
                 </div>
             </div>
-
             <div class="col-md">
                 <div class="filterButton">
-                    <button type="submit">Go</button>
+                    <button class="btn btn-success" type="submit">Go</button>
                 </div>
             </div>
-        </div>
   {% if request.user.is_superuser %}
          <div class="row" id='adminRow'>
           <div class="col-md">
@@ -208,13 +200,7 @@
                     </a>
                 </div>
             </div>
-      <div class="col-md">
-                <div class="topicsName">
-                    <a href="{% url 'stage_all' %}">
-                        <h3>Stages</h3>
-                    </a>
-                </div>
-            </div>
+      </div>
 {% endif %}
     </header>
     <div class="container-xl">

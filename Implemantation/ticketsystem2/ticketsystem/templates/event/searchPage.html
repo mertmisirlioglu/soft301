@@ -10,19 +10,7 @@
 
 {% block content %}
                  <div class="mainpageDiv">
-                        <div id="searchResultRow">
-                            <div id="searchInfo">Search information.
-                            </div>
-                            <div class="pageButtons">
-                            <button  id="leftPageArrow"></button>
-                            <button id= "pageButtons" type="pageNo">1</button>
-                            <button id= "pageButtons" type="pageNo">2</button>
-                            <button id= "pageButtons" type="pageNo">3</button>
-                            <button id= "pageButtons" type="pageNo">4</button>
-                            <button id= "pageButtons" type="pageNo">5</button>
-                            <button id= "pageButtons" type="pageNo">6</button>
-                            <button  id="rightPageArrow"></button>  
-                            </div>
+                 {% include "event/pagination.html" %}
                          </div>
                         <div id="searchTypesRow">
                             <header id="eventText">Event</header>
