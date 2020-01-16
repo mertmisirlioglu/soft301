@@ -3,8 +3,107 @@
 {% block head %}
     <title>Home Page</title>
     {% endblock %}
+
+
 {% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col col-sm-9">
+      1 of 2
+    </div>
+    <div class="col">
+      2 of 2
+    </div>
+  </div>
+     <div class="row">
+    <div class="col col-sm-9">
+      1 of 2
+    </div>
+
+  </div>
+  <div class="row">
+    <div class="col">
+      1 of 3
+    </div>
+    <div class="col">
+      2 of 3
+    </div>
+    <div class="col">
+      3 of 3
+    </div>
+      <div class="col">
+      4 of 4
+    </div>
+      <div class="col">
+      5 of 5
+    </div>
+  </div>
+      <div class="row">
+    <div class="col">
+      1 of 3
+    </div>
+    <div class="col">
+      2 of 3
+    </div>
+    <div class="col">
+      3 of 3
+    </div>
+      <div class="col">
+      4 of 4
+    </div>
+      <div class="col">
+      5 of 5
+    </div>
+  </div>
+     <div class="row">
+    <div class="col col-sm-9">
+      1 of 2
+    </div>
+    <div class="col">
+      2 of 2
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      1 of 3
+    </div>
+    <div class="col">
+      2 of 3
+    </div>
+    <div class="col">
+      3 of 3
+    </div>
+      <div class="col">
+      4 of 4
+    </div>
+      <div class="col">
+      5 of 5
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      1 of 3
+    </div>
+    <div class="col">
+      2 of 3
+    </div>
+    <div class="col">
+      3 of 3
+    </div>
+      <div class="col">
+      4 of 4
+    </div>
+      <div class="col">
+      5 of 5
+    </div>
+  </div>
+
+  </div>
+</div>
+
         {% for event in event_list %}
 		  <p>Event {{ event.name }} <a href={{ event.get_preview_ticket_url }}>click to buy</a></p>
 	{% endfor %}
 {% endblock %}
+
+
