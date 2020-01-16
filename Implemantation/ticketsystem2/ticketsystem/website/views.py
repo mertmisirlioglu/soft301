@@ -12,6 +12,8 @@ from ticketsystem.config import pagination
 from django.contrib.admin.views.decorators import staff_member_required
 
 from django.contrib import messages
+
+
 from .forms import EditEventForm, AddStage
 from django.db.models import Q
 
@@ -26,7 +28,9 @@ from .forms import (UserReg,
 
 def home(request):
     event_list = Event.objects.all()
-    context = {"event_list": event_list}
+    stage_list = Stage.objects.all()
+    context = {"event_list": event_list,
+               'stage_list':stage_list}
     return render(request, 'home.html', context)
 
 
@@ -440,7 +444,7 @@ def collect_tickets(request):
 def search_event(request):
     if request.method == 'POST':
         searched_event=request.POST['search']
-        print(searched_event)
+
         events=Event.objects.all().filter(name=searched_event)
         context={}
         if len(events)== 0:
@@ -466,3 +470,29 @@ def overall_search(request):
         'query': query
     }
     return render(request, template, context)
+
+
+def search_with_opinions(request):
+    if request.method == 'POST':
+        category = request.POST['categorys']
+        date = request.POST['dates']
+        stage_name = request.POST['stage_names']
+        stage = Stage.objects.all().get(place=stage_name)
+        print(date)
+        if date == 'Today' or date == 'Tomorrow':
+            if date == 'Today':
+                time = datetime.datetime.now()
+            if date == 'Tomorrow':
+                time = datetime.datetime.now() + datetime.timedelta(days=1)
+            events = Event.objects.all().filter(type=category,stage=stage,date=time)
+
+        else:
+            time1 = datetime.datetime.now()
+            time2 = datetime.datetime.now() + datetime.timedelta(days=7)
+            events = Event.objects.all().filter(type=category, stage=stage, date__gte=time1,date__lte=time2)
+        context = {'event_list':events}
+        return render(request,"search-results.html",context)
+
+
+def return_stage_list(request):
+    return {'stage_list': Stage.objects.all()}

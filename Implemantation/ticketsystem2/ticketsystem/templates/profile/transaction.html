@@ -10,11 +10,11 @@
         </tr>
     {% for transaction in transaction_list %}
 
-
+<tr>
         <td>  <a href="{{ transaction.get_transaction_url }}">{{ transaction.id }}</a></td>
         <td>{{ transaction.date }}</td>
 
-
+        </tr>
     {% endfor %}
      </table>
 {% endblock %}
