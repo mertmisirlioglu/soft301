@@ -1,10 +1,11 @@
 import datetime
 
-from django.contrib import messages
+from django.contrib import auth
 from django.contrib.auth import login, authenticate, logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from django.contrib.auth.models import User
+from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, get_object_or_404
 from django.shortcuts import render
 from django.contrib.admin.views.decorators import staff_member_required
@@ -32,13 +33,16 @@ def go(request):
 
 
 def login_view(request):
+    if request.user.is_authenticated:
+        return redirect('home')
     if request.method == 'POST':
         form = AuthenticationForm(request.POST)
         username = request.POST['username']
         password = request.POST['password']
         user = authenticate(username=username, password=password)
-        if user is not None:
-            login(request, user)
+
+        if user is not None and user.is_active:
+            auth.login(request, user)
             return redirect('home')
         else:
             messages.error(request, 'Username or Password is not correct!')

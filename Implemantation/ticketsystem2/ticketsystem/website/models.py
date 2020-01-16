@@ -16,6 +16,7 @@ class Stage(models.Model):
     def get_delete_stage_url(self):
         return f"/admin/stage/{self.pk}/delete"
 
+
 class UserProfile(models.Model):
     id = models.AutoField(primary_key=True)
     GENDER = (
@@ -32,7 +33,6 @@ class UserProfile(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     balance = models.IntegerField(default=0)
-
 
     def __str__(self):
         return self.user.username
@@ -53,7 +53,7 @@ class Event(models.Model):
     type = models.CharField(max_length=1, choices=TYPE)
     isAvailable = models.BooleanField(default=False)
     isAccepted = models.BooleanField(default=False)
-    isRejected  = models.BooleanField(default=False)
+    isRejected = models.BooleanField(default=False)
     rules = models.CharField(max_length=500)
     img = models.URLField(null=True, blank=True)
 
@@ -90,12 +90,7 @@ class Ticket(models.Model):
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
     seat_number = models.CharField(max_length=10)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
-    transaction = models.ForeignKey(Transaction,on_delete=models.CASCADE)
+    transaction = models.ForeignKey(Transaction, on_delete=models.CASCADE)
 
     def get_ticket_review_url(self):
         return f"/account/tickets/{self.pk}/preview"
-
-
-
-
-
