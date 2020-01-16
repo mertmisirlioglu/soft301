@@ -73,7 +73,7 @@
             </div>
             <div class="col-md">
                 <div class="topicsName">
-                    <a href="">
+                    <a href="{% url 'concert_event'  %} ">
                         <h3>Music</h3>
                     </a>
                 </div>
@@ -87,7 +87,7 @@
             </div>
             <div class="col-md">
                 <div class="topicsName">
-                    <a href="">
+                    <a href="{% url 'sport_event'  %} ">
                         <h3>Sports</h3>
                     </a>
                 </div>
@@ -98,9 +98,13 @@
 
             <div class="col-md">
                 <div class="search-container">
+                 <form method="post" action="{% url 'search_event' %}">
+                      {% csrf_token %}
                     <input type="text" placeholder="Search.." name="search">
+                     <button  class="btn btn-success" type="submit">search</button>
+                     </form>
         {% block searchButton %}
-    <a class="btn btn-success" type="submit" href={% url 'search_event' %} role="button">Search</a>
+
         {% endblock %}
                 </div>
             </div>
@@ -201,6 +205,13 @@
                 <div class="topicsName">
                     <a href="{% url 'operator_all' %}">
                         <h3>Operators</h3>
+                    </a>
+                </div>
+            </div>
+      <div class="col-md">
+                <div class="topicsName">
+                    <a href="{% url 'stage_all' %}">
+                        <h3>Stages</h3>
                     </a>
                 </div>
             </div>

@@ -47,7 +47,7 @@
         {% endfor %}</i><br><br>
         <a href="{% url 'my_profile' %}">My Profile</a><br>
         <a href="{% url 'edit_my_profile' %}">Edit Profile</a><br>
-        <a href="{% url 'my_tickets' %}">My Tickets</a><br>
+        <a href="{% url 'my_transactions' %}">My Tickets</a><br>
         <br><br>
         {% block isOperator %}
         {% for info in user_infos %}

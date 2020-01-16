@@ -1,5 +1,5 @@
 from django import forms
-from .models import UserProfile, Event
+from .models import UserProfile, Event, Stage
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 
@@ -74,6 +74,15 @@ class AddEvent(forms.ModelForm):
             'quota',
             'price',
             'rules'
+        )
+
+class AddStage(forms.ModelForm):
+    class Meta:
+        model = Stage
+        fields =(
+            'place',
+            'address',
+            'quota'
         )
 
 
