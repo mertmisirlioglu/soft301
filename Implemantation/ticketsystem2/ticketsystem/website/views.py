@@ -12,7 +12,7 @@ import time
 from django.contrib import messages
 from .forms import EditEventForm, AddStage
 
-from website.models import Event, Ticket, UserProfile, Stage
+from website.models import Event, Ticket, UserProfile, Stage, Transaction
 from .forms import (UserReg,
                     ExtendedUserCreationForm,
                     BuyTicketForm,
@@ -145,8 +145,12 @@ def ticket_buy_view(request, pk):
                 user_infos.save()
                 event.quota -= quantity
                 event.save()
+                transaction = Transaction()
+                transaction.user=user
+                transaction.save()
                 for i in range(0, int(quantity)):
                     ticket = Ticket(event=event, user=user)
+                    ticket.transaction = transaction
                     ticket.save()
 
                 messages.success(request, (
@@ -160,10 +164,11 @@ def ticket_buy_view(request, pk):
 
 
 @login_required
-def my_tickets_view(request):
+def my_tickets_view(request,transaction_id):
     user = request.user
     user_infos = UserProfile.objects.all().filter(user=user)
-    ticket_list = Ticket.objects.all().filter(user=user)
+    transaction=Transaction.objects.get(pk=transaction_id)
+    ticket_list = Ticket.objects.all().filter(transaction=transaction)
     context = {"ticket_list": ticket_list,
                "user_infos": user_infos}
     return render(request, 'profile/my_tickets.html', context)
@@ -423,3 +428,25 @@ def delete_stage_view(request, stage_id):
     else:
         messages.error(request, "You cannot delete this stage. There will be an event on this stage.")
     return redirect('stage_all')
+
+def collect_tickets(request):
+    user_profile=request.user
+    transaction=Transaction.objects.all().filter(user=request.user)
+    context = {'transaction_list': transaction}
+    return render(request,'profile/transaction.html',context)
+
+def search_event(request):
+    if request.method == 'POST':
+        searched_event=request.POST['search']
+        print(searched_event)
+        events=Event.objects.all().filter(name=searched_event)
+        context={}
+        if len(events)== 0:
+            messages.error(request,"Event not found")
+        else:
+            context = {'events':events}
+        return render(request,'ticket/searched_event.html',context)
+
+    else:
+
+        return redirect('home')

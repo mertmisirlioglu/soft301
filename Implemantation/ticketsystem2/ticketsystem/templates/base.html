@@ -98,9 +98,13 @@
 
             <div class="col-md">
                 <div class="search-container">
+                 <form method="post" action="{% url 'search_event' %}">
+                      {% csrf_token %}
                     <input type="text" placeholder="Search.." name="search">
+                     <button  class="btn btn-success" type="submit">search</button>
+                     </form>
         {% block searchButton %}
-    <a class="btn btn-success" type="submit" href={% url 'search_event' %} role="button">Search</a>
+
         {% endblock %}
                 </div>
             </div>

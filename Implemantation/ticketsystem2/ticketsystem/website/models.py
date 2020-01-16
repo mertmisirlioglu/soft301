@@ -84,6 +84,10 @@ class Event(models.Model):
 
 class Transaction(models.Model):
     date = models.DateField(auto_now_add=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+
+    def get_transaction_url(self):
+        return f"/transaction/{self.pk}"
 
 
 class Ticket(models.Model):
