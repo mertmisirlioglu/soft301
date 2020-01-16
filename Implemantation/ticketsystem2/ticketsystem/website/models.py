@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
+
+
 class Stage(models.Model):
     place = models.CharField(max_length=100)
     address = models.CharField(max_length=200)
@@ -9,6 +11,7 @@ class Stage(models.Model):
 
     def __str__(self):
         return '' + self.place
+
 
     def get_edit_stage_url(self):
         return f"/admin/stage/{self.pk}/edit"
@@ -98,7 +101,6 @@ class Ticket(models.Model):
 
     def get_ticket_review_url(self):
         return f"/account/tickets/{self.pk}/preview"
-
 
 
 

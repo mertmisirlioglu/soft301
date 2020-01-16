@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block head %}
+    <title>Search Result View</title>
+{% endblock %}
+{% block content %}
+
+
+{% for event in event_list %}
+
+
+ <tr>
+      <td>{{ event.id}}</td>
+      <td>{{ event.name}}</td>
+      <td>{{ event.stage }}</td>
+      <td>{{ event.date }}</td>
+      <td>{{ event.price }}</td>
+     <td>{{ event.quota }}</td>
+    </tr>
+
+
+
+{% endfor %}
+
+
+{% endblock %}

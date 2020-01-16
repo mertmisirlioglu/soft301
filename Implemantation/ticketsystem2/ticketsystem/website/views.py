@@ -12,6 +12,8 @@ from ticketsystem.config import pagination
 from django.contrib.admin.views.decorators import staff_member_required
 
 from django.contrib import messages
+
+
 from .forms import EditEventForm, AddStage
 from django.db.models import Q
 
@@ -26,7 +28,9 @@ from .forms import (UserReg,
 
 def home(request):
     event_list = Event.objects.all()
-    context = {"event_list": event_list}
+    stage_list = Stage.objects.all()
+    context = {"event_list": event_list,
+               'stage_list':stage_list}
     return render(request, 'home.html', context)
 
 
@@ -459,10 +463,36 @@ def overall_search(request):
     query = request.GET.get('q')
     results = Event.objects.filter(Q(name__icontains=query) | Q(stage__place__icontains=query))
     print(results)
-    pages = pagination(request, results, num=1)
+    pages = pagination(request, results, num=3)
     context = {
         'items': pages[0],
         'page_range': pages[1],
-        'query': query,
+        'query': query
     }
     return render(request, template, context)
+
+
+def search_with_opinions(request):
+    if request.method == 'POST':
+        category = request.POST['categorys']
+        date = request.POST['dates']
+        stage_name = request.POST['stage_names']
+        stage = Stage.objects.all().get(place=stage_name)
+        print(date)
+        if date == 'Today' or date == 'Tomorrow':
+            if date == 'Today':
+                time = datetime.datetime.now()
+            if date == 'Tomorrow':
+                time = datetime.datetime.now() + datetime.timedelta(days=1)
+            events = Event.objects.all().filter(type=category,stage=stage,date=time)
+
+        else:
+            time1 = datetime.datetime.now()
+            time2 = datetime.datetime.now() + datetime.timedelta(days=7)
+            events = Event.objects.all().filter(type=category, stage=stage, date__gte=time1,date__lte=time2)
+        context = {'event_list':events}
+        return render(request,"search-results.html",context)
+
+
+def return_stage_list(request):
+    return {'stage_list': Stage.objects.all()}

@@ -124,19 +124,21 @@
 
 
         <div class="row" id='searchFilterRow'>
+            <form action="{% url 'opinion_search' %}" method="post">
+            {% csrf_token %}
             <div class="col-md">
                 <div class="categories">
-                    <select>
-                        <option value="Sport">Sport</option>
-                        <option value="Music">Music</option>
-                        <option value="Stage">Stage</option>
+                    <select name="categorys">
+                        <option value="C">Concert</option>
+                        <option value="T">Theatre</option>
+                        <option value="S">Sport</option>
                     </select>
                 </div>
             </div>
 
             <div class="col-md">
                 <div class="categories">
-                    <select>
+                    <select name="dates">
                         <option value="Today">Today</option>
                         <option value="Tomorrow">Tomorrow</option>
                         <option value="In this week">This week</option>
@@ -146,16 +148,20 @@
 
             <div class="col-md">
                 <div class="categories">
-                    <select>
-                        <option value="İstanbul">İstanbul</option>
+                    <select name="stage_names">
+                       {% for stage in stage_list %}
+                        <option value="{{ stage.place }}">{{ stage.place }}</option>
+                        {% endfor %}
                     </select>
                 </div>
             </div>
             <div class="col-md">
                 <div class="filterButton">
-                    <button class="btn btn-success" type="submit">Go</button>
+                     <button type="submit">Go</button>
                 </div>
             </div>
+            </form>
+        </div>
   {% if request.user.is_superuser %}
          <div class="row" id='adminRow'>
           <div class="col-md">
