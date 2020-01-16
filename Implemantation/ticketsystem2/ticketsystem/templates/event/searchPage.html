@@ -3,7 +3,7 @@
     {% block head %}
        <title>Search Page</title>
         {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static "css/searchPage/searchPage.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "css/event/searchPage.css" %}">
     <title>{% block title %}{%  endblock %}</title>
   {% endblock %}
 
@@ -12,12 +12,13 @@
                  <div class="mainpageDiv">
                  {% include "event/pagination.html" %}
                          </div>
-                        <div id="searchTypesRow">
-                            <header id="eventText">Event</header>
-                            <header id="stageText">Stage</header>
-                            <header id="dateText">Date</header>
-                        </div>
+
                         <div class="searchContentRow">
+                        {% for obj in items %}
+                    <h1><a href="{% url 'event_preview' pk=obj.pk %}">{{ obj.name }}</a></h1>
+                    <p>{{ obj.date }}</p>
+                    <p>{{ obj.stage }}</p>
+                 {% endfor %}
                         </div>
                         <div class="spaceDivs"></div>
                         <div class="searchContentRow">

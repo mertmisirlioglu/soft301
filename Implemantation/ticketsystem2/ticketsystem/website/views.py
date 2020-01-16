@@ -459,10 +459,10 @@ def overall_search(request):
     query = request.GET.get('q')
     results = Event.objects.filter(Q(name__icontains=query) | Q(stage__place__icontains=query))
     print(results)
-    pages = pagination(request, results, num=1)
+    pages = pagination(request, results, num=3)
     context = {
         'items': pages[0],
         'page_range': pages[1],
-        'query': query,
+        'query': query
     }
     return render(request, template, context)
