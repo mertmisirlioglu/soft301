@@ -25,15 +25,14 @@
 
 #head{
   position: relative;
-  border: 3px solid black;
   padding:6px;
   width: 40%;
-  top: 5%;
+  top: 3%;
 left:1%;
 }
 #firstblock{
   position: relative;
-background-color: orange;
+background-color:#e0d8cd;
 bottom: 6%;
 top:1%;
 height:72%;
@@ -43,11 +42,11 @@ left:1%;
 }
 
 .frow{
-	
+
 position:relative;
 top: 5%;
 margin-left:2%;
-background-color:pink;
+background-color:beige ;
 width:70%;
 height:50%;
 }
@@ -55,7 +54,7 @@ height:50%;
 	position:relative;
 top: 5%;
 margin-left:2%;
-background-color:pink;
+background-color:transparent;
 width:70%;
 height:40%;
 }
@@ -72,11 +71,11 @@ height:40%;
   height: 40%;
   margin-left: 30%;
   bottom: 43%;
-  border:2px solid black;
+
  left: 35%;
 }
 #time p{
-   
+
    float: left;
 }
 
@@ -88,35 +87,43 @@ height:40%;
 }
 #Stage{
   position: relative;
-bottom: 1%;
+  bottom: 1%;
   width:30%;
   height: 40%;
   margin-left: 30%;
   bottom: 85%;
-  border:2px solid black;
+
 
   }
+#tno{
+   position: relative;
+    left: 65%;
+    bottom:111%;
+}
 
 #eventdetails{
     position: relative;
   width:50%;
   height: 37%;
   margin-left: 30%;
-  bottom: 75%;
-  border:2px solid black;
+  bottom: 75%;:
+
  left: 0.3%;
-  
+
 }
 
 .photo{
 position:relative;
-border:2px solid black;
 width: 25%;
 height: 50%;
 }
+.photo img{
+    position: relative;
+    width:102%;
+}
 #ticket{
   position:relative;
-  border: 3px solid black;
+
   padding:6px;
   width: 200px;
   top:270px;
@@ -129,18 +136,18 @@ position:relative;
 }
 
 #qrcode{
-	
+
 position: absolute;
 bottom: 30%;
   color:white;
 }
 
-#secondblock{ 
+#secondblock{
   top: 250px;
   position: relative;
-  
 
-background-color: pink;
+
+background-color: wheat;
 height:40%;
 width:74%;
 left:25px;
