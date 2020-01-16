@@ -444,7 +444,7 @@ def collect_tickets(request):
 def search_event(request):
     if request.method == 'POST':
         searched_event=request.POST['search']
-        print(searched_event)
+
         events=Event.objects.all().filter(name=searched_event)
         context={}
         if len(events)== 0:
