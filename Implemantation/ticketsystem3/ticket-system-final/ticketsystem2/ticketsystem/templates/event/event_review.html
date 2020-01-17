@@ -1,0 +1,93 @@
+{%  extends 'base.html' %}
+
+
+    {% block head %}
+        <title>Event Review</title>
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static "css/base.css" %}">
+    {% endblock %}
+
+{% block content %}
+<div class="container mt-4 mb-5">
+  <div class="row">
+    <div class="col-md-12">
+    <h2 class="sec-title">Event Preview</h2>
+</div>
+<div class="col-md-12">
+    <div class="row">
+      <div class="col-md-12">
+    <div class="card-group evet-card mb-2">
+        <div class="card mb-0">
+            <div class="card-body py-1">
+                <div class="row">
+                    <div class="col-5 center col-sm-3">
+                        <div class="display-4">
+                            <span class="badge">{{event.date.day}}</span>
+                        </div>
+                      <h3 class="card-title text-center">{{ event.date.month }}</h3>
+                    </div>
+                    <div class="col-7 col-sm-9">
+                        <div class="d-flex flex-column">
+                            <h3 class="card-title text-uppercase mt-0"><strong>{{ event.name }}</strong></h3>
+                            <div class="card-text">
+                                Event Rules: {{ event.rules }}
+                            </div>
+                            <ul class="list-inline mt-auto">
+                                <li class="list-inline-item"> <strong>Published By :{{ event.owner }}</strong></li>
+
+                            </ul>
+                        </div>
+                        <div class="buttonDiv">
+            <p><a class="btn btn-info px-0 py-0"  href={{ event.get_buy_ticket_url }}>Buy Ticket</a></p>
+            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card mb-0">
+            <div class="card-body py-1">
+                <div class="row h-100">
+                    <div class="col-5 col-sm-4">
+                        <ul class="list-group my-0 pl-1">
+                            <table width="200">
+                                <tr>
+
+                                      <td>Quota</td>
+                                      <td> Address</td>
+                                      <td>Place</td>
+                                      <td>Price</td>
+                                </tr>
+                                <tr>
+
+                          <th>   <li class="list-inline-item"><i class="icon ion-compose"></i>  {{ event.quota }}</li></th>
+                          <th>   <li class="list-inline-item"><i class="icon ion-android-pin"></i>{{event.stage.address}}</li></th>
+                           <th>  <li class="list-inline-item"><i class="icon ion-ios-paperplane"></i>  {{ event.stage.place }}</li></th>
+                         <th>    <li class="list-inline-item"><i class="icon ion-android-notifications"></i> {{ event.price }}</li></th>
+                                </tr>
+                            </table>
+                        </ul>
+                    </div>
+
+
+                    <div class="col-7 col-sm-8">
+
+                            <img style="position: relative; width:66%; height:102.6%; left:40%; top: -2px" src="{{ event.img }}" alt="">
+                    </div>
+
+                    </div>
+
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+  </div>
+</div>
+  </div>
+</div>
+
+{% endblock %}
+
+

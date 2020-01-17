@@ -1,0 +1,28 @@
+{%  extends 'base.html' %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+    {% block head %}
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static "css/base.css" %}">
+    {% endblock %}
+</head>
+<body>
+{% block content %}
+
+  <div id="mainDiv">
+    <div id="mainRow">
+		  <p>Event name =  {{ event.name }}</p>
+             <p>Event price =  {{ event.price }}</p>
+             <p>Event stage =  {{ event.stage }}</p>
+             <p>Event date =  {{ event.date }}</p>
+             <p><a href={{ event.get_buy_ticket_url }}>Buy Ticket</a></p>
+    </div>
+  </div>
+{% endblock %}
+</body>
+
+</html>

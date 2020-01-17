@@ -1,0 +1,34 @@
+{%  extends 'base.html' %}
+
+
+    {% block head %}
+        <title>Event Review</title>
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static "css/ticket/event.css" %}">
+    {% endblock %}
+{% block content %}
+    <div id="mert">
+  <div class="header">Events</div>
+<table >
+      <tr>
+         <th >Event image</th>
+         <th >Event Name</th>
+         <th >Event Date</th>
+         <th >Event Stage</th>
+
+      </tr>
+
+{% for sport in sport_list %}
+
+      <tr>
+         <th>  <img src="{{ sport.img }}" alt=""></th>
+         <th><a style="color: brown" href= " {% url 'event_preview' pk=sport.pk %}"><h6 id="head"> {{ sport.name }}</h6></a></th>
+         <th>  {{ sport.date }}</th>
+         <th> {{ sport.stage }}</th>
+
+      </tr>
+        {% endfor %}
+</table>
+</div>
+
+{% endblock %}

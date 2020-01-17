@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>Buy Ticket</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static "css/ticket/buyTicketPage.css" %}">
+
+{% endblock %}
+
+
+{% block content %}
+    <div class="mainPageDiv">
+        <div id="miniPageDiv">
+
+            <div id="ticketMainRow">
+                <div id="eventInfoDiv">
+                    <div id="eventPictureDiv">
+                        <img src="{{ event.img }}" alt="">
+                    </div>
+ <div id="artistNameRow">
+                <p>Event Name:  {{ event.name }}</p>
+
+            </div>
+                </div>
+
+                <div id="ticketSelectionDiv">
+                    <div id="ticketSelectionRow">
+                        <p>TICKET SELECTION</p>
+
+                    </div>
+                    <div class="adultRow">
+                        <p>ADULT</p>
+                        <div class="quantityDiv">
+                            <form method="post">
+                                {% csrf_token %}
+
+                                {{ form }}
+
+                                <button class="btn btn-success" type="submit">Buy</button>
+                            </form>
+
+                        </div>
+
+                    </div>
+                    <div id="blockRow">
+                        <p>BLOCK</p>
+                        <select id="selectType">
+                            <option value="Type">STANDING</option>
+                        </select>
+                    </div>
+                    <div id="seatingPlanRow">
+
+                        <p>SEATING PLAN</p>
+
+                        <div class="seating">
+                            {% load static %}
+                            <img src="{%  static 'media/noseat.gif'%}" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div id="yourTicketDiv">
+                    <div id="yourTicketRow">
+                        <p>YOUR TICKETS</p>
+                    <p>Remaining Quota: {{  event.quota  }}</p>
+ {% if messages %}
+                            <ul class="messages">
+                                {% for message in messages %}
+                                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+{% endblock %}

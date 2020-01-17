@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <meta charset="UTF-8"> 
+     {% block head %}
+
+             {% endblock %}
+     {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
+</head>
+
+<body>
+    <header>
+  <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
+    <source src="{% static 'media/homevideo.mp4' %}" type="video/mp4">
+  </video>
+   <div class= "overlay" id='top-navbar'>
+            <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
+                <div class="container">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarCollapse">
+                        <ul class="navbar-nav">
+                            <li class="nav-item active" >
+                                <a class="nav-link" href="#">MainPage <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="">Music</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="">Stage</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Sports</a>
+                            </li>
+
+                            {% if user.is_authenticated %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'my_profile' %}">My Profile</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                            </li>
+                            {% else %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'login' %}">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'signup' %}">Register</a>
+                            </li>
+                            {% endif %}
+
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+  </div>
+
+
+
+        <div class="row" id='mainRow'>
+            <div class="col-sm-2">
+                <div id="webSiteName">
+                    <a href="{%  url 'home' %}">
+                        <h2>Online Ticket System</h2>
+                    </a>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="topicsName">
+                    <a href="{% url 'concert_event'  %} ">
+                        <h3>Music</h3>
+                    </a>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="topicsName">
+                    <a href="{% url 'theatre_event'  %} ">
+                        <h3>Stage</h3>
+                    </a>
+                </div>
+            </div>
+            <div class="col-sm-1">
+                <div class="topicsName">
+                    <a href="{% url 'sport_event'  %} ">
+                        <h3>Sports</h3>
+                    </a>
+                </div>
+            </div>
+
+
+
+
+            <div class="col-md-3">
+                <div class="search-container">
+                    <form method="GET" action="{% url 'overall_search' %}">
+                    <input required name="q" value="{{ request.GET.q }}" placeholder=" search...">
+                    <button class="btn btn-info py-0 px-0" type="submit">Search</button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-sm-2">
+            <div class="border">
+                <div class="avatarDiv">
+                    <img src={% static "media/user-avatar.png" %} alt="user-avatar">
+                </div>
+                <div class="accountTextDiv">
+                    {% if user.is_authenticated %}
+                    <p class="login">Welcome, {{ user.get_username }}.
+                    <a href="{% url 'my_profile' %}">My Profile</a>
+                        <a href="{% url 'logout' %}">Logout</a></p>
+                    {% else %}
+                    <p><a  href="{% url 'login' %}">Login</a></p>
+                    {% endif %}
+                </div>
+            </div>
+            </div>
+        </div>
+
+
+
+
+        <div class="row" id='searchFilterRow'>
+            <table>
+{{ form.as_table }}
+            <form action="{% url 'opinion_search' %}" method="post" >
+            {% csrf_token %}
+            <div class="col-sm-2">
+                <div class="categories">
+                    <select name="categories">
+                        <option value="C">Concert</option>
+                        <option value="T">Theatre</option>
+                        <option value="S">Sport</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-sm-2">
+                <div class="categories">
+                    <select name="dates">
+                        <option value="Today">Today</option>
+                        <option value="Tomorrow">Tomorrow</option>
+                        <option value="In this week">This week</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-sm-2">
+                <div class="categories">
+                    <select name="stage_names">
+                       {% for stage in stage_list %}
+                        <option value="{{ stage.place }}">{{ stage.place }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-1">
+                <div class="categories">
+                     <button class="btn btn-info py-0 " type="submit">Go</button>
+            </div>
+                </div>
+            </form>
+
+</table>
+        </div>
+  {% if request.user.is_superuser %}
+         <div class="row" id='adminRow'>
+          <div class="col">
+                <div class="topicsName">
+                    <a href="{% url 'active_events' %}">
+                        <h3>Active Events</h3>
+                    </a>
+                </div>
+            </div>
+      <div class="col">
+                <div class="topicsName">
+                    <a href="{% url 'rejected_events' %}">
+                        <h3>Rejected Events</h3>
+                    </a>
+                </div>
+            </div>
+            <div class="col">
+                <div class="topicsName">
+                    <a href="{% url 'disactive_events' %}">
+                        <h3>Disactive Events</h3>
+                    </a>
+                </div>
+            </div>
+            <div class="col">
+                <div class="topicsName">
+                    <a href="{% url 'waiting_events' %}">
+                        <h3>Waiting Events</h3>
+                    </a>
+                </div>
+            </div>
+            <div class="col">
+                <div class="topicsName">
+                    <a href="{% url 'users_all' %}">
+                        <h3>Users</h3>
+                    </a>
+                </div>
+            </div>
+            <div class="col">
+                <div class="topicsName">
+                    <a href="{% url 'operator_all' %}">
+                        <h3>Operators</h3>
+                    </a>
+                </div>
+            </div>
+      </div>
+{% endif %}
+    </header>
+    <div class="container-xl">
+
+
+            {% block content %}
+             {% endblock %}
+
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block head %}
+    <title>Users List View</title>
+{% endblock %}
+{% block content %}
+
+       <table style="width: 80%">
+    <thead>
+    <tr class="table-headers">
+    <th>ID</th>
+        <th>Username</th>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>Operator</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    {% for profile in users_list %}
+
+
+
+
+
+ <tr>
+      <td>{{ profile.user.id}}</td>
+      <td>{{ profile.user.username}}</td>
+      <td>{{ profile.user.first_name }}</td>
+      <td>{{ profile.user.last_name }}</td>
+      <td>{{ profile.isOperator }}</td>
+    </tr>
+
+
+
+{% endfor %}
+</table>
+{% endblock %}

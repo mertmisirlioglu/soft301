@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    {% load static %}
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{% static "css/profile/profil.css" %}">
+    <title>My Tickets</title>
+{% endblock %}
+
+
+
+{% block content %}
+
+<div id="mainDiv">
+
+    <h1 id="header">My Profile</h1>
+    <hr>
+
+   <!-- <div class="photo">
+        <img src="picture.jpg" alt="ProfilePhoto" id="photo">
+    </div>
+-->
+    <div class="infos">
+        {% block info %}
+            {% for info in user_infos %}
+                <p>Name: {{ info.user.first_name }} </p>
+                <p>Surname: {{ info.user.last_name }}</p>
+                <p>Gender: {{ info.gender }}</p>
+                <p>Birthday: {{ info.birthday }}</p>
+                <p>Phone Number: {{ info.phone_number }}</p>
+                <p>Email: {{  info.user.email }}</p>
+                <p>Balance: {{  info.balance }}</p>
+                <a href="{% url 'add_balance' %}"><button type="button" class="btn btn-secondary">Add Balance</button></a>
+
+
+            {% endfor %}
+        {% endblock %}
+    </div>
+    <div id="main_menu">
+        <i>{% for info in user_infos %}
+          {{ info.user.first_name }}
+          {{ info.user.last_name }}
+        {% endfor %}</i><br><br>
+        <a href="{% url 'my_profile' %}">My Profile</a><br>
+        <a href="{% url 'edit_my_profile' %}">Edit Profile</a><br>
+        <a href="{% url 'my_transactions' %}">My Tickets</a><br>
+        <br><br>
+        {% block isOperator %}
+        {% for info in user_infos %}
+            {% if info.isOperator %}
+                <a href="{% url 'add_event' %}">Add Event</a><br>
+                <a href="{% url 'my_events' %}">My Events</a><br>
+            {% endif %}
+        {% endfor %}
+            {% endblock %}
+
+    </div>
+</div>
+
+{% endblock %}
+
+

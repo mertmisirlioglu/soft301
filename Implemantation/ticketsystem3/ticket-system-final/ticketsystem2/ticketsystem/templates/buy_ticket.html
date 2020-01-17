@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+    {% block head %}
+    <title>Buy Ticket</title>
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static "css/base.css" %}">
+
+    {% endblock %}
+
+{% block content %}
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Buy</button>
+            </form>
+{% endblock %}
