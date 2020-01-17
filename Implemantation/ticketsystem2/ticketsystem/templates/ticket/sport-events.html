@@ -22,7 +22,7 @@
 
       <tr>
          <th>  <img src="{{ sport.img }}" alt=""></th>
-         <th><a style="color: brown" href= " {{ sport.get_buy_ticket_url }}"><h6 id="head"> {{ sport.name }}</h6></a></th>
+         <th><a style="color: brown" href= " {% url 'event_preview' pk=sport.pk %}"><h6 id="head"> {{ sport.name }}</h6></a></th>
          <th>  {{ sport.date }}</th>
          <th> {{ sport.stage }}</th>
 

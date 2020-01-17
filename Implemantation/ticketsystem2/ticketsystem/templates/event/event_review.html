@@ -30,13 +30,16 @@
                         <div class="d-flex flex-column">
                             <h3 class="card-title text-uppercase mt-0"><strong>{{ event.name }}</strong></h3>
                             <div class="card-text">
-                                {{ event.rules }}
+                                Event Rules: {{ event.rules }}
                             </div>
                             <ul class="list-inline mt-auto">
                                 <li class="list-inline-item"> <strong>Published By :{{ event.owner }}</strong></li>
-                                <li class="list-inline-item"><i class="icon ion-android-person"></i> {{ event.name }}</li>
+
                             </ul>
                         </div>
+                        <div class="buttonDiv">
+            <p><a class="btn btn-info px-0 py-0"  href={{ event.get_buy_ticket_url }}>Buy Ticket</a></p>
+            </div>
                     </div>
                 </div>
             </div>
@@ -46,24 +49,38 @@
                 <div class="row h-100">
                     <div class="col-5 col-sm-4">
                         <ul class="list-group my-0 pl-1">
-                            <li class="list-inline-item"><i class="icon ion-android-alarm-clock"></i>Type: {{ event.type }}</li>
-                            <li class="list-inline-item"><i class="icon ion-compose"></i> Quota: {{ event.quota }}</li>
-                            <li class="list-inline-item"><i class="icon ion-android-pin"></i> Address: {{event.stage.address}}</li>
-                            <li class="list-inline-item"><i class="icon ion-ios-paperplane"></i> Place: {{ event.stage.place }}</li>
-                            <li class="list-inline-item"><i class="icon ion-android-notifications"></i>Price: {{ event.price }}</li>
+                            <table width="200">
+                                <tr>
+
+                                      <td>Quota</td>
+                                      <td> Address</td>
+                                      <td>Place</td>
+                                      <td>Price</td>
+                                </tr>
+                                <tr>
+
+                          <th>   <li class="list-inline-item"><i class="icon ion-compose"></i>  {{ event.quota }}</li></th>
+                          <th>   <li class="list-inline-item"><i class="icon ion-android-pin"></i>{{event.stage.address}}</li></th>
+                           <th>  <li class="list-inline-item"><i class="icon ion-ios-paperplane"></i>  {{ event.stage.place }}</li></th>
+                         <th>    <li class="list-inline-item"><i class="icon ion-android-notifications"></i> {{ event.price }}</li></th>
+                                </tr>
+                            </table>
                         </ul>
                     </div>
+
+
                     <div class="col-7 col-sm-8">
-                        <p>
-                            {{ event.img }}
-                        </p>
+
+                            <img style="position: relative; width:66%; height:102.6%; left:40%; top: -2px" src="{{ event.img }}" alt="">
                     </div>
+
+                    </div>
+
+
 
                 </div>
             </div>
-            <div class="buttonDiv">
-            <p><a class="btn btn-info px-0 py-0"  href={{ event.get_buy_ticket_url }}>Buy Ticket</a></p>
-            </div>
+
         </div>
     </div>
   </div>

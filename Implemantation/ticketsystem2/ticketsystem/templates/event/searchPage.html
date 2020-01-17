@@ -30,7 +30,8 @@
     {% for obj in items %}
   <tr data-href="{% url 'event_preview' pk=obj.pk %}">
     <td data-th="Image">
-        {{ obj.img }}
+        <div class="img-obj">
+        <img src="{{ obj.img }}" alt=""></div>
     </td>
     <td data-th="Event Name">{{ obj.name }}</td>
     <td data-th="Date">{{obj.date}}</td>

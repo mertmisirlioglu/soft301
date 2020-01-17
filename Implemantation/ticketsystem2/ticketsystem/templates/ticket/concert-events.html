@@ -22,7 +22,7 @@
 
       <tr>
          <th>  <img src="{{ concert.img }}" alt=""></th>
-         <th><a style="color: brown" href= " {{ concert.get_buy_ticket_url }}"><h6 id="head"> {{ concert.name }}</h6></a></th>
+         <th><a style="color: brown" href= " {% url 'event_preview' pk=concert.pk %}"><h6 id="head"> {{ concert.name }}</h6></a></th>
          <th>  {{ concert.date }}</th>
          <th> {{ concert.stage }}</th>
 
