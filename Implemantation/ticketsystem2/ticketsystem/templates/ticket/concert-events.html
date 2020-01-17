@@ -7,38 +7,27 @@
         <link rel="stylesheet" type="text/css" href="{% static "css/ticket/event.css" %}">
     {% endblock %}
 {% block content %}
+  <div class="header">Events</div>
+<table >
+      <tr>
+         <th >Event image</th>
+         <th >Event Name</th>
+         <th >Event Date</th>
+         <th >Event Stage</th>
 
-
+      </tr>
 
 {% for concert in concert_list %}
 
-      <div id="firstblock">
+      <tr>
+         <th>  <img src="{{ concert.img }}" alt=""></th>
+         <th><a href= " {{ concert.get_buy_ticket_url }}"><h6 id="head"> {{ concert.name }}</h6></a></th>
+         <th>  {{ concert.date }}</th>
+         <th> {{ concert.stage }}</th>
 
-        <div class="photo">
-        <p>image</p>
-      </div>
-
-          <div class="inf">
-          <h6 id="head">Event Name:  {{ concert.name }}</h6>
-               </div>
-          <hr>
-           <div class="inf" >
-          <p> Event Date:  {{ concert.date }}</p>
-                    </div>
-
-          <div class="inf" >
-          <p> Event Stage:  {{ concert.stage }}</p>
-            </div>
-            <div class="inf" >
-
-          </div>
-
-        </div>
- <br>
-     <br>
-
+      </tr>
         {% endfor %}
-
+</table>
 
 
 {% endblock %}

@@ -11,14 +11,16 @@
 {% block content %}
     <div class="mainPageDiv">
         <div id="miniPageDiv">
-            <div id="artistNameRow">
-                <header>Artist Name</header>
 
-            </div>
             <div id="ticketMainRow">
                 <div id="eventInfoDiv">
-                    <div id="eventPictureDiv">event picture</div>
+                    <div id="eventPictureDiv">
+                        <img src="{{ event.img }}" alt="">
+                    </div>
+ <div id="artistNameRow">
+                <header>Event Name:  {{ event.name }}</header>
 
+            </div>
                 </div>
 
                 <div id="ticketSelectionDiv">
@@ -50,7 +52,10 @@
 
                         <header>SEATING PLAN</header>
 
-                        <div>picture</div>
+                        <div class="seating">
+                            {% load static %}
+                            <img src="{%  static 'media/noseat.gif'%}" alt="">
+                        </div>
                     </div>
                 </div>
                 <div id="yourTicketDiv">

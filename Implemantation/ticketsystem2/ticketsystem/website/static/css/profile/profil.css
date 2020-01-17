@@ -11,9 +11,7 @@ body{
     background-color: beige;
 }
 
-#header{
-	border:2px solid black;
-}
+
 .infos p{
 	padding-top: 15px;
 }
@@ -36,10 +34,14 @@ right: 150px;
 #main_menu{
 	position: absolute;
 	width:200px;
-    top:30%;
+    top:57%;
     font-size: 25px;
     padding-left:20px;
 }
+#main_menu a{
+    color:black;
+}
+
 form input{
 	position: absolute;
 	left:140px;

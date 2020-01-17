@@ -3,8 +3,8 @@
     <title>Users List View</title>
 {% endblock %}
 {% block content %}
-    <a href="{% url 'operator_add' %}"><button type="button" class="btn btn-danger">Add Operator</button></a>
-       <table>
+
+       <table style="width: 80%">
     <thead>
     <tr class="table-headers">
     <th>ID</th>
@@ -17,7 +17,7 @@
     </thead>
     <tbody>
     <tr>
-    {% for operator in operators_list %}
+    {% for operator in operators_list reversed%}
 
 
 
@@ -35,4 +35,6 @@
 
 {% endfor %}
 
+</table>
+    <a style="position: relative; left: 88%;" href="{% url 'operator_add' %}"><button type="button" class="btn btn-danger">Add Operator</button></a>
 {% endblock %}
