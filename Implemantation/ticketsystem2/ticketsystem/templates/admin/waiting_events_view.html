@@ -4,7 +4,7 @@
 {% endblock %}
 {% block content %}
 
-       <table>
+       <table style="width:100%">
     <thead>
     <tr class="table-headers">
     <th>ID</th>
@@ -19,10 +19,6 @@
     <tr>
     {% for event in waiting_event_list %}
 
-
-
-
-
  <tr>
       <td>{{ event.id}}</td>
       <td>{{ event.name}}</td>
@@ -31,11 +27,11 @@
       <td>{{ event.price }}</td>
      <td>{{ event.quota }}</td>
      <td><a href="{{ event.get_approve_url }}"> <button type="button" class="btn btn-danger">Approve</button></a></td>
- <td><a href="{{ event.get_reject_url }}"> <button type="button" class="btn btn-danger">Reject</button></a></td>
+ <td style="position: relative; right: 7%"><a href="{{ event.get_reject_url }}"> <button type="button" class="btn btn-danger">Reject</button></a></td>
     </tr>
 
 
 
 {% endfor %}
-
+</table>
 {% endblock %}

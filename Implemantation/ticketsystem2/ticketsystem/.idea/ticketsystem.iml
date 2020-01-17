@@ -14,11 +14,11 @@
   </component>
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$" />
-<<<<<<< Updated upstream
-    <orderEntry type="jdk" jdkName="Python 3.6 (ticketsystem)" jdkType="Python SDK" />
-=======
+
     <orderEntry type="jdk" jdkName="Python 3.6 (learn_django)" jdkType="Python SDK" />
->>>>>>> Stashed changes
+
+    
+
     <orderEntry type="jdk" jdkName="Python 3.6" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>

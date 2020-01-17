@@ -1,12 +1,25 @@
 body{
     margin: auto;
 }
+#eventPictureDiv img {
+    display: block;
+    height: 160%;
+    min-width: 80%;
+    width: 160%;
 
+}
+.seating img{
+    display: block;
+    height: 100%;
+    min-width: 80%;
+    width: 100%;
+
+}
 .mainPageDiv{
     position: relative;
       width: 85%;
       height: 100%;
-      background-color: red;
+
       margin: auto;
   }
   
@@ -15,20 +28,29 @@ body{
     text-align: center;
       width: 90%;
       height: 100%;
-      background-color: green;
+      top: 40px;
       margin: auto;
+    -webkit-box-shadow: 9px 6px 13px 3px rgba(84,67,67,0.64);
+-moz-box-shadow: 9px 6px 13px 3px rgba(84,67,67,0.64);
+box-shadow: 9px 6px 13px 3px rgba(84,67,67,0.64);
+
   }
   
   #artistNameRow{
     position: relative;
-    top: 1px;
-    width: 15%;
+
+    width: 60%;
     height: 30px;
-    background-color: pink;
-    border: 1px solid black;
+    bottom: 40%;
     margin-right: auto;
+    left: 17%;
+
   }
-  
+    #artistNameRow header{
+
+    font-size:25px;
+    font-weight: bold;
+  }
   #artistNameRow header{
     position: relative;
     top: 25%;
@@ -40,7 +62,7 @@ body{
     position: relative;
     width: 99.8%;
     height: 503.5px;
-    background-color: burlywood;
+    background-color: oldlace;
     border: 1px solid black;
   }
 
@@ -70,7 +92,7 @@ body{
     position: relative;
     height: 23.5px;
     width: 100%;
-    background-color: brown;
+    background-color: goldenrod;
     border: 1px solid black;
   }
 
@@ -85,7 +107,7 @@ body{
     height: 100px;
     margin-left: 0.5%;
     width: 20%;
-    border: 1px solid black;
+
   }
 
   #ticketSelectionRow header{
