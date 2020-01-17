@@ -5,34 +5,9 @@ body {
 
 #adminRow{
     background-color:aquamarine;
-    position: relative;
     padding-left: 15px;
 }
-.home-event-img{
-    position: relative;
-}
-.home-event-img img{
-    position: relative;
-    width: 100%;
-    height: 100%;
-}
 
-.card-fixed{
-    position: relative;
-    width: 100%;
-    height: 100%;
-}
-
-.row-fixed{
-    position: relative;
-    padding-top: 20px;
-}
-
-.row-first{
-    position: relative;
-    padding-top: 20px;
-    padding-left: 20%;
-}
 #helpText {
     text-align: right;
 }

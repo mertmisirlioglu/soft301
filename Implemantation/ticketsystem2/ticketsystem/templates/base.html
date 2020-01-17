@@ -67,28 +67,28 @@
 
 
         <div class="row" id='mainRow'>
-            <div class="col-sm">
+            <div class="col-sm-2">
                 <div id="webSiteName">
                     <a href="{%  url 'home' %}">
                         <h2>Online Ticket System</h2>
                     </a>
                 </div>
             </div>
-            <div class="col-sm">
+            <div class="col-sm-2">
                 <div class="topicsName">
                     <a href="{% url 'concert_event'  %} ">
                         <h3>Music</h3>
                     </a>
                 </div>
             </div>
-            <div class="col-sm">
+            <div class="col-sm-2">
                 <div class="topicsName">
                     <a href="{% url 'theatre_event'  %} ">
                         <h3>Stage</h3>
                     </a>
                 </div>
             </div>
-            <div class="col-sm">
+            <div class="col-sm-1">
                 <div class="topicsName">
                     <a href="{% url 'sport_event'  %} ">
                         <h3>Sports</h3>
@@ -99,7 +99,7 @@
 
 
 
-            <div class="col-md">
+            <div class="col-md-3">
                 <div class="search-container">
                     <form method="GET" action="{% url 'overall_search' %}">
                     <input required name="q" value="{{ request.GET.q }}" placeholder=" search...">
@@ -107,7 +107,7 @@
                     </form>
                 </div>
             </div>
-            <div class="col-lg">
+            <div class="col-sm-2">
             <div class="border">
                 <div class="avatarDiv">
                     <img src={% static "media/user-avatar.png" %} alt="user-avatar">
@@ -115,8 +115,8 @@
                 <div class="accountTextDiv">
                     {% if user.is_authenticated %}
                     <p class="login">Welcome, {{ user.get_username }}.
-                        <a href="{% url 'logout' %}">Logout</a>
-                    <a href="{% url 'my_profile' %}">MyProfile</a></p>
+                    <a href="{% url 'my_profile' %}">My Profile</a>
+                        <a href="{% url 'logout' %}">Logout</a></p>
                     {% else %}
                     <p><a  href="{% url 'login' %}">Login</a></p>
                     {% endif %}
@@ -133,9 +133,9 @@
 {{ form.as_table }}
             <form action="{% url 'opinion_search' %}" method="post" >
             {% csrf_token %}
-            <div class="col-sm">
+            <div class="col-sm-2">
                 <div class="categories">
-                    <select name="categorys">
+                    <select name="categories">
                         <option value="C">Concert</option>
                         <option value="T">Theatre</option>
                         <option value="S">Sport</option>
@@ -143,7 +143,7 @@
                 </div>
             </div>
 
-            <div class="col-sm">
+            <div class="col-sm-2">
                 <div class="categories">
                     <select name="dates">
                         <option value="Today">Today</option>
@@ -153,7 +153,7 @@
                 </div>
             </div>
 
-            <div class="col-sm">
+            <div class="col-sm-2">
                 <div class="categories">
                     <select name="stage_names">
                        {% for stage in stage_list %}
@@ -162,9 +162,11 @@
                     </select>
                 </div>
             </div>
-            <div class="col-sm">
-                     <button class="btn btn-info py-0 px-0" type="submit">Go</button>
+            <div class="col-sm-1">
+                <div class="categories">
+                     <button class="btn btn-info py-0 " type="submit">Go</button>
             </div>
+                </div>
             </form>
 
 </table>
