@@ -1,6 +1,6 @@
-body{
-    margin: auto;
-}
+/*body{*/
+/*    margin: auto;*/
+/*}*/
 #eventPictureDiv img {
     display: block;
     height: 160%;
@@ -46,12 +46,12 @@ box-shadow: 9px 6px 13px 3px rgba(84,67,67,0.64);
     left: 17%;
 
   }
-    #artistNameRow header{
+    #artistNameRow h2{
 
     font-size:25px;
     font-weight: bold;
   }
-  #artistNameRow header{
+  #artistNameRow h2{
     position: relative;
     top: 25%;
     transform: translateY(-50%);
@@ -110,7 +110,7 @@ box-shadow: 9px 6px 13px 3px rgba(84,67,67,0.64);
 
   }
 
-  #ticketSelectionRow header{
+  #ticketSelectionRow p{
     position: relative;
     top: 25%;
     transform: translateY(-20%);
@@ -163,6 +163,7 @@ box-shadow: 9px 6px 13px 3px rgba(84,67,67,0.64);
     height: 50px;
     width: 100%;
     border: 1px solid black;
+
   }
 
   .quantityDiv{
@@ -173,15 +174,16 @@ box-shadow: 9px 6px 13px 3px rgba(84,67,67,0.64);
 
   }
 
-  #blockRow header{
+
+  #blockRow p{
     position: relative;
-    top: 20%;
+    top: 15%;
     transform: translateY(20%);
     margin-left: -44%;
     width:100%;
   }
 
-  .adultRow header{
+  .adultRow p{
     position: relative;
     float: left;
     top: 25%;
@@ -195,6 +197,7 @@ box-shadow: 9px 6px 13px 3px rgba(84,67,67,0.64);
     transform: translateY(-40%);
     margin-left: 70%;
     width: 22%;
+    bottom: 20px;
   }
 
   .adultSelects{
@@ -210,7 +213,7 @@ box-shadow: 9px 6px 13px 3px rgba(84,67,67,0.64);
 
 
 
-  #seatingPlanRow header{
+  #seatingPlanRow p{
     position: relative;
     top: 25%;
     transform: translateY(-20%);
@@ -233,7 +236,7 @@ box-shadow: 9px 6px 13px 3px rgba(84,67,67,0.64);
     border: 1px solid black;
   }
 
-  #yourTicketRow header{
+  #yourTicketRow p{
     position: relative;
     top: 25%;
     transform: translateY(-20%);

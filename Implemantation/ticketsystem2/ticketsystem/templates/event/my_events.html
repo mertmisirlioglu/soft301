@@ -9,7 +9,7 @@
                                 {% endfor %}
                             </ul>
                         {% endif %}</span>
-    <table>
+   <div id="my-events"><table>
 <tr>
          <th> Event</th>
          <th>  </th>
@@ -23,7 +23,7 @@
                 <a class="btn btn-danger" href="{{ event.get_delete_event_url }}">Delete</a>{% ifequal event.isAccepted False %}
         {% endfor %}
     </ul>
-    </table>
+    </table></div>
 {% endblock %}
 {% block isOperator %}
     <a href="{% url 'add_event' %}">Add Event</a><br>

@@ -458,22 +458,6 @@ def collect_tickets(request):
     return render(request, 'profile/transaction.html', context)
 
 
-def search_event(request):
-    if request.method == 'POST':
-        searched_event = request.POST['search']
-
-        events = Event.objects.all().filter(name=searched_event)
-        context = {}
-        if len(events) == 0:
-            messages.error(request, "Event not found")
-        else:
-            context = {'events': events}
-        return render(request, 'ticket/searched_event.html', context)
-
-    else:
-
-        return redirect('home')
-
 
 def overall_search(request):
     template = "event/searchPage.html"
