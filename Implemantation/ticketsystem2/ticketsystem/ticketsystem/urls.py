@@ -52,7 +52,6 @@ urlpatterns = [
     path('admin/stage/all/', views.stage_list_view, name='stage_all'),
     path('admin/stage/add/',views.add_stage_view,name='stage_add'),
     path('admin/stage/edit/',views.edit_stage_view,name='stage_edit'),
-    path('event/search-event/', views.search_event, name='search_event'),
     path('admin/stage/<int:stage_id>/edit', views.edit_stage_view, name='stage_edit'),
     path('admin/stage/<int:stage_id>/delete', views.delete_stage_view, name='stage_delete'),
     path('event/theatre/', views.theatre_events, name='theatre_event'),

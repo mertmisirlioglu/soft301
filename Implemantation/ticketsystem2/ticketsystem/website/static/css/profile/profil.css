@@ -1,19 +1,6 @@
-body{
-    margin: auto;
 
-}
 
-#mainDiv{
-  float: none;
-  width: 100%;
-  height: 768px;
-  margin: auto;
-    background-color: beige;
-}
 
-#header{
-	border:2px solid black;
-}
 .infos p{
 	padding-top: 15px;
 }
@@ -33,14 +20,26 @@ right: 150px;
     margin: auto;
     margin-top: 7.5%;
 }
+#main_menu a{
+    color: black;
+}
+
+#main_menu a:hover{
+    opacity: 0.5;
+    color: #2b686e;
+}
+
+#my-events{
+    position: relative;
+}
 #main_menu{
 	position: absolute;
 	width:200px;
-    top:30%;
+    top:57%;
     font-size: 25px;
     padding-left:20px;
 }
-form input{
-	position: absolute;
-	left:140px;
-}
+/*form input{*/
+/*	position: absolute;*/
+/*	left:140px;*/
+/*}*/

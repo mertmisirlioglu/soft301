@@ -3,8 +3,8 @@
 
 {% block info %}
     {% for ticket in ticket_list %}
-        <p>Ticket No : <a href={{ ticket.get_ticket_review_url}}>{{ ticket.pk }}</a>
-            <br>
+        <p style="color: firebrick">Ticket No : <a style="color: firebrick; font-weight: bold; font-family: italic" href={{ ticket.get_ticket_review_url}}>{{ ticket.pk }}</a>
+        <hr>
             Event name : {{ ticket.event }}
             <br>
             Stage name : {{ ticket.event.stage}}

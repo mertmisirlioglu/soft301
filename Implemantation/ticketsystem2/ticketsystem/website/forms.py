@@ -14,6 +14,7 @@ class ExtendedUserCreationForm(UserCreationForm):
         fields = ('username', 'email', 'first_name',
                   'last_name', 'password1', 'password2')
 
+
     def save(self, commit=True):
         user = super().save(commit=False)
         user.email = self.cleaned_data['email']
@@ -74,10 +75,11 @@ class AddEvent(forms.ModelForm):
             'rules'
         )
 
+
 class AddStage(forms.ModelForm):
     class Meta:
         model = Stage
-        fields =(
+        fields = (
             'place',
             'address',
             'quota'
@@ -102,5 +104,3 @@ class EditEventForm(forms.ModelForm):
             'price',
             'rules'
         )
-
-

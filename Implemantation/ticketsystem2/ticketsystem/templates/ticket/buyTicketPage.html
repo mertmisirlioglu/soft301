@@ -11,28 +11,30 @@
 {% block content %}
     <div class="mainPageDiv">
         <div id="miniPageDiv">
-            <div id="artistNameRow">
-                <header>Artist Name</header>
 
-            </div>
             <div id="ticketMainRow">
                 <div id="eventInfoDiv">
-                    <div id="eventPictureDiv">event picture</div>
+                    <div id="eventPictureDiv">
+                        <img src="{{ event.img }}" alt="">
+                    </div>
+ <div id="artistNameRow">
+                <p>Event Name:  {{ event.name }}</p>
 
+            </div>
                 </div>
 
                 <div id="ticketSelectionDiv">
                     <div id="ticketSelectionRow">
-                        <header>TICKET SELECTION</header>
+                        <p>TICKET SELECTION</p>
 
                     </div>
                     <div class="adultRow">
-                        <header>ADULT</header>
+                        <p>ADULT</p>
                         <div class="quantityDiv">
                             <form method="post">
                                 {% csrf_token %}
 
-                                {{ form.as_p }}
+                                {{ form }}
 
                                 <button class="btn btn-success" type="submit">Buy</button>
                             </form>
@@ -41,21 +43,24 @@
 
                     </div>
                     <div id="blockRow">
-                        <header>BLOCK</header>
+                        <p>BLOCK</p>
                         <select id="selectType">
                             <option value="Type">STANDING</option>
                         </select>
                     </div>
                     <div id="seatingPlanRow">
 
-                        <header>SEATING PLAN</header>
+                        <p>SEATING PLAN</p>
 
-                        <div>picture</div>
+                        <div class="seating">
+                            {% load static %}
+                            <img src="{%  static 'media/noseat.gif'%}" alt="">
+                        </div>
                     </div>
                 </div>
                 <div id="yourTicketDiv">
                     <div id="yourTicketRow">
-                        <header>YOUR TICKETS</header>
+                        <p>YOUR TICKETS</p>
                     <p>Remaining Quota: {{  event.quota  }}</p>
  {% if messages %}
                             <ul class="messages">

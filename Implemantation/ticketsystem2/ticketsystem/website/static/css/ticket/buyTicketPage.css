@@ -1,12 +1,25 @@
-body{
-    margin: auto;
-}
+/*body{*/
+/*    margin: auto;*/
+/*}*/
+#eventPictureDiv img {
+    display: block;
+    height: 160%;
+    min-width: 80%;
+    width: 160%;
 
+}
+.seating img{
+    display: block;
+    height: 100%;
+    min-width: 80%;
+    width: 100%;
+
+}
 .mainPageDiv{
     position: relative;
       width: 85%;
       height: 100%;
-      background-color: red;
+
       margin: auto;
   }
   
@@ -15,21 +28,30 @@ body{
     text-align: center;
       width: 90%;
       height: 100%;
-      background-color: green;
+      top: 40px;
       margin: auto;
+    -webkit-box-shadow: 9px 6px 13px 3px rgba(84,67,67,0.64);
+-moz-box-shadow: 9px 6px 13px 3px rgba(84,67,67,0.64);
+box-shadow: 9px 6px 13px 3px rgba(84,67,67,0.64);
+
   }
   
   #artistNameRow{
     position: relative;
-    top: 1px;
-    width: 15%;
+
+    width: 60%;
     height: 30px;
-    background-color: pink;
-    border: 1px solid black;
+    bottom: 40%;
     margin-right: auto;
+    left: 17%;
+
   }
-  
-  #artistNameRow header{
+    #artistNameRow h2{
+
+    font-size:25px;
+    font-weight: bold;
+  }
+  #artistNameRow h2{
     position: relative;
     top: 25%;
     transform: translateY(-50%);
@@ -40,7 +62,7 @@ body{
     position: relative;
     width: 99.8%;
     height: 503.5px;
-    background-color: burlywood;
+    background-color: oldlace;
     border: 1px solid black;
   }
 
@@ -70,7 +92,7 @@ body{
     position: relative;
     height: 23.5px;
     width: 100%;
-    background-color: brown;
+    background-color: goldenrod;
     border: 1px solid black;
   }
 
@@ -85,10 +107,10 @@ body{
     height: 100px;
     margin-left: 0.5%;
     width: 20%;
-    border: 1px solid black;
+
   }
 
-  #ticketSelectionRow header{
+  #ticketSelectionRow p{
     position: relative;
     top: 25%;
     transform: translateY(-20%);
@@ -141,6 +163,7 @@ body{
     height: 50px;
     width: 100%;
     border: 1px solid black;
+
   }
 
   .quantityDiv{
@@ -151,15 +174,16 @@ body{
 
   }
 
-  #blockRow header{
+
+  #blockRow p{
     position: relative;
-    top: 20%;
+    top: 15%;
     transform: translateY(20%);
     margin-left: -44%;
     width:100%;
   }
 
-  .adultRow header{
+  .adultRow p{
     position: relative;
     float: left;
     top: 25%;
@@ -173,6 +197,7 @@ body{
     transform: translateY(-40%);
     margin-left: 70%;
     width: 22%;
+    bottom: 20px;
   }
 
   .adultSelects{
@@ -188,7 +213,7 @@ body{
 
 
 
-  #seatingPlanRow header{
+  #seatingPlanRow p{
     position: relative;
     top: 25%;
     transform: translateY(-20%);
@@ -211,7 +236,7 @@ body{
     border: 1px solid black;
   }
 
-  #yourTicketRow header{
+  #yourTicketRow p{
     position: relative;
     top: 25%;
     transform: translateY(-20%);
