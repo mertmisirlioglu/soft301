@@ -3,9 +3,11 @@ body {
 }
 
 #adminRow{
-    margin: auto;
-    padding-left: 2%;
-    padding-right: 2%;
+  border-radius: 25px;
+    border-color: #eddcff ;
+  background: #eddcff;
+    width: 100%;
+    height: 100%;
 }
 
 #helpText {
@@ -14,7 +16,7 @@ body {
 
 a {
   color: white;
-  font-family: "MV Boli";
+    font-family: "Century Gothic", serif;
   text-decoration: none;
   text-transform: uppercase;
 }
@@ -30,9 +32,9 @@ a:active {
 
 .accountTextDiv a{
   color: white;
-  font-family: "helvetica";
+    font-family: "Century Gothic", serif;
   text-decoration: none;
-  text-transform: lowercase;
+  text-transform: initial;
 }
 
  .accountTextDiv a:hover {
@@ -122,11 +124,10 @@ header .overlay {
 
 .accountTextDiv {
     float: left;
-    width: 50%;
+    width: 60%;
     height: 95%;
     margin: auto;
     padding-top: 1%;
-    margin-left: 1%;
 }
 
 .accountTextDiv p{
@@ -135,16 +136,14 @@ header .overlay {
 
 .search-container {
     margin: auto;
-    float: left;
     width: 100%;
     height: 25%;
     padding-top: 2%;
 }
 
 .search-container input {
-    float: left;
-    width: 70%;
-    margin-top: 1%;
+    margin-left: 19%;
+    width: 50%;
     webkit-border-radius: 4px !important;
          -moz-border-radius: 4px !important;
               border-radius: 4px !important;
@@ -156,9 +155,13 @@ header .overlay {
               border-bottom: 4px !important;
 }
 
+.search-container button{
+    margin-bottom: 2%;
+}
+
 
 #searchFilterRow {
-    height: 40%;
+    height: 20%;
     margin-top: 2%;
     padding-left: 2%;
     padding-right: 2%;
@@ -166,7 +169,6 @@ header .overlay {
 }
 
 .row select{
-
     webkit-border-radius: 4px !important;
          -moz-border-radius: 4px !important;
               border-radius: 4px !important;
@@ -190,16 +192,20 @@ header .overlay {
 
 .categories {
     float: left;
-    width: 70%;
-    height: 40%;
+    width: 100%;
+    height: 100%;
     margin: auto;
     padding-top: 1.5%;
 }
 
 .categories select {
-    width: 70%;
-    margin-right: 20%;
-    height: 70%;
+    width: 80%;
+    right: 10%;
+    height: fit-content;
+}
+
+.categories button {
+    float: left;
 }
 
 
