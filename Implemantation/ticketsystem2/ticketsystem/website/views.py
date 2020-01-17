@@ -5,14 +5,12 @@ from django.contrib.auth import login, authenticate, logout, update_session_auth
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from django.contrib.auth.models import User
-from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, get_object_or_404
 from django.shortcuts import render
 from ticketsystem.config import pagination
 from django.contrib.admin.views.decorators import staff_member_required
 
 from django.contrib import messages
-
 
 from .forms import EditEventForm, AddStage
 from django.db.models import Q
@@ -174,7 +172,7 @@ def ticket_buy_view(request, pk):
                 event.quota -= quantity
                 event.save()
                 transaction = Transaction()
-                transaction.user=user
+                transaction.user = user
                 transaction.save()
                 for i in range(0, int(quantity)):
                     ticket = Ticket(event=event, user=user)
@@ -192,10 +190,10 @@ def ticket_buy_view(request, pk):
 
 
 @login_required
-def my_tickets_view(request,transaction_id):
+def my_tickets_view(request, transaction_id):
     user = request.user
     user_infos = UserProfile.objects.all().filter(user=user)
-    transaction=Transaction.objects.get(pk=transaction_id)
+    transaction = Transaction.objects.get(pk=transaction_id)
     ticket_list = Ticket.objects.all().filter(transaction=transaction)
     context = {"ticket_list": ticket_list,
                "user_infos": user_infos}
@@ -361,17 +359,13 @@ def add_balance(request):
 
 def edit_event(request, event_id):
     event = Event.objects.get(pk=event_id)
-    user = request.user
-    user_infos = UserProfile.objects.get(user=user)
+    user_infos = UserProfile.objects.get(user=request.user)
     if request.method == 'POST':
-
         form = EditEventForm(request.POST, instance=event)
-
         if form.is_valid():
             form.save()
             return redirect('/account/profile')
     else:
-
         form = EditEventForm(instance=event)
         args = {'form': form}
         return render(request, 'event/edit_event.html', args)
@@ -456,23 +450,25 @@ def delete_stage_view(request, stage_id):
         messages.error(request, "You cannot delete this stage. There will be an event on this stage.")
     return redirect('stage_all')
 
+
 def collect_tickets(request):
-    user_profile=request.user
-    transaction=Transaction.objects.all().filter(user=request.user)
+    user_profile = request.user
+    transaction = Transaction.objects.all().filter(user=request.user)
     context = {'transaction_list': transaction}
-    return render(request,'profile/transaction.html',context)
+    return render(request, 'profile/transaction.html', context)
+
 
 def search_event(request):
     if request.method == 'POST':
-        searched_event=request.POST['search']
+        searched_event = request.POST['search']
 
-        events=Event.objects.all().filter(name=searched_event)
-        context={}
-        if len(events)== 0:
-            messages.error(request,"Event not found")
+        events = Event.objects.all().filter(name=searched_event)
+        context = {}
+        if len(events) == 0:
+            messages.error(request, "Event not found")
         else:
-            context = {'events':events}
-        return render(request,'ticket/searched_event.html',context)
+            context = {'events': events}
+        return render(request, 'ticket/searched_event.html', context)
 
     else:
 
@@ -505,14 +501,14 @@ def search_with_opinions(request):
                 time = datetime.datetime.now()
             if date == 'Tomorrow':
                 time = datetime.datetime.now() + datetime.timedelta(days=1)
-            events = Event.objects.all().filter(type=category,stage=stage,date=time)
+            events = Event.objects.all().filter(type=category, stage=stage, date=time)
 
         else:
             time1 = datetime.datetime.now()
             time2 = datetime.datetime.now() + datetime.timedelta(days=7)
-            events = Event.objects.all().filter(type=category, stage=stage, date__gte=time1,date__lte=time2)
-        context = {'event_list':events}
-        return render(request,"search-results.html",context)
+            events = Event.objects.all().filter(type=category, stage=stage, date__gte=time1, date__lte=time2)
+        context = {'event_list': events}
+        return render(request, "search-results.html", context)
 
 
 def return_stage_list(request):

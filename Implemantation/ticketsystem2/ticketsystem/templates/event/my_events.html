@@ -17,15 +17,10 @@
     <th>  </th>
 </tr>
         {% for event in event_list %}
-            <tr>
-            <td>{{ event.name }} </td>
-                <td> <button class="btn btn-info"><a style="color: black" href="{{ event.get_edit_event_url }}">Edit</a></button></td>
-                 <td><button class="btn btn-info"> <a  style="color: black" href="{{ event.get_delete_event_url }}">Sil</a>{% ifequal event.isAccepted False %}</button></td>
-
-                 <td><button class="btn btn-info">  <a style="color: black" href="{{ event.get_check_event_url }}">Check my request</a>{% endifequal %} </button></td>
-            </tr>
-
-
+            <br><li>{{ event.name }} <a class="btn btn-success" href="{{ event.get_edit_event_url }}">Edit</a>
+                    <a class="btn btn-info" href="{{ event.get_check_event_url }}">Check My Request</a>{% endifequal %}
+            </li>
+                <a class="btn btn-danger" href="{{ event.get_delete_event_url }}">Delete</a>{% ifequal event.isAccepted False %}
         {% endfor %}
     </ul>
     </table>
