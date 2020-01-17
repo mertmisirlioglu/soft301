@@ -5,6 +5,11 @@
         {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static "css/event/searchPage.css" %}">
     <title>{% block title %}{%  endblock %}</title>
+        <style>
+            tr[data-href]{
+                cursor: pointer;
+            }
+        </style>
   {% endblock %}
 
 
@@ -12,20 +17,43 @@
                  <div class="mainpageDiv">
                  {% include "event/pagination.html" %}
                          </div>
+<table class="rwd-table">
+  <tr>
+      <th>Image</th>
+      <th>Event Name</th>
+    <th>Date</th>
+    <th>Stage</th>
+      <th>Price</th>
 
-                        <div class="searchContentRow">
-                        {% for obj in items %}
-                    <h1><a href="{% url 'event_preview' pk=obj.pk %}">{{ obj.name }}</a></h1>
-                    <p>{{ obj.date }}</p>
-                    <p>{{ obj.stage }}</p>
-                 {% endfor %}
-                        </div>
-                        <div class="spaceDivs"></div>
-                        <div class="searchContentRow">
-                            </div>
-                            <div class="spaceDivs"></div>
-                            <div class="searchContentRow">
-                                </div>
+  </tr>
+ <div class="searchContentRow">
+    {% for obj in items %}
+  <tr data-href="{% url 'event_preview' pk=obj.pk %}">
+    <td data-th="Image">
+        {{ obj.img }}
+    </td>
+    <td data-th="Event Name">{{ obj.name }}</td>
+    <td data-th="Date">{{obj.date}}</td>
+    <td data-th="Stage">{{obj.stage}}</td>
+      <td data-th="Price">{{ obj.price }}</td>
+  </tr>
+  {% endfor %}
+ </div>
+<script>
+    document.addEventListener("DOMContentLoaded", () =>{
+        const rows = document.querySelectorAll("tr[data-href]");
+
+        rows.forEach(row => {
+            row.addEventListener("click", () => {
+                window.location.href = row.dataset.href;
+            });
+        });
+    });
+</script>
+
+</table>
+
+
                      </div>
                  </div>
          </div>

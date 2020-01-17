@@ -10,10 +10,9 @@
                             </ul>
                         {% endif %}</span>
         {% for event in event_list %}
-            <li>{{ event.name }} <a href="{{ event.get_edit_event_url }}">Edit</a> <a
-                    href="{{ event.get_delete_event_url }}">Sil</a>{% ifequal event.isAccepted False %}<a
-
-                    href="{{ event.get_check_event_url }}">Check my request</a>{% endifequal %}
+            <br><li>{{ event.name }} <a class="btn btn-success" href="{{ event.get_edit_event_url }}">Edit</a>
+                <a class="btn btn-danger" href="{{ event.get_delete_event_url }}">Delete</a>{% ifequal event.isAccepted False %}
+                    <a class="btn btn-info" href="{{ event.get_check_event_url }}">Check My Request</a>{% endifequal %}
             </li>
         {% endfor %}
     </ul>

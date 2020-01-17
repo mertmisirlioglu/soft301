@@ -74,10 +74,11 @@ class AddEvent(forms.ModelForm):
             'rules'
         )
 
+
 class AddStage(forms.ModelForm):
     class Meta:
         model = Stage
-        fields =(
+        fields = (
             'place',
             'address',
             'quota'
@@ -102,5 +103,3 @@ class EditEventForm(forms.ModelForm):
             'price',
             'rules'
         )
-
-
