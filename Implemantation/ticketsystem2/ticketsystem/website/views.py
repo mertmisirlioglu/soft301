@@ -28,10 +28,32 @@ from .forms import (UserReg,
 
 def home(request):
     event_list = Event.objects.all()
-    stage_list = Stage.objects.all()
-    context = {"event_list": event_list,
-               'stage_list':stage_list}
+    max = 0
+    popular_event = event_list.first()
+    for event in event_list:
+        sold = event.quotastart - event.quota
+        if sold>max:
+            max = sold
+            popular_event = event
+
+    concert_list1 = Event.objects.all().filter(type='C')[0:5]
+    concert_list2 = Event.objects.all().filter(type='C')[5:10]
+    theatre_list1 = Event.objects.all().filter(type='T')[0:3]
+    theatre_list2 = Event.objects.all().filter(type='T')[3:6]
+    sport_list1 = Event.objects.all().filter(type='S')[0:2]
+    sport_list2 = Event.objects.all().filter(type='S')[2:4]
+
+    context = {"event": popular_event,
+               'concert_list1': concert_list1,
+               'theatre_list1': theatre_list1,
+               'sport_list1':sport_list1,
+               'concert_list2': concert_list2,
+               'theatre_list2': theatre_list2,
+               'sport_list2': sport_list2
+               }
     return render(request, 'home.html', context)
+
+
 
 
 def go(request):
@@ -351,8 +373,7 @@ def edit_event(request, event_id):
     else:
 
         form = EditEventForm(instance=event)
-        args = {'form': form,
-                'user_infos': user_infos}
+        args = {'form': form}
         return render(request, 'event/edit_event.html', args)
 
 

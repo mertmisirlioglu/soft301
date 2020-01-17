@@ -52,6 +52,7 @@ class Event(models.Model):
     owner = models.ForeignKey(UserProfile, on_delete=models.CASCADE, null=True)
     date = models.DateField()
     quota = models.IntegerField()
+    quotastart = models.IntegerField()
     price = models.IntegerField()
     type = models.CharField(max_length=1, choices=TYPE)
     isAvailable = models.BooleanField(default=False)
